@@ -6,11 +6,13 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:01:10 by msuokas           #+#    #+#             */
-/*   Updated: 2024/12/26 14:59:23 by msuokas          ###   ########.fr       */
+/*   Updated: 2024/12/26 15:04:53 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+//now when the basic functionalities are added, how will the sorting take place? how will it happen?
 
 void	push_swap(int *stack_a, int *stack_b, int len)
 {

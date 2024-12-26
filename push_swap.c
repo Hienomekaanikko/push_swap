@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:01:10 by msuokas           #+#    #+#             */
-/*   Updated: 2024/12/26 14:29:32 by msuokas          ###   ########.fr       */
+/*   Updated: 2024/12/26 14:59:23 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ void	push_swap(int *stack_a, int *stack_b, int len)
 	//swap firsts. sa, sb or ss (for both at the same time)
 	sa_sb_ss(stack_a);
 	//first of src to the top of dest
-	pa_pb(stack_b, stack_a, len);
-	//
-
+	pa_pb(stack_b, stack_a);
+	//rotate everything up one step. first becomes last
+	ra_rb_rr(stack_a, len);
+	//rotate everything down one step. last becomes first
+	rra_rrb_rrr(stack_a, len);
 }
 
 int	main(int argc, char *argv[])

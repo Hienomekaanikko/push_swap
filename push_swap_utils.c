@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:52:05 by msuokas           #+#    #+#             */
-/*   Updated: 2024/12/26 14:59:49 by msuokas          ###   ########.fr       */
+/*   Updated: 2024/12/27 15:35:46 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,28 @@ void	sa_sb_ss(int *stack)
 	stack[0] = stack[1];
 	stack[1] = temp;
 }
-void	pa_pb(int *dest, int *src)
+void	pa_pb(int *dest, int *src, int len)
 {
 	int	i;
 
 	i = 0;
-	dest[i] = src[i];
+	if (!dest[0])
+		dest[0] = src[0];
+	else {
+		i = len;
+		while (i > 0)
+		{
+			dest[i] = dest[i - 1];
+			i--;
+		}
+		dest[0] = src[0];
+	}
+	i = 0;
 	while (src[i])
 	{
 		src[i] = src[i + 1];
 		i++;
 	}
-	src[i] = '\0';
 }
 void	ra_rb_rr(int *stack, int len)
 {

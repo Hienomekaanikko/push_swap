@@ -6,24 +6,25 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:01:10 by msuokas           #+#    #+#             */
-/*   Updated: 2024/12/26 15:04:53 by msuokas          ###   ########.fr       */
+/*   Updated: 2024/12/27 15:36:09 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//now when the basic functionalities are added, how will the sorting take place? how will it happen?
-
 void	push_swap(int *stack_a, int *stack_b, int len)
 {
 	//swap firsts. sa, sb or ss (for both at the same time)
-	sa_sb_ss(stack_a);
+	//sa_sb_ss(stack_a);
 	//first of src to the top of dest
-	pa_pb(stack_b, stack_a);
+	// pa_pb(stack_b, stack_a, len - 2);
+	// pa_pb(stack_b, stack_a, len - 2);
+	// pa_pb(stack_a, stack_b, len - 2);
+	// pa_pb(stack_a, stack_b, len - 2);
 	//rotate everything up one step. first becomes last
-	ra_rb_rr(stack_a, len);
+	//ra_rb_rr(stack_a, len);
 	//rotate everything down one step. last becomes first
-	rra_rrb_rrr(stack_a, len);
+	//rra_rrb_rrr(stack_a, len);
 }
 
 int	main(int argc, char *argv[])

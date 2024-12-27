@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+#CFLAGS = -Wall -Werror -Wextra
 LIBFT_SRC = ../libft
 NAME = push_swap
 SRC = push_swap_utils.c push_swap.c

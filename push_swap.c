@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 11:01:10 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/06 14:06:56 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/06 17:07:51 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,27 @@ int	check_order(int *stack, int len)
 	int	i;
 
 	i = 0;
-	while (stack[i])
+	while (i < len)
 	{
 		if (stack[i] > stack[i + 1])
 			return(0);
 		i++;
 	}
-	if (i == len - 1);
-		return (1);
-	return (0);
+	return (1);
+}
+
+int	check_inverse_order(int *stack, int len)
+{
+	int	i;
+
+	i = len - 1;
+	while (i >= 0)
+	{
+		if (stack[i] > stack[i - 1])
+			return(0);
+		i--;
+	}
+	return (1);
 }
 //return the highest value in the current array
 int check_highest(int *stack, int len)
@@ -81,7 +93,7 @@ void	place_inverse_order(int *stack, int len)
 }
 
 //check order of first two, return 0 if in descending order, 1 if in ascending order
-int	check_order_of_two(int	*stack)
+int	check_order_of_two(int *stack)
 {
 	int	i;
 
@@ -95,25 +107,14 @@ int	check_order_of_two(int	*stack)
 void	push_swap(int *stack_a, int *stack_b, int len)
 {
 	int	i;
-	int	j;
+	int	count;
+
 	i = 0;
-	while (stack_a[i])
-	{
-		if (check_order(stack_a, len))
-			break ;
-		else if (stack_a[i] > stack_a[i + 1])
-		{
-			pa_pb(stack_b, stack_a, len - 2);
-			if (check_order_of_two(stack_b))
-				sa_sb_ss(stack_b);
-		}
-		else if (stack_a[i] < stack_a[i + 1])
-			ra_rb_rr(stack_a, len);
-	}
 	//swap firsts. sa, sb or ss (for both at the same time)
-	//sa_sb_ss(stack_a);
+	//sa_sb_ss(stack_a, len);
 	//first of src to the top of dest
-	//pa_pb(stack_b, stack_a, len - 2);
+	pa_pb(stack_b, stack_a);
+	pa_pb(stack_b, stack_a);
 	//rotate everything up one step. first becomes last
 	//ra_rb_rr(stack_a, len);
 	//rotate everything down one step. last becomes first
@@ -126,20 +127,24 @@ int	main(int argc, char *argv[])
 	int		j;
 	int		*stack_a;
 	int		*stack_b;
+	int		stack_size;
 
-	stack_a = malloc((argc - 1) * sizeof(int));
-	if (!stack_a)
+	stack_size = argc - 1;
+	stack_a = ft_calloc(stack_size, sizeof(int));
+	stack_b = ft_calloc(stack_size, sizeof(int));
+	if (!stack_a || !stack_b)
+	{
+		free(stack_a);
+		free(stack_b);
 		return (0);
-	stack_b = malloc((argc - 1) * sizeof(int));
-	if (!stack_a)
-		return (0);
+	}
 	i = 1;
 	j = 0;
-	if (argc > 1)
+	if (i < stack_size)
 	{
 		while (argv[i])
 			stack_a[j++] = ft_atoi(argv[i++]);
-		push_swap(stack_a, stack_b, argc);
+		push_swap(stack_a, stack_b, stack_size);
 	}
 	i = 0;
 	while (stack_a[i])

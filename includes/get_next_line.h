@@ -1,24 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/26 11:01:28 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/06 17:05:08 by msuokas          ###   ########.fr       */
+/*   Created: 2024/11/29 13:46:36 by msuokas           #+#    #+#             */
+/*   Updated: 2024/12/16 12:38:12 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-#define	PUSH_SWAP_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-#include "../libft/libft.h"
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
-void	sa_sb_ss(int *stack, int len);
-void	pa_pb(int *dest, int *src);
-void	ra_rb_rr(int *stack, int len);
-void	rra_rrb_rrr(int *stack, int len);
-int		count_elements(int *stack);
+# include <stdlib.h>
+# include <unistd.h>
+# include "libft.h"
+
+char	*get_next_line(int fd);
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(char *dest, char *src);
+char	*ft_strchr(const char *s, int c);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 
 #endif

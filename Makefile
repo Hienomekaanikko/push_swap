@@ -49,8 +49,11 @@ LIBFT_FLS = $(LIBFT_DIR)/ft_calloc.c \
 			$(LIBFT_DIR)/ft_lstiter.c \
 			$(LIBFT_DIR)/ft_lstmap.c \
 			$(LIBFT_DIR)/ft_lstadd_back.c \
+			$(LIBFT_DIR)/ft_lstadd_front.c \
 			$(LIBFT_DIR)/ft_lstclear.c \
 			$(LIBFT_DIR)/ft_lstlast.c \
+			$(LIBFT_DIR)/ft_lstsize.c
+
 
 FT_PRINTF_FLS = $(FT_PRINTF_DIR)/ft_itoalen.c \
 				$(FT_PRINTF_DIR)/ft_printf.c \

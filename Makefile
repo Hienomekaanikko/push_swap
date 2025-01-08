@@ -1,5 +1,5 @@
 # PROJECT NAME
-NAME = so_long
+NAME = push_swap
 
 # DIRECTORIES
 SRC_DIR = src

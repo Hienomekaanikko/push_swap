@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:32:09 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/08 15:55:40 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/08 17:00:24 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,52 +34,28 @@ void	add_node(t_list **stack, int content)
 	}
 }
 
-void del(void *content)
-{
-	free(content);
-}
-
-// void	pb(t_list *stack_a, t_list *stack_b)
-// {
-// 	t_list	*temp;
-// 	t_list	*temp_b;
-
-// 	temp = stack_a;
-// 	temp_b = stack_b;
-// 	add_node(temp_b, *(int *)temp->content);
-// 	temp = temp->next;
-// 	ft_lstdelone(temp, del);
-// 	stack_a = temp;
-// }
-
-void	push_swap(t_list **stack)
+void	push_swap(t_list **stack_a)
 {
 	t_list	*stack_b;
-	t_list	*curr;
 	t_list	*temp;
-	int	list_len;
-	int	count;
+	int		count;
+	int		length;
 
-	curr = *stack;
 	stack_b = NULL;
-	list_len = ft_lstsize(curr);
 	count = 0;
-	//check that list_len works
-	//ft_printf("%d \n", list_len);
-	if (list_len > 3)
+	length = ft_lstsize(*stack_a);
+	if (length == 4)
+		pb(stack_a, &stack_b);
+	else if (length > 3)
 	{
 		while (count < 2)
 		{
-			temp = curr;
-			add_node(&stack_b, *(int *)curr->content);
-			curr = curr->next;
-			ft_lstdelone(temp, del);
+			pb(stack_a, &stack_b);
 			count++;
 		}
-		*stack = curr;
 	}
 	temp = stack_b;
-	ft_printf("%s\n", "Stack B: ");
+	ft_printf("Stack B: \n");
 	while (temp)
 	{
 		ft_printf("%d ", *(int *)temp->content);

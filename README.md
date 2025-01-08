@@ -1,27 +1,67 @@
-Push Swap
+# 🔢 Push Swap Project
 
-Push Swap is a project that focuses on sorting algorithms and organizing the file structure for a project. It leverages previously made functions and offers a great opportunity to dive deep into linked lists. The goal is to sort a set of numbers using a limited set of commands while also learning how to manage data structures efficiently.
+## 🚀 Overview
 
-🚀 The Project
-The idea behind Push Swap is to take a set of numbers and sort them with a few allowed operations. We work with two stacks: stack_a and stack_b. Initially, stack_a holds the set of numbers, and stack_b starts off empty.
+Push Swap is an algorithmic challenge focused on sorting data with a limited set of operations, designed to test your skills in data manipulation, algorithm design, and efficient problem-solving.
 
-To make things simpler and reusable, I first created a Makefile that links all the previously written functions together. This way, I can build the push_swap executable with a single command:
+## 📋 Project Objectives
 
-make
-🛠️ Allowed Operations
-You are restricted to using the following commands to manipulate the stacks:
+- Sort a random set of integers using the minimum number of operations
+- Implement a sorting algorithm with strict constraints
+- Demonstrate mastery of linked list manipulation
+- Optimize sorting strategy for different input scenarios
 
-sa (swap a): Swap the first two elements at the top of stack_a. Do nothing if there is only one or no elements.
-sb (swap b): Swap the first two elements at the top of stack_b. Do nothing if there is only one or no elements.
-ss: Perform sa and sb at the same time.
-pa (push a): Take the first element from the top of stack_b and push it to the top of stack_a. Do nothing if stack_b is empty.
-pb (push b): Take the first element from the top of stack_a and push it to the top of stack_b. Do nothing if stack_a is empty.
-ra (rotate a): Shift up all elements of stack_a by one. The first element becomes the last one.
-rb (rotate b): Shift up all elements of stack_b by one. The first element becomes the last one.
-rr: Perform ra and rb at the same time.
-rra (reverse rotate a): Shift down all elements of stack_a by one. The last element becomes the first one.
-rrb (reverse rotate b): Shift down all elements of stack_b by one. The last element becomes the first one.
-rrr: Perform rra and rrb at the same time.
-💡 Learning Focus
-The most challenging part of this project for me will likely be navigating through the linked lists, which is crucial for efficient stack manipulation. But I'm confident that with time and practice, I'll get there!
+## 🛠️ Allowed Operations
 
+### Stack Manipulation Commands
+
+| Command | Description | Stack Impact |
+|---------|-------------|--------------|
+| `sa`    | Swap first two elements of stack A | A: [2, 1, 3] → [1, 2, 3] |
+| `sb`    | Swap first two elements of stack B | B: [5, 3, 1] → [3, 5, 1] |
+| `ss`    | Swap first two elements of both stacks | Simultaneous sa and sb |
+| `pa`    | Push top element from B to A | B: [1, 2, 3] → [], A: [] → [1, 2, 3] |
+| `pb`    | Push top element from A to B | A: [1, 2, 3] → [], B: [] → [1, 2, 3] |
+| `ra`    | Rotate stack A up | A: [1, 2, 3] → [2, 3, 1] |
+| `rb`    | Rotate stack B up | B: [1, 2, 3] → [2, 3, 1] |
+| `rr`    | Rotate both stacks up | Simultaneous ra and rb |
+| `rra`   | Reverse rotate stack A | A: [1, 2, 3] → [3, 1, 2] |
+| `rrb`   | Reverse rotate stack B | B: [1, 2, 3] → [3, 1, 2] |
+| `rrr`   | Reverse rotate both stacks | Simultaneous rra and rrb |
+
+## 🧠 Key Challenges
+
+- Implement an efficient sorting algorithm
+- Minimize the number of operations
+- Handle various input sizes and scenarios
+- Optimize time and space complexity
+
+## 📊 Performance Metrics
+
+| Input Size | Maximum Allowed Operations |
+|-----------|----------------------------|
+| 3 numbers | ≤ 3 moves |
+| 5 numbers | ≤ 12 moves |
+| 100 numbers | ≤ 700 moves |
+| 500 numbers | ≤ 5500 moves |
+
+## 💡 Recommended Strategies
+
+1. **Simple Sort** (3 numbers)
+   - Direct comparison and swapping
+   - Constant time complexity
+
+2. **Radix Sort**
+   - Efficient for larger datasets
+   - O(d * (n + k)) complexity
+
+3. **Quick Sort Variant**
+   - Divide and conquer approach
+   - Adaptive to input distribution
+
+## 🛡️ Error Handling
+
+- Validate input integers
+- Check for duplicates
+- Handle edge cases
+- Provide clear error messages

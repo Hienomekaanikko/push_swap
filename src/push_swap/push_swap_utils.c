@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:58:08 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/08 17:23:19 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/08 17:29:56 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,13 @@ void	sa(t_list **stack_a)
 {
 	t_list	*first;
 	t_list	*second;
+	int		len;
 
+	if (!stack_a)
+		return ;
+	len = ft_lstsize(*stack_a);
+	if (len < 2)
+		return ;
 	first = (*stack_a);
 	second = (*stack_a)->next;
 	first->next = second->next;
@@ -52,7 +58,13 @@ void	sb(t_list **stack_b)
 {
 	t_list	*first;
 	t_list	*second;
+	int		len;
 
+	if (!stack_b)
+		return ;
+	len = ft_lstsize(*stack_b);
+	if (len < 2)
+		return ;
 	first = (*stack_b);
 	second = (*stack_b)->next;
 	first->next = second->next;

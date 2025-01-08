@@ -1,6 +1,6 @@
 Push Swap
 
-Push Swap is a project that focuses on sorting algorithms and organizing code. It leverages previously made functions and offers a great opportunity to dive deep into linked lists. The goal is to sort a set of numbers using a limited set of commands while also learning how to manage data structures efficiently.
+Push Swap is a project that focuses on sorting algorithms and organizing the file structure for a project. It leverages previously made functions and offers a great opportunity to dive deep into linked lists. The goal is to sort a set of numbers using a limited set of commands while also learning how to manage data structures efficiently.
 
 🚀 The Project
 The idea behind Push Swap is to take a set of numbers and sort them with a few allowed operations. We work with two stacks: stack_a and stack_b. Initially, stack_a holds the set of numbers, and stack_b starts off empty.

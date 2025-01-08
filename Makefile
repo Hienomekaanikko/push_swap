@@ -1,5 +1,5 @@
 # PROJECT NAME
-NAME = push_swap
+NAME = so_long
 
 # DIRECTORIES
 SRC_DIR = src
@@ -78,7 +78,7 @@ OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
 DEPS = $(OBJS:.o=.d)
 
 # FLAGS
-CC = gcc
+CC = cc
 RM = rm -rf
 CFLGS = -Wall -Werror -Wextra
 IFLGS = -I$(INCLUDES)

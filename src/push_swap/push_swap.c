@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:32:09 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/08 17:00:24 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/08 17:09:49 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ void	add_node(t_list **stack, int content)
 		temp->next = new_node;
 	}
 }
+
+// void	target_node(t_list **stack_a, t_list **stack_b)
+// {
+// 	t_list	*temp;
+// 	int		distance;
+
+// 	temp = *stack_a;
+// 	distance = 0;
+
+// }
 
 void	push_swap(t_list **stack_a)
 {

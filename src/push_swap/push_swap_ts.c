@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:08:30 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/09 16:49:56 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/09 16:55:15 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ void	add_targets(t_list **stack_a, t_list **stack_b)
 		a_value = *(int *)temp_a->content;
 		if ((a_value - max) < (a_value - min) && (a_value - max) > 0)
 			temp_a->target = max;
-		else
+		else if ((a_value - min) > 0)
 			temp_a->target = min;
+		else
+			temp_a->target = max;
 		temp_a = temp_a->next;
 	}
 }

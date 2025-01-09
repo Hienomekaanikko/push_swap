@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:32:09 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/09 12:56:07 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/09 16:49:40 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	add_node(t_list **stack, int content)
 		return ;
 	*content_copy = content;
 	new_node = ft_lstnew(content_copy);
+	new_node->target = 0;
 	if (*stack == NULL)
 		*stack = new_node;
 	else
@@ -51,13 +52,10 @@ void	push_swap(t_list **stack_a)
 		while (count < 2)
 		{
 			pb(stack_a, &stack_b);
-			pa(stack_a, &stack_b);
-			ra(stack_a);
-			rra(stack_a);
 			count++;
 		}
-		//rra(stack_a);
 	}
+	add_targets(stack_a, &stack_b);
 	temp = stack_b;
 	ft_printf("Stack B: \n");
 	while (temp)
@@ -89,7 +87,8 @@ int	main(int argc, char *argv[])
 	ft_printf("%s\n", "Stack A: ");
 	while (temp)
 	{
-		ft_printf("%d ", *(int *)temp->content);
+		ft_printf("%d, ", *(int *)temp->content);
+		ft_printf("TARGET: %d ", temp->target);
 		temp = temp->next;
 	}
 	ft_printf("\n");

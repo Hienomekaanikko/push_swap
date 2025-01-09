@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:41:40 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/09 12:45:59 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/09 15:38:28 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,6 @@ void	ra(t_list **stack_a);
 void	rb(t_list **stack_b);
 void	rra(t_list **stack_b);
 void	rrb(t_list **stack_b);
+void	add_targets(t_list **stack_a, t_list **stack_b);
+
 #endif

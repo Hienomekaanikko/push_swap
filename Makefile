@@ -66,8 +66,10 @@ FT_PRINTF_FLS = $(FT_PRINTF_DIR)/ft_itoalen.c \
 GNL_FLS = $(GNL_DIR)/get_next_line.c \
 
 PUSH_SWAP_FLS = $(PUSH_SWAP_DIR)/push_swap.c \
-				$(PUSH_SWAP_DIR)/push_swap_oper.c \
-				$(PUSH_SWAP_DIR)/push_swap_ts.c
+				$(PUSH_SWAP_DIR)/operations.c \
+				$(PUSH_SWAP_DIR)/add_targets.c \
+				$(PUSH_SWAP_DIR)/count_cost.c \
+				$(PUSH_SWAP_DIR)/error_checks.c
 
 # ALL SOURCE FILES
 SRC_FILES = $(LIBFT_FLS) $(FT_PRINTF_FLS) $(GNL_FLS) $(PUSH_SWAP_FLS)

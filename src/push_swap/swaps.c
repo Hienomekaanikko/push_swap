@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 13:14:37 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/10 16:26:17 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/10 17:39:53 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,28 @@
 
 #include "push_swap.h"
 
-// static void	move(t_list **stack_a, t_list **stack_b, int cheapest)
-// {
-// 	t_list	*temp_a;
-// 	t_list	*temp_b;
+static void	roll_position(t_list **stack_a, t_list **stack_b, int cheapest)
+{
+	t_list	*temp_a;
+	int		moves;
 
-// 	temp_a = stack_a;
-// 	temp_b = stack_b;
-// 	int	moves;
-// 	moves = cheapest;
-// 	while (temp_a->cost != cheapest)
-// 	{
-// 		ra(temp_a);
-// 		moves--;
-// 	}
-// 	while (moves > 0)
-// 	{
-// 		rb(temp_b);
-// 		moves--;
-// 	}
-// }
+	temp_a = *stack_a;
+	moves = cheapest;
+	while (temp_a->cost != cheapest)
+	{
+		ra(stack_a);
+		temp_a = temp_a->next;
+		moves--;
+	}
+	while (moves > 0)
+	{
+		rb(stack_b);
+		moves--;
+	}
+	pb(stack_a, stack_b);
+}
 
-void	find_cheapest(t_list **stack_a)
+void	find_cheapest(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*temp_a;
 	int		cheapest;
@@ -60,4 +60,19 @@ void	find_cheapest(t_list **stack_a)
 	}
 	temp_a = *stack_a;
 	ft_printf("Least moves needed: %d ", cheapest);
+	roll_position(stack_a, stack_b, cheapest);
+	count_cost(stack_a, stack_b);
+	find_cheapest(stack_a, stack_b);
+	// while (temp_a->cost != cheapest)
+	// {
+	// 	ra(stack_a);
+	// 	temp_a = temp_a->next;
+	// 	moves--;
+	// }
+	// while (moves > 0)
+	// {
+	// 	rb(stack_b);
+	// 	moves--;
+	// }
+	// pb(stack_a, stack_b);
 }

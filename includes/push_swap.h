@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:41:40 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/10 15:51:01 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/10 16:30:20 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	rra(t_list **stack_b);
 void	rrb(t_list **stack_b);
 void	add_targets(t_list **stack_a, t_list **stack_b);
 void	count_cost(t_list **stack_a, t_list **stack_b);
-void	find_cheapest(t_list **stack_a);
+void	find_cheapest(t_list **stack_a, t_list **stack_b);
 
 #endif

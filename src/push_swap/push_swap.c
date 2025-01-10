@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:32:09 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/10 15:52:24 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/10 17:23:18 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	push_swap(t_list **stack_a)
 	}
 	add_targets(stack_a, &stack_b);
 	count_cost(stack_a, &stack_b);
+	find_cheapest(stack_a, &stack_b);
 	temp = stack_b;
 	ft_printf("Stack B: \n");
 	while (temp)
@@ -66,7 +67,6 @@ void	push_swap(t_list **stack_a)
 		ft_printf("\n");
 		temp = temp->next;
 	}
-	find_cheapest(stack_a);
 	ft_printf("\n");
 }
 
@@ -98,6 +98,5 @@ int	main(int argc, char *argv[])
 		ft_printf("\n");
 		temp = temp->next;
 	}
-	ft_printf("\n");
 	return (0);
 }

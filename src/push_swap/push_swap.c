@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:32:09 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/10 10:50:04 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/10 15:52:24 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	add_node(t_list **stack, int content)
 		return ;
 	*content_copy = content;
 	new_node = ft_lstnew(content_copy);
-	new_node->target = 0;
 	if (*stack == NULL)
 		*stack = new_node;
 	else
@@ -56,13 +55,18 @@ void	push_swap(t_list **stack_a)
 		}
 	}
 	add_targets(stack_a, &stack_b);
+	count_cost(stack_a, &stack_b);
 	temp = stack_b;
 	ft_printf("Stack B: \n");
 	while (temp)
 	{
-		ft_printf("%d ", *(int *)temp->content);
+		ft_printf("VALUE: %d, ", *(int *)temp->content);
+		ft_printf("INDEX: %d ", temp->index);
+		ft_printf("COST: %d ", temp->cost);
+		ft_printf("\n");
 		temp = temp->next;
 	}
+	find_cheapest(stack_a);
 	ft_printf("\n");
 }
 
@@ -87,8 +91,11 @@ int	main(int argc, char *argv[])
 	ft_printf("%s\n", "Stack A: ");
 	while (temp)
 	{
-		ft_printf("%d, ", *(int *)temp->content);
+		ft_printf("VALUE: %d, ", *(int *)temp->content);
 		ft_printf("TARGET: %d ", temp->target);
+		ft_printf("INDEX: %d ", temp->index);
+		ft_printf("COST: %d ", temp->cost);
+		ft_printf("\n");
 		temp = temp->next;
 	}
 	ft_printf("\n");

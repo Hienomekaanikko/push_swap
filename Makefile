@@ -69,7 +69,8 @@ PUSH_SWAP_FLS = $(PUSH_SWAP_DIR)/push_swap.c \
 				$(PUSH_SWAP_DIR)/operations.c \
 				$(PUSH_SWAP_DIR)/add_targets.c \
 				$(PUSH_SWAP_DIR)/count_cost.c \
-				$(PUSH_SWAP_DIR)/error_checks.c
+				$(PUSH_SWAP_DIR)/error_checks.c \
+				$(PUSH_SWAP_DIR)/swaps.c
 
 # ALL SOURCE FILES
 SRC_FILES = $(LIBFT_FLS) $(FT_PRINTF_FLS) $(GNL_FLS) $(PUSH_SWAP_FLS)

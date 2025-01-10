@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:32:09 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/10 17:23:18 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/10 18:14:21 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	push_swap(t_list **stack_a)
 	while (temp)
 	{
 		ft_printf("VALUE: %d, ", *(int *)temp->content);
+		ft_printf("TARGET: %d ", temp->target);
 		ft_printf("INDEX: %d ", temp->index);
 		ft_printf("COST: %d ", temp->cost);
 		ft_printf("\n");

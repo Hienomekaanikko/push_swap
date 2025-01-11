@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+//try to make new add_target, which calculates the min and max values regardless of how many items in B and
+//assigns it in to the closest lower value according to live situation
 static void	assign(int min, int max, t_list *temp_a)
 {
 	int		a_value;

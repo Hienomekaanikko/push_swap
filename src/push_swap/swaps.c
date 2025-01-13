@@ -18,7 +18,7 @@ static void	roll_position(t_list **stack_a, t_list **stack_b, int cheapest)
 	int		moves;
 
 	temp_a = *stack_a;
-	moves = cheapest - 1;
+	moves = cheapest;
 	while (temp_a->cost != cheapest)
 	{
 		ra(stack_a);

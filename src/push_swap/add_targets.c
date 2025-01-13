@@ -12,24 +12,48 @@
 
 #include "push_swap.h"
 
-static void	assign(int min, int max, t_list *temp_a)
+static void	assign(int temp, t_list **stack_a)
 {
-	int		a_value;
+	t_list	*temp_a;
 
+	temp_a = *stack_a;
+	temp_a->target = temp;
+}
+
+void	add_targets(t_list **stack_a, t_list **stack_b)
+{
+	t_list *temp_a;
+	t_list *temp_b;
+	int		max;
+	int		min;
+	int		temp;
+
+	temp_a = *stack_a;
+	temp_b = *stack_b;
+	max = highest(stack_b);
+	min = lowest(stack_b);
 	while (temp_a)
 	{
-		a_value = *(int *)temp_a->content;
-		if ((a_value - max) < (a_value - min) && (a_value - max) > 0)
-			temp_a->target = max;
-		else if ((a_value - min) > 0)
-			temp_a->target = min;
-		else
-			temp_a->target = max;
+		temp = min;
+		temp_b = *stack_b;
+		while (temp_b)
+		{
+			if (*(int *)temp_b->content < *(int *)temp_a->content)
+			{
+				if (*(int *)temp_b->content > temp)
+					temp = *(int *)temp_b->content;
+			}
+			temp_b = temp_b->next;
+		}
+		if (temp > *(int *)temp_a->content)
+			temp = max;
+		assign(temp, &temp_a);
 		temp_a = temp_a->next;
 	}
 }
 
-void	add_targets(t_list **stack_a, t_list **stack_b)
+
+/* void	add_targets(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*temp_a;
 	t_list	*temp_b;
@@ -59,4 +83,4 @@ void	add_targets(t_list **stack_a, t_list **stack_b)
 		temp_b = temp_b->next;
 	}
 	assign(min, max, temp_a);
-}
+} */

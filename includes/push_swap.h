@@ -33,4 +33,6 @@ void	find_cheapest(t_list **stack_a, t_list **stack_b);
 void	rotate_max_on_top(t_list **stack);
 int		highest(t_list **stack);
 int		lowest(t_list **stack);
+void	empty_b_to_a(t_list	**stack_a, t_list **stack_b);
+
 #endif

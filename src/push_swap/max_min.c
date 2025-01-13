@@ -35,14 +35,3 @@ int	highest(t_list **stack)
 	}
 	return (temp);
 }
-
-void	rotate_max_on_top(t_list **stack)
-{
-	int		target;
-
-	target = highest(stack);
-	while (*(int *)(*stack)->content != target)
-	{
-		rb(stack);
-	}
-}

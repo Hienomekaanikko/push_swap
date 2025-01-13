@@ -133,3 +133,26 @@ void	rrb(t_list **stack_b)
 	(*stack_b)->next = first;
 	second_last->next = NULL;
 }
+
+void	rotate_max_on_top(t_list **stack)
+{
+	int		target;
+
+	target = highest(stack);
+	while (*(int *)(*stack)->content != target)
+	{
+		rb(stack);
+	}
+}
+
+void	empty_b_to_a(t_list	**stack_a, t_list **stack_b)
+{
+	int	size;
+
+	size = ft_lstsize(*stack_b);
+	while (size > 0)
+	{
+		pa(stack_a, stack_b);
+		size--;
+	}
+}

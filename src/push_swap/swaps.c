@@ -39,9 +39,9 @@ void	find_cheapest(t_list **stack_a, t_list **stack_b)
 	int		cheapest;
 
 	temp_a = *stack_a;
-	cheapest = temp_a->cost;
-	if (temp_a ->next == NULL)
+	if (temp_a == NULL)
 		return ;
+	cheapest = temp_a->cost;
 	while (temp_a)
 	{
 		if (temp_a->cost == 0)
@@ -53,9 +53,9 @@ void	find_cheapest(t_list **stack_a, t_list **stack_b)
 			cheapest = temp_a->cost;
 		temp_a = temp_a->next;
 	}
-	ft_printf("Least moves needed: %d \n", cheapest);
 	roll_position(stack_a, stack_b, cheapest);
 	add_targets(stack_a, stack_b);
 	count_cost(stack_a, stack_b);
 	find_cheapest(stack_a, stack_b);
+	rotate_max_on_top(stack_b);
 }

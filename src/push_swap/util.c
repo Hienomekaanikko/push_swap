@@ -38,11 +38,11 @@ int	highest(t_list **stack)
 
 void	rotate_max_on_top(t_list **stack)
 {
-	t_list	*temp_stack;
 	int		target;
 
-	temp_stack = *stack;
 	target = highest(stack);
-	while (*(int *)temp_stack->content != target)
+	while (*(int *)(*stack)->content != target)
+	{
 		rb(stack);
+	}
 }

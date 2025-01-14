@@ -23,6 +23,7 @@ void	add_node(t_list **stack, int content)
 		return ;
 	*content_copy = content;
 	new_node = ft_lstnew(content_copy);
+	new_node->reverse_roll = 0;
 	if (*stack == NULL)
 		*stack = new_node;
 	else
@@ -56,7 +57,7 @@ void	push_swap(t_list **stack_a)
 	}
 	add_targets(stack_a, &stack_b);
 	count_cost(stack_a, &stack_b);
-	find_cheapest(stack_a, &stack_b);
+	build_stack_b(stack_a, &stack_b);
 	empty_b_to_a(stack_a, &stack_b);
 	temp = stack_b;
 	ft_printf("Stack B: \n");

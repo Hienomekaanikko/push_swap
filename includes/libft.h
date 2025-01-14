@@ -20,6 +20,7 @@
 typedef struct	s_list
 {
 	void	*content;
+	int		reverse_roll;
 	int		target;
 	int		cost;
 	int		index;

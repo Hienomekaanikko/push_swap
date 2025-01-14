@@ -22,6 +22,7 @@ void	pb(t_list **stack_a, t_list **stack_b)
 	*stack_a = (*stack_a)->next;
 	temp->next = (*stack_b);
 	*stack_b = temp;
+	ft_printf("pb\n");
 }
 
 void	pa(t_list **stack_a, t_list **stack_b)
@@ -34,6 +35,7 @@ void	pa(t_list **stack_a, t_list **stack_b)
 	*stack_b = (*stack_b)->next;
 	temp->next = (*stack_a);
 	*stack_a = temp;
+	ft_printf("pa\n");
 }
 
 void	sa(t_list **stack_a)
@@ -52,6 +54,7 @@ void	sa(t_list **stack_a)
 	first->next = second->next;
 	second->next = first;
 	*stack_a = second;
+	ft_printf("sa\n");
 }
 
 void	sb(t_list **stack_b)
@@ -70,6 +73,7 @@ void	sb(t_list **stack_b)
 	first->next = second->next;
 	second->next = first;
 	*stack_b = second;
+	ft_printf("sb\n");
 }
 
 void	ra(t_list **stack_a)
@@ -84,6 +88,7 @@ void	ra(t_list **stack_a)
 	*stack_a = first->next;
 	last->next = first;
 	first->next = NULL;
+	ft_printf("ra\n");
 }
 
 void	rb(t_list **stack_b)
@@ -98,6 +103,13 @@ void	rb(t_list **stack_b)
 	*stack_b = first->next;
 	last->next = first;
 	first->next = NULL;
+	ft_printf("sb\n");
+}
+void	rr(t_list **stack_a, t_list **stack_b)
+{
+	ra(stack_a);
+	rb(stack_b);
+	ft_printf("rr\n");
 }
 
 void	rra(t_list **stack_a)
@@ -116,6 +128,7 @@ void	rra(t_list **stack_a)
 	*stack_a = last;
 	(*stack_a)->next = first;
 	second_last->next = NULL;
+	ft_printf("rra\n");
 }
 
 void	rrb(t_list **stack_b)
@@ -132,7 +145,16 @@ void	rrb(t_list **stack_b)
 	*stack_b = last;
 	(*stack_b)->next = first;
 	second_last->next = NULL;
+	ft_printf("rrb\n");
 }
+
+void rrr(t_list **stack_a, t_list **stack_b)
+{
+	rra(stack_a);
+	rrb(stack_b);
+	ft_printf("rrr\n");
+}
+
 
 void	rotate_max_on_top(t_list **stack)
 {

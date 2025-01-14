@@ -42,23 +42,29 @@ void	count_cost(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*temp_a;
 	t_list	*temp_b;
-	int		temp_index_a;
 	int		cost;
+	int		a_med;
+	int		b_med;
 
-	add_index(stack_a, stack_b);
 	temp_a = *stack_a;
-	while (temp_a)
+	a_med = ft_lstsize(*stack_a) / 2;
+	b_med = ft_lstsize(*stack_b) / 2;
+	add_index(stack_a, stack_b);
+	while(temp_a)
 	{
 		temp_b = *stack_b;
-		temp_index_a = temp_a->index;
-		cost = 0;
-		while (temp_index_a != 0)
+		cost = temp_a->index;
+		if (temp_a->index > a_med)
+			cost = ft_lstsize(*stack_a) - temp_a->index;
+		while (temp_b)
 		{
-			cost++;
-			temp_index_a--;
-		}
-		while (*(int*)temp_b->content != temp_a->target)
-		{
+			if (*(int *)temp_b->content == temp_a->target)
+				break ;
+			if (temp_b->index > b_med)
+			{
+				cost = ft_lstsize(*stack_b) - temp_b->index;
+				temp_b->reverse_roll = 1;
+			}
 			cost++;
 			temp_b = temp_b->next;
 		}

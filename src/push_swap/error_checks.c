@@ -9,6 +9,3 @@
 /*   Updated: 2025/01/10 14:47:13 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//check for doubles
-//check current order if it's already correct

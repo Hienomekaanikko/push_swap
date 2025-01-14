@@ -103,7 +103,7 @@ void	rb(t_list **stack_b)
 	*stack_b = first->next;
 	last->next = first;
 	first->next = NULL;
-	ft_printf("sb\n");
+	ft_printf("rb\n");
 }
 void	rr(t_list **stack_a, t_list **stack_b)
 {

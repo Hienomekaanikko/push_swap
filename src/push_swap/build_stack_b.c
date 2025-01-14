@@ -42,63 +42,52 @@ static void	roll_position(t_list **stack_a, t_list **stack_b, int cheapest)
 		temp_b = temp_b->next;
 		j++;
 	}
-	while (i > 0 && j > 0 && i <= a_size && j <= b_size)
+	while (i > 0 && j > 0 && i < a_size && j < b_size)
 	{
-		if (i > a_median && j > b_median)
+		if (i >= a_median && j >= b_median)
 		{
 			rrr(stack_a, stack_b);
 			i++;
 			j++;
 		}
-		else if (i < a_median && j < b_median)
+		 if (i <= a_median && j <= b_median)
 		{
 			rr(stack_a, stack_b);
 			i--;
 			j--;
 		}
 	}
-	while (i > 0)
+	if (i <= a_median)
 	{
-		ra(stack_a);
-		i--;
-	}
-	while (j > 0)
-	{
-		rb(stack_b);
-		j--;
-	}
-	pb(stack_a, stack_b);
-}
-/*
-static void	roll_position(t_list **stack_a, t_list **stack_b, int cheapest)
-{
-	t_list	*temp_a;
-	t_list	*temp_b;
-	int		moves;
-
-	temp_a = *stack_a;
-	temp_b = *stack_b;
-	moves = 0;
-	while (temp_a->cost != cheapest)
-	{
-		if (temp_a->reverse_roll == 0)
+		while (i > 0)
+		{
 			ra(stack_a);
-		else
-			rra(stack_a);
-		temp_a = temp_a->next;
-		moves--;
+			i--;
+		}
 	}
-	while (moves > 0)
+	if (j <= b_median)
 	{
-		if (temp_b->reverse_roll == 0)
+		while (j > 0)
+		{
 			rb(stack_b);
-		else
+			j--;
+		}
+	}
+	if (i > a_median)
+	{
+		i = a_size - i;
+		while (i--)
+			rra(stack_a);
+	}
+	if (j > b_median)
+	{
+		j = b_size - j;
+		while (j--)
 			rrb(stack_b);
-		moves--;
 	}
 	pb(stack_a, stack_b);
 }
-*/
+
 void	build_stack_b(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*temp_a;

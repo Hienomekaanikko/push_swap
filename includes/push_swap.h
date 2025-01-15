@@ -29,14 +29,15 @@ void	rra(t_list **stack_b);
 void	rrb(t_list **stack_b);
 void	add_targets(t_list **stack_a, t_list **stack_b);
 void	count_cost(t_list **stack_a, t_list **stack_b);
-void	build_stack_b(t_list **stack_a, t_list **stack_b);
+void	long_sort(t_list **stack_a, t_list **stack_b);
 void	rotate_max_on_top(t_list **stack);
 int		highest(t_list **stack);
 int		lowest(t_list **stack);
 void	empty_b_to_a(t_list	**stack_a, t_list **stack_b);
 void	rrr(t_list **stack_a, t_list **stack_b);
 void	rr(t_list **stack_a, t_list **stack_b);
-void	quick_sort(t_list **stack_a);
+void	short_sort(t_list **stack_a);
 int		error_check(t_list	**stack_a);
+void	add_index(t_list **stack_a, t_list **stack_b);
 
 #endif

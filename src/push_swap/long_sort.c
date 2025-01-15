@@ -12,87 +12,69 @@
 
 #include "push_swap.h"
 
-
-static void	roll_position(t_list **stack_a, t_list **stack_b, int cheapest)
+static int	a_cheapest_index(int cheapest, t_list **stack_a, t_list **stack_b)
 {
 	t_list	*temp_a;
+
+	temp_a = *stack_a;
+	add_index(stack_a, stack_b);
+	while (temp_a->cost != cheapest)
+		temp_a = temp_a->next;
+	return (temp_a->index);
+}
+
+static int	b_cheapest_index(int cheapest, t_list **stack_a, t_list **stack_b)
+{
 	t_list	*temp_b;
-	int		a_median;
-	int		b_median;
-	int		a_size;
-	int		b_size;
-	int		i;
-	int		j;
+	t_list	*temp_a;
+
+	temp_b = *stack_b;
+	temp_a = *stack_a;
+	add_index(stack_a, stack_b);
+	while (temp_a->cost != cheapest)
+		temp_a = temp_a->next;
+	while (*(int*)temp_b->content != temp_a->target)
+		temp_b = temp_b->next;
+	return(temp_b->index);
+}
+
+static void	swaps(t_list **stack_a, t_list **stack_b, int cheapest)
+{
+	int	b_index;
+	int	a_index;
+ 	int	a_size;
+	int	b_size;
+ 	int	a_median;
+	int	b_median;
 
 	a_size = ft_lstsize(*stack_a);
 	b_size = ft_lstsize(*stack_b);
-	a_median = a_size / 2;
+ 	a_median = a_size / 2;
 	b_median = b_size / 2;
-	temp_a = *stack_a;
-	temp_b = *stack_b;
-	i = 0;
-	j = 0;
-	while (temp_a->cost != cheapest)
+	while (*(int*)(*stack_b)->content != (*stack_a)->target)
 	{
-		temp_a = temp_a->next;
-		i++;
-	}
-	while (*(int *)temp_b->content != temp_a->target)
-	{
-		temp_b = temp_b->next;
-		j++;
-	}
-	while (i > 0 && j > 0 && i < a_size && j < b_size)
-	{
-		if (i >= a_median && j >= b_median)
-		{
-			rrr(stack_a, stack_b);
-			i++;
-			j++;
-		}
-		 if (i <= a_median && j <= b_median)
-		{
+		a_index = a_cheapest_index(cheapest, stack_a, stack_b);
+		b_index = b_cheapest_index (cheapest, stack_a, stack_b);
+		if (a_index > 0 && b_index > 0 && a_index <= a_median && b_index <= b_median)
 			rr(stack_a, stack_b);
-			i--;
-			j--;
-		}
-	}
-	if (i <= a_median)
-	{
-		while (i > 0)
-		{
-			ra(stack_a);
-			i--;
-		}
-	}
-	if (j <= b_median)
-	{
-		while (j > 0)
-		{
+		else if (a_index > a_median && b_index > b_median)
+			rrr(stack_a, stack_b);
+		else if (a_index == 0 && b_index > 0 && b_index <= b_median)
 			rb(stack_b);
-			j--;
-		}
-	}
-	if (i > a_median)
-	{
-		i = a_size - i;
-		while (i--)
-			rra(stack_a);
-	}
-	if (j > b_median)
-	{
-		j = b_size - j;
-		while (j--)
+		else if (b_index == 0 && a_index > 0 && a_index <= a_median)
+			ra(stack_a);
+		else if (a_index == 0 && b_index > b_median)
 			rrb(stack_b);
+		else if (b_index == 0 && a_index > a_median)
+			rra(stack_a);
 	}
 	pb(stack_a, stack_b);
 }
 
-void	build_stack_b(t_list **stack_a, t_list **stack_b)
+void	long_sort(t_list **stack_a, t_list **stack_b)
 {
 	t_list	*temp_a;
 	int		cheapest;
-
 	temp_a = *stack_a;
 	if (temp_a == NULL)
 		return ;
@@ -108,9 +90,9 @@ void	build_stack_b(t_list **stack_a, t_list **stack_b)
 			cheapest = temp_a->cost;
 		temp_a = temp_a->next;
 	}
-	roll_position(stack_a, stack_b, cheapest);
+	swaps(stack_a, stack_b, cheapest);
 	add_targets(stack_a, stack_b);
 	count_cost(stack_a, stack_b);
-	build_stack_b(stack_a, stack_b);
+	long_sort(stack_a, stack_b);
 	rotate_max_on_top(stack_b);
 }

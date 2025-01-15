@@ -28,7 +28,7 @@ static void	three_num(t_list **stack_a)
 	}
 }
 
-void	quick_sort(t_list **stack_a)
+void	short_sort(t_list **stack_a)
 {
 	int		size;
 	t_list	*temp;

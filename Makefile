@@ -70,9 +70,9 @@ PUSH_SWAP_FLS = $(PUSH_SWAP_DIR)/push_swap.c \
 				$(PUSH_SWAP_DIR)/add_targets.c \
 				$(PUSH_SWAP_DIR)/count_cost.c \
 				$(PUSH_SWAP_DIR)/error_checks.c \
-				$(PUSH_SWAP_DIR)/build_stack_b.c \
+				$(PUSH_SWAP_DIR)/long_sort.c \
 				$(PUSH_SWAP_DIR)/max_min.c \
-				$(PUSH_SWAP_DIR)/quick_sort.c
+				$(PUSH_SWAP_DIR)/short_sort.c
 
 # ALL SOURCE FILES
 SRC_FILES = $(LIBFT_FLS) $(FT_PRINTF_FLS) $(GNL_FLS) $(PUSH_SWAP_FLS)

@@ -22,7 +22,7 @@ void	pb(t_list **stack_a, t_list **stack_b)
 	*stack_a = (*stack_a)->next;
 	temp->next = (*stack_b);
 	*stack_b = temp;
-	ft_printf("pb\n");
+	ft_putendl_fd("pb", 1);
 }
 
 void	pa(t_list **stack_a, t_list **stack_b)
@@ -35,7 +35,7 @@ void	pa(t_list **stack_a, t_list **stack_b)
 	*stack_b = (*stack_b)->next;
 	temp->next = (*stack_a);
 	*stack_a = temp;
-	ft_printf("pa\n");
+	ft_putendl_fd("pa", 1);
 }
 
 void	sa(t_list **stack_a)
@@ -54,7 +54,7 @@ void	sa(t_list **stack_a)
 	first->next = second->next;
 	second->next = first;
 	*stack_a = second;
-	ft_printf("sa\n");
+	ft_putendl_fd("sa", 1);
 }
 
 void	sb(t_list **stack_b)
@@ -73,7 +73,7 @@ void	sb(t_list **stack_b)
 	first->next = second->next;
 	second->next = first;
 	*stack_b = second;
-	ft_printf("sb\n");
+	ft_putendl_fd("sb", 1);
 }
 
 void	ra(t_list **stack_a)
@@ -88,7 +88,7 @@ void	ra(t_list **stack_a)
 	*stack_a = first->next;
 	last->next = first;
 	first->next = NULL;
-	ft_printf("ra\n");
+	ft_putendl_fd("ra", 1);
 }
 
 void	rb(t_list **stack_b)
@@ -103,13 +103,13 @@ void	rb(t_list **stack_b)
 	*stack_b = first->next;
 	last->next = first;
 	first->next = NULL;
-	ft_printf("rb\n");
+	ft_putendl_fd("rb", 1);
 }
 void	rr(t_list **stack_a, t_list **stack_b)
 {
 	ra(stack_a);
 	rb(stack_b);
-	ft_printf("rr\n");
+	ft_putendl_fd("rr", 1);
 }
 
 void	rra(t_list **stack_a)
@@ -128,7 +128,7 @@ void	rra(t_list **stack_a)
 	*stack_a = last;
 	(*stack_a)->next = first;
 	second_last->next = NULL;
-	ft_printf("rra\n");
+	ft_putendl_fd("rra", 1);
 }
 
 void	rrb(t_list **stack_b)
@@ -145,7 +145,7 @@ void	rrb(t_list **stack_b)
 	*stack_b = last;
 	(*stack_b)->next = first;
 	second_last->next = NULL;
-	ft_printf("rrb\n");
+	ft_putendl_fd("rrb", 1);
 }
 
 void rrr(t_list **stack_a, t_list **stack_b)
@@ -176,7 +176,7 @@ void rrr(t_list **stack_a, t_list **stack_b)
 		last_b->next = *stack_b;
 		*stack_b = last_b;
 	}
-	ft_printf("rrr\n");
+	ft_putendl_fd("rrr", 1);
 }
 
 void	rotate_max_on_top(t_list **stack)
@@ -200,4 +200,18 @@ void	empty_b_to_a(t_list	**stack_a, t_list **stack_b)
 		pa(stack_a, stack_b);
 		size--;
 	}
+}
+void	free_stack(t_list **stack)
+{
+	t_list	*tmp;
+
+	if (!stack || !(*stack))
+		return ;
+	while (*stack)
+	{
+		tmp = (*stack)->next;
+		free(*stack);
+		*stack = tmp;
+	}
+	*stack = NULL;
 }

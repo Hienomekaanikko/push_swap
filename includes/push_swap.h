@@ -39,5 +39,6 @@ void	rr(t_list **stack_a, t_list **stack_b);
 void	short_sort(t_list **stack_a);
 int		error_check(t_list	**stack_a);
 void	add_index(t_list **stack_a, t_list **stack_b);
+void	free_stack(t_list **stack);
 
 #endif

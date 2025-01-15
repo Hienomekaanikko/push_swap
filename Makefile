@@ -52,7 +52,8 @@ LIBFT_FLS = $(LIBFT_DIR)/ft_calloc.c \
 			$(LIBFT_DIR)/ft_lstadd_front.c \
 			$(LIBFT_DIR)/ft_lstclear.c \
 			$(LIBFT_DIR)/ft_lstlast.c \
-			$(LIBFT_DIR)/ft_lstsize.c
+			$(LIBFT_DIR)/ft_lstsize.c \
+			$(LIBFT_DIR)/ft_putstr.c
 
 
 FT_PRINTF_FLS = $(FT_PRINTF_DIR)/ft_itoalen.c \
@@ -72,7 +73,7 @@ PUSH_SWAP_FLS = $(PUSH_SWAP_DIR)/push_swap.c \
 				$(PUSH_SWAP_DIR)/error_checks.c \
 				$(PUSH_SWAP_DIR)/long_sort.c \
 				$(PUSH_SWAP_DIR)/max_min.c \
-				$(PUSH_SWAP_DIR)/short_sort.c
+				$(PUSH_SWAP_DIR)/short_sort.c \
 
 # ALL SOURCE FILES
 SRC_FILES = $(LIBFT_FLS) $(FT_PRINTF_FLS) $(GNL_FLS) $(PUSH_SWAP_FLS)

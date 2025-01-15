@@ -38,7 +38,6 @@ void	add_node(t_list **stack, int content)
 void	push_swap(t_list **stack_a)
 {
 	t_list	*stack_b;
-	//t_list	*temp;
 	int		count;
 	int		a_size;
 
@@ -65,23 +64,11 @@ void	push_swap(t_list **stack_a)
 	}
 	else
 		short_sort(stack_a);
-/*	temp = stack_b;
-	ft_printf("Stack B: \n");
- 	while (temp)
-	{
-		ft_printf("VALUE: %d, ", *(int *)temp->content);
-		ft_printf("TARGET: %d ", temp->target);
-		ft_printf("INDEX: %d ", temp->index);
-		ft_printf("COST: %d ", temp->cost);
-		ft_printf("\n");
-		temp = temp->next;
-	} */
 }
 
 int	main(int argc, char *argv[])
 {
 	t_list	*stack_a;
-	//t_list	*temp;
 	int		i;
 
 	i = 1;
@@ -95,21 +82,10 @@ int	main(int argc, char *argv[])
 		}
 		if (!error_check(&stack_a))
 		{
-			ft_printf("error\n");
-			return (0);
+			ft_putendl_fd("Error", 2);
+			return (-1);
 		}
 		push_swap(&stack_a);
 	}
-	/* temp = stack_a;
-	ft_printf("%s\n", "Stack A: ");
-	while (temp)
-	{
-		ft_printf("VALUE: %d, ", *(int *)temp->content);
-		ft_printf("TARGET: %d ", temp->target);
-		ft_printf("INDEX: %d ", temp->index);
-		ft_printf("COST: %d ", temp->cost);
-		ft_printf("\n");
-		temp = temp->next;
-	} */
 	return (0);
 }

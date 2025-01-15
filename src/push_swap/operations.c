@@ -105,12 +105,33 @@ void	rb(t_list **stack_b)
 	first->next = NULL;
 	ft_putendl_fd("rb", 1);
 }
-void	rr(t_list **stack_a, t_list **stack_b)
+void   	rr(t_list **stack_a, t_list **stack_b)
 {
-	ra(stack_a);
-	rb(stack_b);
+	t_list  *first_a;
+	t_list  *last_a;
+	t_list  *first_b;
+	t_list  *last_b;
+
+	if (*stack_a != NULL && (*stack_a)->next != NULL)
+	{
+		first_a = (*stack_a);
+		last_a = ft_lstlast(*stack_a);
+		*stack_a = first_a->next;
+		last_a->next = first_a;
+		first_a->next = NULL;
+	}
+
+	if (*stack_b != NULL && (*stack_b)->next != NULL)
+	{
+		first_b = (*stack_b);
+		last_b = ft_lstlast(*stack_b);
+		*stack_b = first_b->next;
+		last_b->next = first_b;
+		first_b->next = NULL;
+	}
 	ft_putendl_fd("rr", 1);
 }
+
 
 void	rra(t_list **stack_a)
 {

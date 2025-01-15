@@ -57,15 +57,15 @@ static void	swaps(t_list **stack_a, t_list **stack_b, int cheapest)
 		b_index = b_cheapest_index (cheapest, stack_a, stack_b);
 		if (a_index > 0 && b_index > 0 && a_index <= a_median && b_index <= b_median)
 			rr(stack_a, stack_b);
-		else if (a_index > a_median && b_index > b_median)
+		else if (a_index > a_median && a_index != 0 && b_index > b_median && b_index != 0)
 			rrr(stack_a, stack_b);
 		else if (a_index == 0 && b_index > 0 && b_index <= b_median)
 			rb(stack_b);
 		else if (b_index == 0 && a_index > 0 && a_index <= a_median)
 			ra(stack_a);
-		else if (a_index == 0 && b_index > b_median)
+		else if ((a_index == 0 || a_index < a_median) && b_index > b_median)
 			rrb(stack_b);
-		else if (b_index == 0 && a_index > a_median)
+		else if ((b_index == 0 || b_index < b_median) && a_index > a_median)
 			rra(stack_a);
 	}
 	pb(stack_a, stack_b);

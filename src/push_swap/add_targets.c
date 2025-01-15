@@ -51,36 +51,3 @@ void	add_targets(t_list **stack_a, t_list **stack_b)
 		temp_a = temp_a->next;
 	}
 }
-
-
-/* void	add_targets(t_list **stack_a, t_list **stack_b)
-{
-	t_list	*temp_a;
-	t_list	*temp_b;
-	int		min;
-	int		max;
-
-	temp_a = *stack_a;
-	temp_b = *stack_b;
-	if (!temp_a && !temp_b)
-		return ;
-	if (temp_b->content > temp_b->next->content)
-	{
-		max = *(int *)temp_b->content;
-		min = *(int *)temp_b->next->content;
-	}
-	else
-	{
-		max = *(int *)temp_b->next->content;
-		min = *(int *)temp_b->content;
-	}
-	while (temp_b)
-	{
-		if (*(int *)temp_b->content < min)
-			min = *(int *)temp_b->content;
-		else if (*(int *)temp_b->content > max)
-			max = *(int *)temp_b->content;
-		temp_b = temp_b->next;
-	}
-	assign(min, max, temp_a);
-} */

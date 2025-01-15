@@ -38,39 +38,32 @@ void	add_node(t_list **stack, int content)
 void	push_swap(t_list **stack_a)
 {
 	t_list	*stack_b;
-	t_list	*temp;
 	int		count;
 	int		length;
 
 	stack_b = NULL;
 	count = 0;
 	length = ft_lstsize(*stack_a);
-	if (length == 4)
-		pb(stack_a, &stack_b);
-	else if (length > 3)
+	if (length > 3)
 	{
-		while (count < 2)
-		{
+		if (length == 4)
 			pb(stack_a, &stack_b);
-			count++;
+		else
+		{
+			quick_sort(stack_a);
+			while (count < 2)
+			{
+				pb(stack_a, &stack_b);
+				count++;
+			}
 		}
+		add_targets(stack_a, &stack_b);
+		count_cost(stack_a, &stack_b);
+		build_stack_b(stack_a, &stack_b);
+		empty_b_to_a(stack_a, &stack_b);
 	}
-	add_targets(stack_a, &stack_b);
-	count_cost(stack_a, &stack_b);
-	build_stack_b(stack_a, &stack_b);
-	empty_b_to_a(stack_a, &stack_b);
-	temp = stack_b;
-	ft_printf("Stack B: \n");
-	while (temp)
-	{
-		ft_printf("VALUE: %d, ", *(int *)temp->content);
-		ft_printf("TARGET: %d ", temp->target);
-		ft_printf("INDEX: %d ", temp->index);
-		ft_printf("COST: %d ", temp->cost);
-		ft_printf("\n");
-		temp = temp->next;
-	}
-	ft_printf("\n");
+	else
+		quick_sort(stack_a);
 }
 
 int	main(int argc, char *argv[])
@@ -87,6 +80,11 @@ int	main(int argc, char *argv[])
 		{
 			add_node(&stack_a, ft_atoi(argv[i]));
 			i++;
+		}
+		if (!error_check(&stack_a))
+		{
+			ft_printf("error\n");
+			return (0);
 		}
 		push_swap(&stack_a);
 	}

@@ -36,5 +36,7 @@ int		lowest(t_list **stack);
 void	empty_b_to_a(t_list	**stack_a, t_list **stack_b);
 void	rrr(t_list **stack_a, t_list **stack_b);
 void	rr(t_list **stack_a, t_list **stack_b);
+void	quick_sort(t_list **stack_a);
+int		error_check(t_list	**stack_a);
 
 #endif

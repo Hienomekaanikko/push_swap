@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//count the cost to find the cheapest one and add the cost to the node information to compare
-
 #include "push_swap.h"
 
 void	add_index(t_list **stack_a, t_list **stack_b)

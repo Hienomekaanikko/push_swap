@@ -32,9 +32,26 @@ static int find_duplicates(t_list **stack_a)
 	return (0);
 }
 
-int	error_check(t_list	**stack_a)
+static int	order_check(t_list **stack_a)
+{
+	t_list	*temp;
+
+	temp = *stack_a;
+	while (temp->next != NULL)
+	{
+		if (*(int*)temp->content < *(int*)temp->next->content)
+			temp = temp->next;
+		else
+			return (0);
+	}
+	return (1);
+}
+
+int	error_check(t_list **stack_a)
 {
 	if (find_duplicates(stack_a))
+		return (0);
+	if (order_check(stack_a))
 		return (0);
 	return (1);
 }

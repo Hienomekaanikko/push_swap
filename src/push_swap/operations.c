@@ -150,11 +150,34 @@ void	rrb(t_list **stack_b)
 
 void rrr(t_list **stack_a, t_list **stack_b)
 {
-	rra(stack_a);
-	rrb(stack_b);
+	t_list	*last_a;
+	t_list	*second_last_a;
+	t_list	*last_b;
+	t_list	*second_last_b;
+
+	if (*stack_a && (*stack_a)->next)
+	{
+		second_last_a = *stack_a;
+		while (second_last_a->next->next)
+			second_last_a = second_last_a->next;
+		last_a = second_last_a->next;
+		second_last_a->next = NULL;
+		last_a->next = *stack_a;
+		*stack_a = last_a;
+	}
+
+	if (*stack_b && (*stack_b)->next)
+	{
+		second_last_b = *stack_b;
+		while (second_last_b->next->next)
+			second_last_b = second_last_b->next;
+		last_b = second_last_b->next;
+		second_last_b->next = NULL;
+		last_b->next = *stack_b;
+		*stack_b = last_b;
+	}
 	ft_printf("rrr\n");
 }
-
 
 void	rotate_max_on_top(t_list **stack)
 {

@@ -38,7 +38,7 @@ void	add_node(t_list **stack, int content)
 void	push_swap(t_list **stack_a)
 {
 	t_list	*stack_b;
-	t_list	*temp;
+	//t_list	*temp;
 	int		count;
 	int		a_size;
 
@@ -61,13 +61,13 @@ void	push_swap(t_list **stack_a)
 		add_targets(stack_a, &stack_b);
 		count_cost(stack_a, &stack_b);
 		long_sort(stack_a, &stack_b);
-		//empty_b_to_a(stack_a, &stack_b);
+		empty_b_to_a(stack_a, &stack_b);
 	}
 	else
 		short_sort(stack_a);
-	temp = stack_b;
+/*	temp = stack_b;
 	ft_printf("Stack B: \n");
-	while (temp)
+ 	while (temp)
 	{
 		ft_printf("VALUE: %d, ", *(int *)temp->content);
 		ft_printf("TARGET: %d ", temp->target);
@@ -75,13 +75,13 @@ void	push_swap(t_list **stack_a)
 		ft_printf("COST: %d ", temp->cost);
 		ft_printf("\n");
 		temp = temp->next;
-	}
+	} */
 }
 
 int	main(int argc, char *argv[])
 {
 	t_list	*stack_a;
-	t_list	*temp;
+	//t_list	*temp;
 	int		i;
 
 	i = 1;
@@ -100,7 +100,7 @@ int	main(int argc, char *argv[])
 		}
 		push_swap(&stack_a);
 	}
-	temp = stack_a;
+	/* temp = stack_a;
 	ft_printf("%s\n", "Stack A: ");
 	while (temp)
 	{
@@ -110,6 +110,6 @@ int	main(int argc, char *argv[])
 		ft_printf("COST: %d ", temp->cost);
 		ft_printf("\n");
 		temp = temp->next;
-	}
+	} */
 	return (0);
 }

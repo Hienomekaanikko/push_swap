@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:32:09 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/17 18:05:21 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/17 19:07:36 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	push_swap(t_list **stack_a, t_list **stack_b)
 		}
 		min = lowest(stack_b);
 		max = highest(stack_b);
-		add_targets(stack_a, stack_b, min, max);
+		add_targets_a(stack_a, stack_b, min, max);
 		count_cost(stack_a, stack_b, &size_a, &size_b);
 		long_sort(stack_a, stack_b, &size_a, &size_b);
 	}
@@ -89,18 +89,13 @@ int	main(int argc, char *argv[])
 	t_list	*stack_a;
 	t_list	*stack_b;
 	t_list	*temp;
-	int		i;
 
-	i = 1;
 	stack_a = NULL;
 	stack_b = NULL;
 	if (argc > 1)
 	{
-		while (argv[i])
-		{
-			add_node(&stack_a, ft_atoi(argv[i]));
-			i++;
-		}
+		while (*++argv)
+			add_node(&stack_a, ft_atoi(*argv));
 		if (error_check(&stack_a))
 		{
 			ft_putendl_fd("Error\n", 2);

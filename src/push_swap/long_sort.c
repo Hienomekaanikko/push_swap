@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 13:14:37 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/17 18:09:59 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/17 19:08:08 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ static void	fill_b(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b)
 		position_for_b(stack_a, stack_b, cheapest, *size_a, *size_b);
 		pb(stack_a, stack_b);
 		min_max_check(stack_b, &min, &max);
-		add_targets(stack_a, stack_b, min, max);
+		add_targets_a(stack_a, stack_b, min, max);
 		count_cost(stack_a, stack_b, size_a, size_b);
 		(*size_a)--;
 		(*size_b)++;

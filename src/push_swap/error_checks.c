@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:47:46 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/10 14:47:13 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/17 10:14:06 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static int	order_check(t_list **stack_a)
 int	error_check(t_list **stack_a)
 {
 	if (find_duplicates(stack_a))
-		return (0);
+		return (1);
 	if (order_check(stack_a))
-		return (0);
-	return (1);
+		return (1);
+	return (0);
 }
 

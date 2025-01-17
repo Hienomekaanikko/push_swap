@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:58:08 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/10 17:24:09 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/17 13:09:38 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,9 +206,16 @@ void	rotate_max_on_top(t_list **stack)
 
 	target = highest(stack);
 	while (*(int *)(*stack)->content != target)
-	{
 		rb(stack);
-	}
+}
+
+void	rotate_min_on_top(t_list **stack)
+{
+	int		target;
+
+	target = lowest(stack);
+	while (*(int *)(*stack)->content != target)
+		ra(stack);
 }
 
 void	empty_b_to_a(t_list	**stack_a, t_list **stack_b)

@@ -6,13 +6,13 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 13:14:37 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/17 14:57:08 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/17 15:39:29 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	src_cheapest_dist(int cheapest, t_list **src, t_list **dest)
+static int	cheapest_src(int cheapest, t_list **src, t_list **dest)
 {
 	t_list	*temp;
 
@@ -23,7 +23,7 @@ static int	src_cheapest_dist(int cheapest, t_list **src, t_list **dest)
 	return (temp->index);
 }
 
-static int	dest_target_dist(int cheapest, t_list **src, t_list **dest)
+static int	cheapest_dst(int cheapest, t_list **src, t_list **dest)
 {
 	t_list	*temp_a;
 	t_list	*temp_b;
@@ -38,7 +38,7 @@ static int	dest_target_dist(int cheapest, t_list **src, t_list **dest)
 	return(temp_b->index);
 }
 
-static void	swaps(t_list **stack_a, t_list **stack_b, int cheapest, int size_a, int size_b)
+static void	position_for_b(t_list **stack_a, t_list **stack_b, int cheapest, int size_a, int size_b)
 {
 	int	b_index;
 	int	a_index;
@@ -49,8 +49,8 @@ static void	swaps(t_list **stack_a, t_list **stack_b, int cheapest, int size_a, 
 	b_median = size_b / 2;
 	while (*(int*)(*stack_b)->content != (*stack_a)->target)
 	{
-		a_index = src_cheapest_dist(cheapest, stack_a, stack_b);
-		b_index = dest_target_dist(cheapest, stack_a, stack_b);
+		a_index = cheapest_src(cheapest, stack_a, stack_b);
+		b_index = cheapest_dst(cheapest, stack_a, stack_b);
 		if (a_index > 0 && b_index > 0 && a_index <= a_median && b_index <= b_median)
 			rr(stack_a, stack_b);
 		else if (a_index > a_median && a_index != 0 && b_index > b_median && b_index != 0)
@@ -64,9 +64,8 @@ static void	swaps(t_list **stack_a, t_list **stack_b, int cheapest, int size_a, 
 		else if ((b_index == 0 || b_index < b_median) && a_index > a_median)
 			rra(stack_a);
 	}
-	pb(stack_a, stack_b);
 }
-static void	refill_a(t_list **stack_a, t_list **stack_b, int cheapest, int size_a, int size_b)
+static void	position_for_a(t_list **stack_a, t_list **stack_b, int cheapest, int size_a, int size_b)
 {
 	int	b_index;
 	int	a_index;
@@ -78,8 +77,8 @@ static void	refill_a(t_list **stack_a, t_list **stack_b, int cheapest, int size_
 	while (*(int*)(*stack_a)->content != (*stack_b)->target)
 	{
 
-		b_index = src_cheapest_dist(cheapest, stack_b, stack_a);
-		a_index = dest_target_dist(cheapest, stack_b, stack_a);
+		b_index = cheapest_src(cheapest, stack_b, stack_a);
+		a_index = cheapest_dst(cheapest, stack_b, stack_a);
 		if (b_index > 0 && a_index > 0 && b_index <= b_median && a_index <= a_median)
 			rr(stack_a, stack_b);
 		else if (b_index > b_median && b_index != 0 && a_index > a_median && a_index != 0)
@@ -97,7 +96,6 @@ static void	refill_a(t_list **stack_a, t_list **stack_b, int cheapest, int size_
 		else if ((a_index == 0 || a_index < a_median) && b_index > b_median)
 			rrb(stack_b);
 	}
-	pa(stack_a, stack_b);
 }
 
 int		find_cheapest(t_list **stack)
@@ -120,8 +118,24 @@ int		find_cheapest(t_list **stack)
 	}
 	return (cheapest);
 }
+// void	fill_b(t_list **stack_a, t_list **stack_b, int size_a, int size_b)
+// {
+// 	int	cheapest;
 
-void	fill_b(t_list **stack_a, t_list **stack_b, int size_a, int size_b)
+// 	cheapest = (*stack_a)->cost;
+// 	while(size_a > 2)
+// 	{
+// 		cheapest = find_cheapest(stack_a);
+// 		position_for_b(stack_a, stack_b, cheapest, size_a, size_b);
+// 		pb(stack_a, stack_b);
+// 		add_targets(stack_a, stack_b);
+// 		count_cost(stack_a, stack_b, size_a, size_b);
+// 		size_a--;
+// 		size_b++;
+// 	}
+// }
+
+void	long_sort(t_list **stack_a, t_list **stack_b, int size_a, int size_b)
 {
 	t_list	*temp_a;
 	int		cheapest;
@@ -133,19 +147,22 @@ void	fill_b(t_list **stack_a, t_list **stack_b, int size_a, int size_b)
 	while(size_a > 2)
 	{
 		cheapest = find_cheapest(stack_a);
-		swaps(stack_a, stack_b, cheapest, size_a, size_b);
+		position_for_b(stack_a, stack_b, cheapest, size_a, size_b);
+		pb(stack_a, stack_b);
 		add_targets(stack_a, stack_b);
 		count_cost(stack_a, stack_b, size_a, size_b);
 		size_a--;
 		size_b++;
 	}
+	//fill_b(stack_a, stack_b, size_a, size_b);
 	short_sort(stack_a);
 	while (size_b > 0)
 	{
 		add_targets_b(stack_a, stack_b);
 		count_cost_b(stack_a, stack_b, size_a, size_b);
 		cheapest = find_cheapest(stack_b);
-		refill_a(stack_a, stack_b, cheapest, size_a, size_b);
+		position_for_a(stack_a, stack_b, cheapest, size_a, size_b);
+		pa(stack_a, stack_b);
 		size_a++;
 		size_b--;
 	}

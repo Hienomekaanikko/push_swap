@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:32:09 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/17 14:44:15 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/17 15:34:45 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	push_swap(t_list **stack_a, t_list **stack_b)
 	int		count;
 	int		size_a;
 	int		size_b;
-	int		min;
-	int		max;
 	t_list	*temp;
 
 	count = 0;
@@ -65,11 +63,9 @@ void	push_swap(t_list **stack_a, t_list **stack_b)
 				size_a--;
 			}
 		}
-		max = highest(stack_b);
-		min = lowest(stack_b);
-		add_targets(stack_a, stack_b, min, max);
+		add_targets(stack_a, stack_b);
 		count_cost(stack_a, stack_b, size_a, size_b);
-		fill_b(stack_a, stack_b, size_a, size_b);
+		long_sort(stack_a, stack_b, size_a, size_b);
 	}
 	else
 		short_sort(stack_a);

@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 13:14:37 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/17 16:18:46 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/17 18:09:59 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,15 +118,30 @@ static int		find_cheapest(t_list **stack)
 	}
 	return (cheapest);
 }
+
+static void min_max_check(t_list **stack, int *min, int *max)
+{
+	if (*(int*)(*stack)->content > *max)
+		*max = *(int*)(*stack)->content;
+	if (*(int*)(*stack)->content < *min)
+		*min = *(int*)(*stack)->content;
+}
+
 static void	fill_b(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b)
 {
 	int	cheapest;
+	int	min;
+	int	max;
+
+	max = highest(stack_b);
+	min = lowest(stack_b);
 	while(*size_a > 2)
 	{
 		cheapest = find_cheapest(stack_a);
 		position_for_b(stack_a, stack_b, cheapest, *size_a, *size_b);
 		pb(stack_a, stack_b);
-		add_targets(stack_a, stack_b);
+		min_max_check(stack_b, &min, &max);
+		add_targets(stack_a, stack_b, min, max);
 		count_cost(stack_a, stack_b, size_a, size_b);
 		(*size_a)--;
 		(*size_b)++;
@@ -135,6 +150,11 @@ static void	fill_b(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b)
 static void	fill_a(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b)
 {
 	int	cheapest;
+	int	min;
+	int	max;
+
+	max = highest(stack_a);
+	min = lowest(stack_a);
 	while (*size_b > 0)
 	{
 		add_targets_b(stack_a, stack_b);
@@ -142,6 +162,7 @@ static void	fill_a(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b)
 		cheapest = find_cheapest(stack_b);
 		position_for_a(stack_a, stack_b, cheapest, *size_a, *size_b);
 		pa(stack_a, stack_b);
+		min_max_check(stack_a, &min, &max);
 		(*size_a)++;
 		(*size_b)--;
 	}

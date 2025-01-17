@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:41:40 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/17 15:34:57 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/17 15:43:31 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	rb(t_list **stack_b);
 void	rra(t_list **stack_b);
 void	rrb(t_list **stack_b);
 void	add_targets(t_list **stack_a, t_list **stack_b);
-void	count_cost(t_list **stack_a, t_list **stack_b, int size_a, int size_b);
-void	count_cost_b(t_list **stack_a, t_list **stack_b, int size_a, int size_b);
-void	long_sort(t_list **stack_a, t_list **stack_b, int size_a, int size_b);
+void	count_cost(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b);
+void	count_cost_b(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b);
+void	long_sort(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b);
 void	rotate_max_on_top(t_list **stack);
 int		highest(t_list **stack);
 int		lowest(t_list **stack);

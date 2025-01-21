@@ -20,7 +20,6 @@
 typedef struct	s_list
 {
 	void	*content;
-	int		reverse_roll;
 	int		target;
 	int		cost;
 	int		index;
@@ -63,6 +62,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 t_list	*ft_lstnew(void *content);
+long	ft_atol(const char *str);
 int		ft_lstsize(t_list *lst);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstadd_back(t_list **lst, t_list *new);

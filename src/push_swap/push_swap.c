@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	add_node(t_list **stack, int content)
+static void	add_node(t_list **stack, int content)
 {
 	t_list	*new_node;
 	t_list	*temp;
@@ -23,7 +23,6 @@ void	add_node(t_list **stack, int content)
 		return ;
 	*content_copy = content;
 	new_node = ft_lstnew(content_copy);
-	new_node->reverse_roll = 0;
 	if (*stack == NULL)
 		*stack = new_node;
 	else
@@ -34,85 +33,42 @@ void	add_node(t_list **stack, int content)
 		temp->next = new_node;
 	}
 }
-
-void	push_swap(t_list **stack_a, t_list **stack_b)
+static int create_stack(int argc, char **argv)
 {
-	int		count;
-	int		size_a;
-	int		size_b;
-	int		min;
-	int		max;
-	t_list	*temp;
+	t_list	*stack_a;
+	char	**temp_argv;
 
-	count = 0;
-	size_a = ft_lstsize(*stack_a);
-	size_b = 0;
-	if (size_a > 3)
+	stack_a = NULL;
+	if (argc == 2)
 	{
-		if (size_a == 4)
+		temp_argv = ft_split(argv[1], ' ');
+		while (*temp_argv)
 		{
-			pb(stack_a, stack_b);
-			size_b++;
+			add_node(&stack_a, ft_atol(*temp_argv));
+			temp_argv++;
 		}
-		else
-		{
-			short_sort(stack_a);
-			while (count < 2)
-			{
-				pb(stack_a, stack_b);
-				count++;
-				size_b++;
-				size_a--;
-			}
-		}
-		min = lowest(stack_b);
-		max = highest(stack_b);
-		add_targets_a(stack_a, stack_b, min, max);
-		count_cost(stack_a, stack_b, &size_a, &size_b);
-		long_sort(stack_a, stack_b, &size_a, &size_b);
 	}
-	else
-		short_sort(stack_a);
-	temp = *stack_b;
-	ft_printf("STACK_B:\n");
-	while (temp)
+	else if (argc > 2)
 	{
-		ft_printf("Value: %d ", *(int*)temp->content);
-		ft_printf("Target: %d ", temp->target);
-		ft_printf("Cost: %d \n", temp->cost);
-		temp = temp->next;
+		while (*++argv)
+			add_node(&stack_a, ft_atol(*argv));
 	}
+	if (!list_check(&stack_a))
+		return (0);
+	return (1);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
-	t_list	*temp;
-
-	stack_a = NULL;
-	stack_b = NULL;
 	if (argc > 1)
 	{
-		while (*++argv)
-			add_node(&stack_a, ft_atoi(*argv));
-		if (error_check(&stack_a))
-		{
-			ft_putendl_fd("Error\n", 2);
+		if (argv[1][0] == '\0')
 			return (0);
-		}
-		push_swap(&stack_a, &stack_b);
+		if (!input_check(argc, argv))
+			return (0);
+		if (!create_stack(argc, argv))
+			return (0);
 	}
-	temp = stack_a;
-	ft_printf("STACK_A:\n");
-	while (temp)
-	{
-		ft_printf("Value: %d ", *(int*)temp->content);
-		ft_printf("Target: %d ", temp->target);
-		ft_printf("Cost: %d \n", temp->cost);
-		temp = temp->next;
-	}
-	free_stack(&stack_a);
-	free_stack(&stack_b);
+	exit(0);
 	return (0);
 }

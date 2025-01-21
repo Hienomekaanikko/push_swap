@@ -32,5 +32,6 @@ void	rotate_max_on_top(t_list **stack);
 void	rotate_min_on_top(t_list **stack);
 void	free_stack(t_list **stack);
 void	error_checks(int argc, char **argv);
+void	sort(t_list **stack_a, t_list **stack_b);
 
 #endif

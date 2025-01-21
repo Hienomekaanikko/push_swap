@@ -12,3 +12,10 @@
 
 #include "push_swap.h"
 
+void	sort(t_list **stack_a, t_list **stack_b)
+{
+	*stack_b = NULL;
+
+	if (ft_lstsize(*stack_a) == 3)
+		short_sort(stack_a);
+}

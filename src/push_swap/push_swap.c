@@ -33,34 +33,57 @@ static void	add_node(t_list **stack, int content)
 		temp->next = new_node;
 	}
 }
-static int create_stack(int argc, char **argv)
+static void create_stack(int argc, char **argv, t_list **stack_a, t_list **stack_b)
 {
-	t_list	*stack_a;
 	char	**temp_argv;
 
-	stack_a = NULL;
+	*stack_b = NULL;
 	if (argc == 2)
 	{
 		temp_argv = ft_split(argv[1], ' ');
 		while (*temp_argv)
 		{
-			add_node(&stack_a, ft_atol(*temp_argv));
+			add_node(stack_a, ft_atol(*temp_argv));
 			temp_argv++;
 		}
 	}
 	else if (argc > 2)
 	{
 		while (*++argv)
-			add_node(&stack_a, ft_atol(*argv));
+			add_node(stack_a, ft_atol(*argv));
 	}
-	return (1);
+}
+static void	sort_prep(t_list **stack_a, t_list **stack_b)
+{
+	int	size_a;
+
+	*stack_b = NULL;
+	size_a = ft_lstsize(*stack_a);
+	if (size_a <= 3)
+		short_sort(stack_a);
+/* 	else if (size_a == 4)
+		med_sort(tms)
+	else
+		turk_sort(tms) */
 }
 
-int	main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
+	t_list *stack_a;
+	t_list *stack_b;
+
+	stack_a = NULL;
+	stack_b = NULL;
 	if (argc < 2)
 		return (-1);
 	error_checks(argc, argv);
-	create_stack(argc, argv);
-	return (0);
+	create_stack(argc, argv, &stack_a, &stack_b);
+	sort_prep(&stack_a, &stack_b);
+/* 	t_list *temp = stack_a;
+	while (temp)
+	{
+		ft_printf("%d\n", *(int*)temp->content);
+		temp = temp->next;
+	} */
+	return 0;
 }

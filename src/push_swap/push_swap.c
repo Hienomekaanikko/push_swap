@@ -53,22 +53,14 @@ static int create_stack(int argc, char **argv)
 		while (*++argv)
 			add_node(&stack_a, ft_atol(*argv));
 	}
-	if (!list_check(&stack_a))
-		return (0);
 	return (1);
 }
 
 int	main(int argc, char *argv[])
 {
-	if (argc > 1)
-	{
-		if (argv[1][0] == '\0')
-			return (0);
-		if (!input_check(argc, argv))
-			return (0);
-		if (!create_stack(argc, argv))
-			return (0);
-	}
-	exit(0);
+	if (argc < 2)
+		return (-1);
+	error_checks(argc, argv);
+	create_stack(argc, argv);
 	return (0);
 }

@@ -72,7 +72,7 @@ PUSH_SWAP_FLS = $(PUSH_SWAP_DIR)/push_swap.c \
 				$(PUSH_SWAP_DIR)/multi_oper.c \
 				$(PUSH_SWAP_DIR)/add_targets.c \
 				$(PUSH_SWAP_DIR)/count_cost.c \
-				$(PUSH_SWAP_DIR)/error.c \
+				$(PUSH_SWAP_DIR)/error_check.c \
 				$(PUSH_SWAP_DIR)/sort.c \
 				$(PUSH_SWAP_DIR)/max_min.c \
 				$(PUSH_SWAP_DIR)/short_sort.c \

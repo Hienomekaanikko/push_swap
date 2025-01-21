@@ -31,7 +31,6 @@ void	reverse_rotate_one(t_list **stack);
 void	rotate_max_on_top(t_list **stack);
 void	rotate_min_on_top(t_list **stack);
 void	free_stack(t_list **stack);
-int		input_check(int argc, char **argv);
-int		list_check(t_list **stack_a);
+void	error_checks(int argc, char **argv);
 
 #endif

@@ -20,7 +20,7 @@
 typedef struct	s_list
 {
 	void	*content;
-	long	target;
+	long long	target;
 	int		cost;
 	int		index;
 	struct s_list 	*next;

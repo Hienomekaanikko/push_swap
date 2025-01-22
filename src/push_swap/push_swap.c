@@ -87,7 +87,7 @@ static void	sort_prep(t_list **stack_a, t_list **stack_b)
 	else
 		full_sort(stack_a, stack_b, &size_a, &size_b);
 }
-#include <stdio.h>
+
 int main(int argc, char *argv[])
 {
 	t_list *stack_a;
@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
 	error_checks(argc, argv);
 	create_stack(argc, argv, &stack_a, &stack_b);
 	sort_prep(&stack_a, &stack_b);
-/*  	t_list *temp = stack_a;
+/*    	t_list *temp = stack_a;
 	while (temp)
 	{
 		ft_printf("VALUE: %d ", *(int*)temp->content);

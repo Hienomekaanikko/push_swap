@@ -28,7 +28,6 @@ void	swap_first_two(t_list **stack)
 	first->next = second->next;
 	second->next = first;
 	*stack = second;
-	ft_putendl_fd("sa", 2);
 }
 
 void	rotate_one_up(t_list **stack)

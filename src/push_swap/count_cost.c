@@ -1,6 +1,5 @@
 #include "push_swap.h"
 
-
 static void assign_index_to_stack(t_list **stack)
 {
 	t_list	*temp;

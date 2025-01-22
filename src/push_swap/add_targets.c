@@ -24,7 +24,7 @@ static void add_target_mode_0(t_list *curr_to, t_list *from)
 		curr_from = curr_from->next;
 	}
 	if (!found)
-		curr_to->target = highest(from);
+		curr_to->target = highest(&from);
 }
 
 static void add_target_mode_1(t_list *curr_to, t_list *from)
@@ -51,7 +51,7 @@ static void add_target_mode_1(t_list *curr_to, t_list *from)
 		curr_from = curr_from->next;
 	}
 	if (!found)
-		curr_to->target = lowest(from);
+		curr_to->target = lowest(&from);
 }
 
 void add_targets(t_list **to, t_list **from, int mode)

@@ -33,5 +33,7 @@ void	rotate_min_on_top(t_list **stack);
 void	free_stack(t_list **stack);
 void	error_checks(int argc, char **argv);
 void	sort(t_list **stack_a, t_list **stack_b);
+void	add_targets(t_list **to, t_list **from, int mode);
+void 	count_cost(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b, int is_stack_a);
 
 #endif

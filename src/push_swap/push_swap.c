@@ -56,16 +56,24 @@ static void create_stack(int argc, char **argv, t_list **stack_a, t_list **stack
 static void	sort_prep(t_list **stack_a, t_list **stack_b)
 {
 	int	size_a;
+	int	size_b;
 
 	*stack_b = NULL;
 	size_a = ft_lstsize(*stack_a);
+	size_b = 0;
 	if (size_a <= 3)
 		short_sort(stack_a);
 	else
 	{
 		push_one(stack_a, stack_b);
+		size_b++;
+		size_a--;
 		push_one(stack_a, stack_b);
+		size_b++;
+		size_a--;
 	}
+	add_targets(stack_a, stack_b, 0);
+	count_cost(stack_a, stack_b, &size_a, &size_b, 1);
 	/*
 	else
 		turk_sort(tms) */
@@ -83,7 +91,6 @@ int main(int argc, char *argv[])
 	error_checks(argc, argv);
 	create_stack(argc, argv, &stack_a, &stack_b);
 	sort_prep(&stack_a, &stack_b);
-	add_targets(&stack_a, &stack_b, 0);
  	t_list *temp = stack_a;
 	while (temp)
 	{

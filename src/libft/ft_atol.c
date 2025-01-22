@@ -1,9 +1,9 @@
 #include "libft.h"
 
-long	ft_atol(const char *str)
+long long	ft_atoll(const char *str)
 {
-	long	i;
-	long	nbr;
+	long long	i;
+	long long	nbr;
 	int		isneg;
 
 	i = 0;

@@ -11,7 +11,7 @@ static void add_target_mode_0(t_list *curr_to, t_list *from)
 
 	value_to = *(long long*)curr_to->content;
 	found = 0;
-	closest = INT_MAX;
+	closest = LLONG_MAX;
 	curr_from = from;
 	while (curr_from)
 	{
@@ -42,7 +42,7 @@ static void add_target_mode_1(t_list *curr_to, t_list *from)
 	long long		num;
 
 	curr_from = from;
-	closest = INT_MAX;
+	closest = LLONG_MAX;
 	found = 0;
 	value_to = *(long long*)curr_to->content;
 	while (curr_from)

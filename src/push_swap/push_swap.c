@@ -14,8 +14,8 @@
 
 static void	add_node(t_list **stack, long long content)
 {
-	t_list	*new_node;
-	t_list	*temp;
+	t_list			*new_node;
+	t_list			*temp;
 	long long		*content_copy;
 
 	content_copy = malloc(sizeof(long long));
@@ -43,14 +43,14 @@ static void create_stack(int argc, char **argv, t_list **stack_a, t_list **stack
 		temp_argv = ft_split(argv[1], ' ');
 		while (*temp_argv)
 		{
-			add_node(stack_a, ft_atol(*temp_argv));
+			add_node(stack_a, ft_atoll(*temp_argv));
 			temp_argv++;
 		}
 	}
 	else if (argc > 2)
 	{
 		while (*++argv)
-			add_node(stack_a, ft_atol(*argv));
+			add_node(stack_a, ft_atoll(*argv));
 	}
 }
 
@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
 	error_checks(argc, argv);
 	create_stack(argc, argv, &stack_a, &stack_b);
 	sort_prep(&stack_a, &stack_b);
-/*    	t_list *temp = stack_a;
+/* 	t_list *temp = stack_a;
 	while (temp)
 	{
 		ft_printf("VALUE: %d ", *(int*)temp->content);

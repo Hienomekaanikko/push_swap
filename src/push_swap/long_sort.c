@@ -89,7 +89,7 @@ static int find_median(t_list *stack, int size)
 	int i = 0;
 	int j;
 	long long t;
-	int median;
+	long long median;
 
 	arr = malloc(size * sizeof(long long));
 	temp = stack;
@@ -223,4 +223,4 @@ void full_sort(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b)
 	push_back_to_a(stack_a, stack_b, size_a, size_b);
 	min_pos = find_min_position(stack_a);
 	rotate_to_position(stack_a, min_pos, *size_a);
-}
+	}

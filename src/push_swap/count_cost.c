@@ -37,7 +37,7 @@ static void calculate_cost_for_element(t_list *temp_a, t_list *stack_b, int *siz
 	cost = calculate_cost_with_reverse_roll(temp_a, median_a, size_a);
 	while (temp_b)
 	{
-		if (* (int*)temp_b->content == temp_a->target)
+		if (* (long long*)temp_b->content == temp_a->target)
 			break;
 		if (temp_b->index > median_b)
 			cost = *size_b - temp_b->index;

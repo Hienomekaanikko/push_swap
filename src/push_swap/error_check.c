@@ -89,7 +89,7 @@ void	error_checks(int argc, char **argv)
 	}
 	while (args[i])
 	{
-		nbr = ft_atol(args[i]);
+		nbr = ft_atoll(args[i]);
 		if (!isnum(args[i]))
 			error("Error");
 		if (values(nbr, args, i))

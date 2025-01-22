@@ -28,7 +28,7 @@ void	swap_first_two(t_list **stack)
 	first->next = second->next;
 	second->next = first;
 	*stack = second;
-	//print sa or sb
+	ft_putendl_fd("sa", 2);
 }
 
 void	rotate_one_up(t_list **stack)
@@ -62,25 +62,30 @@ void	reverse_rotate_one(t_list **stack)
 	*stack = last;
 	(*stack)->next = first;
 	second_last->next = NULL;
-	//print rra or rrb
 }
 
 void	rotate_max_on_top(t_list **stack)
 {
-	int		target;
+	long		target;
 
 	target = highest(stack);
-	while (*(int *)(*stack)->content != target)
+	while (*(long long*)(*stack)->content != target)
+	{
 		rotate_one_up(stack);
+		ft_putendl_fd("rb", 1);
+	}
 }
 
 void	rotate_min_on_top(t_list **stack)
 {
-	int		target;
+	long		target;
 
 	target = lowest(stack);
-	while (*(int *)(*stack)->content != target)
+	while (*(long long*)(*stack)->content != target)
+	{
 		rotate_one_up(stack);
+		ft_putendl_fd("ra", 1);
+	}
 }
 
 void	free_stack(t_list **stack)

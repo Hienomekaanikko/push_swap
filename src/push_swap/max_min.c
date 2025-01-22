@@ -1,36 +1,36 @@
 #include "push_swap.h"
 
-int lowest(t_list **stack)
+long long	lowest(t_list **stack)
 {
 	t_list *temp_stack;
-	int temp;
+	long long	temp;
 
 	if (!stack || !*stack)
 		return (0);
 
 	temp_stack = *stack;
-	temp = *(int *)temp_stack->content;
+	temp = *(long long*)temp_stack->content;
 	while (temp_stack)
 	{
-		if (*(int *)temp_stack->content < temp)
-			temp = *(int *)temp_stack->content;
+		if (*(long long*)temp_stack->content < temp)
+			temp = *(long long*)temp_stack->content;
 		temp_stack = temp_stack->next;
 	}
 	return (temp);
 }
 
 
-int	highest(t_list **stack)
+long long	highest(t_list **stack)
 {
 	t_list	*temp_stack;
-	int	temp;
+	long long	temp;
 
 	temp_stack = *stack;
-	temp = *(int *)temp_stack->content;
+	temp = *(long long*)temp_stack->content;
 	while (temp_stack)
 	{
-		if (*(int *)temp_stack->content > temp)
-			temp = *(int *)temp_stack->content;
+		if (*(long long*)temp_stack->content > temp)
+			temp = *(long long*)temp_stack->content;
 		temp_stack = temp_stack->next;
 	}
 	return (temp);

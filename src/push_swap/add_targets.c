@@ -2,18 +2,23 @@
 
 static void add_target_mode_0(t_list *curr_to, t_list *from)
 {
-	t_list *curr_from = from;
-	int closest = INT_MAX;
-	int found = 0;
-	int value_to = *(int*)curr_to->content;
-	int value_from;
+	t_list		*curr_from;
+	long long		closest;
+	long long		found;
+	long long		value_to;
+	long long		value_from;
+	long long		num;
 
+	value_to = *(long long*)curr_to->content;
+	found = 0;
+	closest = INT_MAX;
+	curr_from = from;
 	while (curr_from)
 	{
-		value_from = *(int*)curr_from->content;
+		value_from = *(long long*)curr_from->content;
 		if (value_from < value_to)
 		{
-			int num = value_to - value_from;
+			num = value_to - value_from;
 			if (num > 0 && num < closest)
 			{
 				closest = num;
@@ -29,21 +34,26 @@ static void add_target_mode_0(t_list *curr_to, t_list *from)
 
 static void add_target_mode_1(t_list *curr_to, t_list *from)
 {
-	t_list *curr_from = from;
-	int closest = INT_MIN;
-	int found = 0;
-	int value_to = *(int*)curr_to->content;
-	int value_from;
+	t_list		*curr_from;
+	long long		closest;
+	long long		found;
+	long long		value_to;
+	long long		value_from;
+	long long		num;
 
+	curr_from = from;
+	closest = INT_MAX;
+	found = 0;
+	value_to = *(long long*)curr_to->content;
 	while (curr_from)
 	{
-		value_from = *(int*)curr_from->content;
+		value_from = *(long long*)curr_from->content;
 		if (value_from > value_to)
 		{
-			int num = value_from - value_to;
-			if (num < 0 && -num < closest)
+			num = value_from - value_to;
+			if (num < closest)
 			{
-				closest = -num;
+				closest = num;
 				curr_to->target = value_from;
 				found = 1;
 			}
@@ -54,11 +64,12 @@ static void add_target_mode_1(t_list *curr_to, t_list *from)
 		curr_to->target = lowest(&from);
 }
 
+
 void add_targets(t_list **to, t_list **from, int mode)
 {
-	t_list *curr_to;
-	curr_to = *to;
+	t_list	*curr_to;
 
+	curr_to = *to;
 	while (curr_to)
 	{
 		if (mode == 0)

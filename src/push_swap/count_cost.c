@@ -1,10 +1,13 @@
 #include "push_swap.h"
 
+
 static void assign_index_to_stack(t_list **stack)
 {
-	t_list *temp = *stack;
-	int pos = 0;
+	t_list	*temp;
+	int		pos;
 
+	temp = *stack;
+	pos = 0;
 	while (temp)
 	{
 		temp->index = pos;
@@ -15,7 +18,7 @@ static void assign_index_to_stack(t_list **stack)
 
 static int calculate_cost_with_reverse_roll(t_list *temp, int median, int *size)
 {
-	int cost;
+	int	cost;
 
 	cost = temp->index;
 	if (cost < 0)
@@ -27,15 +30,15 @@ static int calculate_cost_with_reverse_roll(t_list *temp, int median, int *size)
 
 static void calculate_cost_for_element(t_list *temp_a, t_list *stack_b, int *size_a, int *size_b, int median_a, int median_b)
 {
-	t_list *temp_b;
-	int cost;
+	t_list	*temp_b;
+	int		cost;
 
 	cost = temp_a->index;
 	temp_b = stack_b;
 	cost = calculate_cost_with_reverse_roll(temp_a, median_a, size_a);
 	while (temp_b)
 	{
-		if (*(int *)temp_b->content == temp_a->target)
+		if (* (int*)temp_b->content == temp_a->target)
 			break;
 		if (temp_b->index > median_b)
 			cost = *size_b - temp_b->index;
@@ -47,11 +50,15 @@ static void calculate_cost_for_element(t_list *temp_a, t_list *stack_b, int *siz
 
 void count_cost(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b, int is_stack_a)
 {
-	t_list *temp_a = *stack_a;
-	t_list *temp_b = *stack_b;
-	int median_a = *size_a / 2;
-	int median_b = *size_b / 2;
+	t_list	*temp_a;
+	t_list	*temp_b;
+	int median_a;
+	int median_b;
 
+	temp_a = *stack_a;
+	temp_b = *stack_b;
+	median_a = *size_a / 2;
+	median_b = *size_b / 2;
 	assign_index_to_stack(stack_a);
 	assign_index_to_stack(stack_b);
 	if (is_stack_a)

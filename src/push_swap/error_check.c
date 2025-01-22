@@ -24,6 +24,21 @@ static int	values(int num, char **argv, int i)
 	return (0);
 }
 
+static int	order(char **argv)
+{
+	int i;
+
+	i = 0;
+	while (argv[i + 1])
+	{
+		if (ft_atoi(argv[i]) >= ft_atoi(argv[i + 1]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+
 static int	isnum(char *num)
 {
 	int	i;
@@ -61,7 +76,7 @@ static void	free_split(char **args)
 void	error_checks(int argc, char **argv)
 {
 	int		i;
-	long	nbr;
+	long long	nbr;
 	char	**args;
 
 	i = 0;
@@ -83,6 +98,8 @@ void	error_checks(int argc, char **argv)
 			error("Error");
 		i++;
 	}
+	if (order(args) == 1)
+		exit(0);
 	if (argc == 2)
 		free_split(args);
 }

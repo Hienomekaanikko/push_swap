@@ -20,8 +20,8 @@
 #include "get_next_line.h"
 
 void	short_sort(t_list **stack_a);
-int		lowest(t_list **stack);
-int		highest(t_list **stack);
+long long	lowest(t_list **stack);
+long long	highest(t_list **stack);
 void	reverse_rotate_both(t_list **stack_a, t_list **stack_b);
 void	rotate_both_up(t_list **stack_a, t_list **stack_b);
 void	push_one(t_list **stack_src, t_list **stack_dst);
@@ -34,6 +34,7 @@ void	free_stack(t_list **stack);
 void	error_checks(int argc, char **argv);
 void	sort(t_list **stack_a, t_list **stack_b);
 void	add_targets(t_list **to, t_list **from, int mode);
-void 	count_cost(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b, int is_stack_a);
+void	count_cost(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b, int is_stack_a);
+void	full_sort(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b);
 
 #endif

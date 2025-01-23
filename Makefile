@@ -12,9 +12,9 @@ PUSH_SWAP_DIR = $(SRC_DIR)/push_swap
 
 # SOURCE FILES
 LIBFT_FLS = $(LIBFT_DIR)/ft_calloc.c \
+			$(LIBFT_DIR)/ft_atol.c \
 			$(LIBFT_DIR)/ft_strlen.c \
 			$(LIBFT_DIR)/ft_strdup.c \
-			$(LIBFT_DIR)/ft_atol.c \
 			$(LIBFT_DIR)/ft_memset.c \
 			$(LIBFT_DIR)/ft_bzero.c \
 			$(LIBFT_DIR)/ft_memcpy.c \
@@ -68,14 +68,13 @@ FT_PRINTF_FLS = $(FT_PRINTF_DIR)/ft_itoalen.c \
 GNL_FLS = $(GNL_DIR)/get_next_line.c \
 
 PUSH_SWAP_FLS = $(PUSH_SWAP_DIR)/push_swap.c \
-				$(PUSH_SWAP_DIR)/single_oper.c \
-				$(PUSH_SWAP_DIR)/multi_oper.c \
+				$(PUSH_SWAP_DIR)/operations.c \
 				$(PUSH_SWAP_DIR)/add_targets.c \
 				$(PUSH_SWAP_DIR)/count_cost.c \
-				$(PUSH_SWAP_DIR)/error_check.c \
+				$(PUSH_SWAP_DIR)/error_checks.c \
+				$(PUSH_SWAP_DIR)/long_sort.c \
 				$(PUSH_SWAP_DIR)/max_min.c \
 				$(PUSH_SWAP_DIR)/short_sort.c \
-				$(PUSH_SWAP_DIR)/long_sort.c \
 
 # ALL SOURCE FILES
 SRC_FILES = $(LIBFT_FLS) $(FT_PRINTF_FLS) $(GNL_FLS) $(PUSH_SWAP_FLS)

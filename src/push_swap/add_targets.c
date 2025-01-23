@@ -1,81 +1,77 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_targets.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/09 13:08:30 by msuokas           #+#    #+#             */
+/*   Updated: 2025/01/23 10:12:56 by msuokas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-static void add_target_mode_0(t_list *curr_to, t_list *from)
+static void	assign(long long temp, t_list **stack_a)
 {
-	t_list		*curr_from;
-	long long		closest;
-	long long		found;
-	long long		value_to;
-	long long		value_from;
-	long long		num;
+	t_list	*temp_a;
 
-	value_to = *(long long*)curr_to->content;
-	found = 0;
-	closest = LLONG_MAX;
-	curr_from = from;
-	while (curr_from)
-	{
-		value_from = *(long long*)curr_from->content;
-		if (value_from < value_to)
-		{
-			num = value_to - value_from;
-			if (num > 0 && num < closest)
-			{
-				closest = num;
-				curr_to->target = value_from;
-				found = 1;
-			}
-		}
-		curr_from = curr_from->next;
-	}
-	if (!found)
-		curr_to->target = highest(&from);
+	temp_a = *stack_a;
+	temp_a->target = temp;
 }
 
-static void add_target_mode_1(t_list *curr_to, t_list *from)
+void	add_targets_a(t_list **stack_a, t_list **stack_b, long long min, long long max)
 {
-	t_list		*curr_from;
-	long long		closest;
-	long long		found;
-	long long		value_to;
-	long long		value_from;
-	long long		num;
+	t_list		*temp_a;
+	t_list		*temp_b;
+	long long	temp;
 
-	curr_from = from;
-	closest = LLONG_MAX;
-	found = 0;
-	value_to = *(long long*)curr_to->content;
-	while (curr_from)
+	temp_a = *stack_a;
+	temp_b = *stack_b;
+	while (temp_a)
 	{
-		value_from = *(long long*)curr_from->content;
-		if (value_from > value_to)
+		temp = min;
+		temp_b = *stack_b;
+		while (temp_b)
 		{
-			num = value_from - value_to;
-			if (num < closest)
+			if (*(long long*)temp_b->content < *(long long*)temp_a->content)
 			{
-				closest = num;
-				curr_to->target = value_from;
-				found = 1;
+				if (*(long long*)temp_b->content > temp)
+					temp = *(long long *)temp_b->content;
 			}
+			temp_b = temp_b->next;
 		}
-		curr_from = curr_from->next;
+		if (temp > *(long long *)temp_a->content)
+			temp = max;
+		assign(temp, &temp_a);
+		temp_a = temp_a->next;
 	}
-	if (!found)
-		curr_to->target = lowest(&from);
 }
 
-
-void add_targets(t_list **to, t_list **from, int mode)
+void	add_targets_b(t_list **stack_a, t_list **stack_b)
 {
-	t_list	*curr_to;
+	t_list		*temp_a;
+	t_list		*temp_b;
+	long long	min;
+	long long	max;
+	long long	temp;
 
-	curr_to = *to;
-	while (curr_to)
+	max = highest(stack_a);
+	min = lowest(stack_a);
+	temp_b = *stack_b;
+	while (temp_b)
 	{
-		if (mode == 0)
-			add_target_mode_0(curr_to, *from);
-		else if (mode == 1)
-			add_target_mode_1(curr_to, *from);
-		curr_to = curr_to->next;
+		temp = max;
+		temp_a = *stack_a;
+		while (temp_a)
+		{
+			if (*(long long *)temp_a->content > *(long long *)temp_b->content && *(long long *)temp_a->content < temp)
+				temp = *(long long *)temp_a->content;
+			temp_a = temp_a->next;
+		}
+		if (temp < *(long long *)temp_b->content)
+			temp = min;
+		temp_b->target = temp;
+		temp_b = temp_b->next;
 	}
 }

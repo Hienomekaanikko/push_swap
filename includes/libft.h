@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:27:06 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/10 11:49:29 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/23 09:42:24 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 typedef struct	s_list
 {
 	void	*content;
-	long long	target;
+	int		reverse_roll;
+	int		target;
 	int		cost;
 	int		index;
 	struct s_list 	*next;
@@ -62,7 +63,6 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 t_list	*ft_lstnew(void *content);
-long long	ft_atoll(const char *str);
 int		ft_lstsize(t_list *lst);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstadd_back(t_list **lst, t_list *new);
@@ -71,4 +71,5 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void 	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstlast(t_list *lst);
+long long	ft_atoll(const char *s);
 #endif

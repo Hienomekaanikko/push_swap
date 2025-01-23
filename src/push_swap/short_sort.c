@@ -1,76 +1,50 @@
 #include "push_swap.h"
 
-static void	sort_two(t_list **stack_a)
+static void	three_num(t_list **stack_a)
 {
-	if (*(long*)(*stack_a)->content > *(long*)(*stack_a)->next->content)
+	t_list	*temp;
+	long long		lowest;
+
+	temp = *stack_a;
+	lowest = *(long long *)temp->content;
+	while (temp)
 	{
-		swap_first_two(stack_a);
-		ft_putendl_fd("sa", 1);
+		if (*(long long *)temp->content < lowest)
+			lowest = *(long long *)temp->content;
+		temp = temp->next;
 	}
-}
-
-static void	sort_three_case_one(t_list **stack_a)
-{
-	swap_first_two(stack_a);
-	ft_putendl_fd("sa", 1);
-}
-
-static void	sort_three_case_two(t_list **stack_a)
-{
-	swap_first_two(stack_a);
-	ft_putendl_fd("sa", 1);
-	reverse_rotate_one(stack_a);
-	ft_putendl_fd("rra", 1);
-}
-
-static void	sort_three_case_three(t_list **stack_a)
-{
-	rotate_one_up(stack_a);
-	ft_putendl_fd("ra", 1);
-}
-
-static void	sort_three_case_four(t_list **stack_a)
-{
-	swap_first_two(stack_a);
-	ft_putendl_fd("sa", 1);
-	rotate_one_up(stack_a);
-	ft_putendl_fd("ra", 1);
-}
-
-static void	sort_three_case_five(t_list **stack_a)
-{
-	reverse_rotate_one(stack_a);
-	ft_putendl_fd("rra", 1);
-}
-
-static void	sort_three(t_list **stack_a)
-{
-	long	a;
-	long	b;
-	long	c;
-
-	a = *(long*)(*stack_a)->content;
-	b = *(long*)(*stack_a)->next->content;
-	c = *(long*)(*stack_a)->next->next->content;
-	if (a > b && b < c && a < c)
-		sort_three_case_one(stack_a);
-	else if (a > b && b > c)
-		sort_three_case_two(stack_a);
-	else if (a > b && b < c && a > c)
-		sort_three_case_three(stack_a);
-	else if (a < b && b > c && a < c)
-		sort_three_case_four(stack_a);
-	else if (a < b && b > c && a > c)
-		sort_three_case_five(stack_a);
+	temp = *stack_a;
+	while (*(long long *)temp->content != lowest)
+	{
+		ra(stack_a);
+		temp = *stack_a;
+	}
+	temp = temp->next;
+	if (*(long long *)temp->content > *(long long *)temp->next->content)
+	{
+		ra(stack_a);
+		sa(stack_a);
+		rra(stack_a);
+	}
 }
 
 void	short_sort(t_list **stack_a)
 {
-	int	size;
+	int		size;
+	t_list	*temp;
 
+	temp = *stack_a;
 	size = ft_lstsize(*stack_a);
-	if (size == 2)
-		sort_two(stack_a);
+	if (size > 3)
+	{
+		if (*(long long *)temp->content > *(long long *)temp->next->content)
+			sa(stack_a);
+	}
 	else if (size == 3)
-		sort_three(stack_a);
+		three_num(stack_a);
+	else if (size == 2)
+	{
+		if (*(long long *)temp->content > *(long long *)temp->next->content)
+			sa(stack_a);
+	}
 }

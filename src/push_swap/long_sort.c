@@ -39,7 +39,7 @@ static int	cheapest_dst(int cheapest, t_list **src, t_list **dest)
 	return(temp_b->index);
 }
 
-static void	position(t_list **stack_src, t_list **stack_dst, int cheapest, int size_src, int size_dst)
+static void	position(t_list **stack_src, t_list **stack_dst, int cheapest, int size_src, int size_dst, int stack_flag)
 {
 	int	dst_index;
 	int	src_index;
@@ -52,7 +52,7 @@ static void	position(t_list **stack_src, t_list **stack_dst, int cheapest, int s
 	dst_index = cheapest_dst(cheapest, stack_src, stack_dst);
 	while (*(long long*)(*stack_dst)->content != (long long)(*stack_src)->target)
 	{
-		if (src_index == size_dst)
+		if (src_index == size_src)
 			src_index = 0;
 		if (dst_index == size_dst)
 			dst_index = 0;
@@ -70,37 +70,58 @@ static void	position(t_list **stack_src, t_list **stack_dst, int cheapest, int s
 		}
 		else if (src_index == 0 && dst_index > 0 && dst_index <= dst_median)
 		{
-			rb(stack_dst);
+			if (stack_flag == 'a')
+				rb(stack_dst);
+			else
+				ra(stack_dst);
 			dst_index--;
 		}
 		else if (src_index == 0 && dst_index > 0 && dst_index > dst_median)
 		{
-			rrb(stack_dst);
+			if (stack_flag == 'a')
+				rrb(stack_dst);
+			else
+				rra(stack_dst);
 			dst_index++;
 		}
 		else if (dst_index == 0 && src_index > 0 && src_index <= src_median)
 		{
-			ra(stack_src);
+			if (stack_flag == 'a')
+				ra(stack_src);
+			else
+				rb(stack_src);
 			src_index--;
 		}
-		else if (dst_index == 0 && src_index > 0 && src_index > src_median)
+		else if (dst_index == 0 && src_index > src_median)
 		{
-			rra(stack_src);
+			if (stack_flag == 'a')
+				rra(stack_src);
+			else
+				rrb(stack_src);
 			src_index++;
 		}
-		else if (src_index == 0 && dst_index > dst_median && dst_index < size_dst)
+		else if (src_index == 0 && dst_index > dst_median)
 		{
-			rrb(stack_dst);
+			if (stack_flag == 'a')
+				rrb(stack_dst);
+			else
+				rra(stack_dst);
 			dst_index++;
 		}
 		else if (dst_index == 0 && src_index > src_median && src_index < size_src)
 		{
-			rra(stack_src);
+			if (stack_flag == 'a')
+				rra(stack_src);
+			else
+				rrb(stack_src);
 			src_index++;
 		}
 		else
 		{
-			rra(stack_src);
+			if (stack_flag == 'a')
+				ra(stack_src);
+			else
+				rb(stack_src);
 			src_index--;
 		}
 	}
@@ -146,7 +167,7 @@ static void	fill_b(t_list **stack_src, t_list **stack_dst, int *size_src, int *s
 	while(*size_src > 2)
 	{
 		cheapest = find_cheapest(stack_src);
-		position(stack_src, stack_dst, cheapest, *size_src, *size_dst);
+		position(stack_src, stack_dst, cheapest, *size_src, *size_dst, 'a');
 		pb(stack_src, stack_dst);
 		min_max_check(stack_dst, &min, &max);
 		add_targets_a(stack_src, stack_dst);
@@ -168,7 +189,7 @@ static void	fill_a(t_list **stack_src, t_list **stack_dst, int *size_src, int *s
 		add_targets_b(stack_src, stack_dst);
 		count_cost(stack_dst, stack_src, size_src, size_dst);
 		cheapest = find_cheapest(stack_dst);
-		position(stack_dst, stack_src, cheapest, *size_dst, *size_src);
+		position(stack_dst, stack_src, cheapest, *size_dst, *size_src, 'b');
 		pa(stack_src, stack_dst);
 		min_max_check(stack_src, &min, &max);
 		(*size_src)++;

@@ -118,7 +118,7 @@ int	main(int argc, char *argv[])
 		}
 		push_swap(&stack_a, &stack_b);
 	}
-	t_list	*temp;
+	/* t_list	*temp;
 	temp = stack_a;
 	ft_printf("STACK_A:\n");
 	while (temp)
@@ -127,7 +127,7 @@ int	main(int argc, char *argv[])
 		ft_printf("Target: %d ", temp->target);
 		ft_printf("Cost: %d \n", temp->cost);
 		temp = temp->next;
-	}
+	} */
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);

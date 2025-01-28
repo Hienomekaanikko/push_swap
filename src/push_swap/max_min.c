@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-int lowest(t_list **stack)
+long long lowest(t_list **stack)
 {
 	t_list *temp_stack;
 	long long temp;
@@ -20,7 +20,7 @@ int lowest(t_list **stack)
 }
 
 
-int	highest(t_list **stack)
+long long	highest(t_list **stack)
 {
 	t_list	*temp_stack;
 	long long	temp;

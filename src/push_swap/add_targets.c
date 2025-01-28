@@ -6,26 +6,22 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 13:08:30 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/23 10:12:56 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/28 12:02:13 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	assign(long long temp, t_list **stack_a)
-{
-	t_list	*temp_a;
-
-	temp_a = *stack_a;
-	temp_a->target = temp;
-}
-
-void	add_targets_a(t_list **stack_a, t_list **stack_b, long long min, long long max)
+void	add_targets_a(t_list **stack_a, t_list **stack_b)
 {
 	t_list		*temp_a;
 	t_list		*temp_b;
 	long long	temp;
+	long long	min;
+	long long	max;
 
+	max = highest(stack_b);
+	min = lowest(stack_b);
 	temp_a = *stack_a;
 	temp_b = *stack_b;
 	while (temp_a)
@@ -43,7 +39,7 @@ void	add_targets_a(t_list **stack_a, t_list **stack_b, long long min, long long 
 		}
 		if (temp > *(long long *)temp_a->content)
 			temp = max;
-		assign(temp, &temp_a);
+		temp_a->target = temp;
 		temp_a = temp_a->next;
 	}
 }

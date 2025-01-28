@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:27:06 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/23 09:42:24 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/28 10:27:00 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct	s_list
 {
 	void	*content;
 	int		reverse_roll;
-	int		target;
+	long long	target;
 	int		cost;
 	int		index;
 	struct s_list 	*next;

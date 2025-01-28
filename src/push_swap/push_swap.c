@@ -6,13 +6,13 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:32:09 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/23 10:23:56 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/28 12:03:10 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	add_node(t_list **stack, int content)
+void	add_node(t_list **stack, long long content)
 {
 	t_list	*new_node;
 	t_list	*temp;
@@ -39,9 +39,6 @@ void	push_swap(t_list **stack_a, t_list **stack_b)
 {
 	int		size_a;
 	int		size_b;
-	long long		min;
-	long long		max;
-	//t_list	*temp;
 
 	size_a = ft_lstsize(*stack_a);
 	size_b = 0;
@@ -65,11 +62,10 @@ void	push_swap(t_list **stack_a, t_list **stack_b)
 			size_a--;
 		}
 	}
-	min = lowest(stack_b);
-	max = highest(stack_b);
-	add_targets_a(stack_a, stack_b, min, max);
+	add_targets_a(stack_a, stack_b);
 	count_cost(stack_a, stack_b, &size_a, &size_b);
 	long_sort(stack_a, stack_b, &size_a, &size_b);
+	//t_list	*temp;
 	// temp = *stack_b;
 	// ft_printf("STACK_B:\n");
 	// while (temp)
@@ -122,16 +118,16 @@ int	main(int argc, char *argv[])
 		}
 		push_swap(&stack_a, &stack_b);
 	}
-	// t_list	*temp;
-	// temp = stack_a;
-	// ft_printf("STACK_A:\n");
-	// while (temp)
-	// {
-	// 	ft_printf("Value: %d ", *(long long*)temp->content);
-	// 	ft_printf("Target: %d ", temp->target);
-	// 	ft_printf("Cost: %d \n", temp->cost);
-	// 	temp = temp->next;
-	// }
+	t_list	*temp;
+	temp = stack_a;
+	ft_printf("STACK_A:\n");
+	while (temp)
+	{
+		ft_printf("Value: %d ", *(long long*)temp->content);
+		ft_printf("Target: %d ", temp->target);
+		ft_printf("Cost: %d \n", temp->cost);
+		temp = temp->next;
+	}
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);

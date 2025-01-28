@@ -6,18 +6,18 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:47:46 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/23 09:51:55 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/28 10:01:27 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	values(int num, char **argv, int i)
+static int	values(long long num, char **argv, int i)
 {
 	i++;
 	while (argv[i])
 	{
-		if (ft_atoi(argv[i]) == num)
+		if (ft_atoll(argv[i]) == num)
 			return (1);
 		i++;
 	}
@@ -31,7 +31,7 @@ static int	order(char **argv)
 	i = 0;
 	while (argv[i + 1])
 	{
-		if (ft_atoi(argv[i]) >= ft_atoi(argv[i + 1]))
+		if (ft_atoll(argv[i]) >= ft_atoll(argv[i + 1]))
 			return (0);
 		i++;
 	}

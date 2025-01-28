@@ -98,6 +98,11 @@ static void	position(t_list **stack_src, t_list **stack_dst, int cheapest, int s
 			rra(stack_src);
 			src_index++;
 		}
+		else
+		{
+			rra(stack_src);
+			src_index--;
+		}
 	}
 }
 

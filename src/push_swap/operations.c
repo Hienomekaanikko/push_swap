@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:58:08 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/29 14:21:13 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/29 16:57:16 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	push(t_list **stack_src, t_list **stack_dst, const char *operation)
 		return ;
 	temp = *stack_src;
 	*stack_src = (*stack_src)->next;
-	temp->next = (*stack_dst);
+	temp->next = (*stack_dst);c
 	*stack_dst = temp;
 	if (ft_strncmp(operation, "pb", 2) == 0)
 		ft_putendl_fd("pb", 1);
@@ -74,67 +74,4 @@ void	rotate_both(t_list **stack_src, t_list **stack_dst, const char *operation)
 	rotate(stack_dst, "rr");
 	if (ft_strncmp(operation, "rr", 2) == 0)
 		ft_putendl_fd("rr", 1);
-}
-
-void	reverse(t_list **stack_src, const char *operation)
-{
-	t_list	*first;
-	t_list	*last;
-	t_list	*second_last;
-
-	if (*stack_src == NULL || (*stack_src)->next == NULL)
-		return ;
-	first = *stack_src;
-	second_last = *stack_src;
-	last = ft_lstlast(*stack_src);
-	while (second_last->next != last)
-		second_last = second_last->next;
-	*stack_src = last;
-	(*stack_src)->next = first;
-	second_last->next = NULL;
-	if (ft_strncmp(operation, "rra", 3) == 0)
-		ft_putendl_fd("rra", 1);
-	else if (ft_strncmp(operation, "rrb", 3) == 0)
-		ft_putendl_fd("rrb", 1);
-}
-
-void reverse_both(t_list **stack_src, t_list **stack_dst, const char *operation)
-{
-	reverse(stack_src, "rrr");
-	reverse(stack_dst, "rrr");
-	if (ft_strncmp(operation, "rrr", 3) == 0)
-		ft_putendl_fd("rrr", 1);
-}
-
-void	rotate_max_on_top(t_list **stack_src)
-{
-	long long	target;
-
-	target = highest(stack_src);
-	while (*(long long *)(*stack_src)->content != target)
-		rotate(stack_src, "rb");
-}
-
-void	rotate_min_on_top(t_list **stack_src)
-{
-	long long	target;
-
-	target = lowest(stack_src);
-	while (*(long long *)(*stack_src)->content != target)
-		rotate(stack_src, "ra");
-}
-
-void	free_stack(t_list **stack_src)
-{
-	t_list	*tmp;
-
-	if (!stack_src || !(*stack_src))
-		return ;
-	while (*stack_src)
-	{
-		tmp = (*stack_src)->next;
-		free(*stack_src);
-		*stack_src = tmp;
-	}
-	*stack_src = NULL;
 }

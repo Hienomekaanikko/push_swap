@@ -6,12 +6,11 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 13:14:37 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/29 15:20:42 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/29 16:53:34 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 static int	src_to_top_dist(int cheapest, t_list **src, t_list **dest)
 {
@@ -38,7 +37,6 @@ static int	dst_to_top_dist(int cheapest, t_list **src, t_list **dest)
 		temp_dst = temp_dst->next;
 	return(temp_dst->index);
 }
-
 static void	position(t_list **stack_src, t_list **stack_dst, int cheapest, int size_src, int size_dst, int stack_flag)
 {
 	int	dst_index;
@@ -125,27 +123,6 @@ static void	position(t_list **stack_src, t_list **stack_dst, int cheapest, int s
 			src_index--;
 		}
 	}
-}
-
-static int	find_cheapest(t_list **stack)
-{
-	t_list	*temp_src;
-	int		cheapest;
-
-	temp_src = *stack;
-	cheapest = temp_src->cost;
-	while (temp_src)
-	{
-		if (temp_src->cost == 0)
-		{
-			cheapest = 0;
-			break ;
-		}
-		if (temp_src->cost < cheapest)
-			cheapest = temp_src->cost;
-		temp_src = temp_src->next;
-	}
-	return (cheapest);
 }
 
 static void	fill_b(t_list **stack_src, t_list **stack_dst, int *size_src, int *size_dst)

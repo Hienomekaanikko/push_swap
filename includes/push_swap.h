@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:41:40 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/29 15:26:55 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/29 16:54:13 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,6 @@ void	add_index(t_list **stack_a, t_list **stack_b);
 void	free_stack(t_list **stack);
 void	rotate_min_on_top(t_list **stack);
 void	error_checks(int argc, char **argv);
+int		find_cheapest(t_list **stack);
+
 #endif

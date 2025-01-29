@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:32:09 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/28 12:03:10 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/29 10:15:27 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	add_node(t_list **stack, long long content)
 		return ;
 	*content_copy = content;
 	new_node = ft_lstnew(content_copy);
-	new_node->reverse_roll = 0;
 	if (*stack == NULL)
 		*stack = new_node;
 	else
@@ -62,8 +61,6 @@ void	push_swap(t_list **stack_a, t_list **stack_b)
 			size_a--;
 		}
 	}
-	add_targets_a(stack_a, stack_b);
-	count_cost(stack_a, stack_b, &size_a, &size_b);
 	long_sort(stack_a, stack_b, &size_a, &size_b);
 	//t_list	*temp;
 	// temp = *stack_b;

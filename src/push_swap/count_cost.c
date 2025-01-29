@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:48:55 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/28 12:12:58 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/29 10:28:44 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,48 @@
 
 void	add_index(t_list **stack_src, t_list **stack_dst)
 {
-	t_list	*temp_a;
-	t_list	*temp_b;
+	t_list	*temp_src;
+	t_list	*temp_dst;
 	int		pos;
 
-	temp_a = *stack_src;
-	temp_b = *stack_dst;
+	temp_src = *stack_src;
+	temp_dst = *stack_dst;
 	pos = 0;
-	while (temp_a)
+	while (temp_src)
 	{
-		temp_a->index = pos;
+		temp_src->index = pos;
 		pos++;
-		temp_a = temp_a->next;
+		temp_src = temp_src->next;
 	}
 	pos = 0;
-	while (temp_b)
+	while (temp_dst)
 	{
-		temp_b->index = pos;
+		temp_dst->index = pos;
 		pos++;
-		temp_b = temp_b->next;
+		temp_dst = temp_dst->next;
 	}
 }
 
-void	count_cost(t_list **stack_src, t_list **stack_dst, int *size_src, int *size_dst)
+void	count_cost(t_list **stack_src, t_list **stack_dst)
 {
-	t_list	*temp_a;
-	t_list	*temp_b;
+	t_list	*temp_src;
+	t_list	*temp_dst;
 	int		cost;
-	int		a_med;
-	int		b_med;
 
-	temp_a = *stack_src;
-	a_med = *size_src / 2;
-	b_med = *size_dst / 2;
+	temp_src = *stack_src;
 	add_index(stack_src, stack_dst);
-	while(temp_a)
+	while(temp_src)
 	{
-		temp_b = *stack_dst;
-		cost = temp_a->index;
-		if (temp_a->index > a_med)
-			cost = *size_src - temp_a->index;
-		while (temp_b)
+		temp_dst = *stack_dst;
+		cost = temp_src->index;
+		while (temp_dst)
 		{
-			if (*(long long *)temp_b->content == temp_a->target)
+			if (*(long long *)temp_dst->content == temp_src->target)
 				break ;
-			if (temp_b->index > b_med)
-			{
-				cost = *size_dst - temp_b->index;
-				temp_b->reverse_roll = 1;
-			}
 			cost++;
-			temp_b = temp_b->next;
+			temp_dst = temp_dst->next;
 		}
-		temp_a->cost = cost;
-		temp_a = temp_a->next;
+		temp_src->cost = cost;
+		temp_src = temp_src->next;
 	}
 }

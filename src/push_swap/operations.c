@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:58:08 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/29 12:32:51 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/29 14:21:13 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,17 +124,6 @@ void	rotate_min_on_top(t_list **stack_src)
 		rotate(stack_src, "ra");
 }
 
-void	empty_b_to_a(t_list	**stack_src, t_list **stack_dst)
-{
-	int	size;
-
-	size = ft_lstsize(*stack_dst);
-	while (size > 0)
-	{
-		push(stack_dst, stack_src, "pa");
-		size--;
-	}
-}
 void	free_stack(t_list **stack_src)
 {
 	t_list	*tmp;

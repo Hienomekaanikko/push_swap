@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 13:14:37 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/29 14:19:12 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/29 15:20:42 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ static void	fill_b(t_list **stack_src, t_list **stack_dst, int *size_src, int *s
 	int	cheapest;
 	while(*size_src > 2)
 	{
-		add_targets_a(stack_src, stack_dst, 'a');
+		add_targets(stack_src, stack_dst, 'a');
 		count_cost(stack_src, stack_dst);
 		cheapest = find_cheapest(stack_src);
 		position(stack_src, stack_dst, cheapest, *size_src, *size_dst, 'a');
@@ -167,7 +167,7 @@ static void	fill_a(t_list **stack_src, t_list **stack_dst, int *size_src, int *s
 	int	cheapest;
 	while (*size_dst > 0)
 	{
-		add_targets_a(stack_dst, stack_src, 'b');
+		add_targets(stack_dst, stack_src, 'b');
 		count_cost(stack_dst, stack_src);
 		cheapest = find_cheapest(stack_dst);
 		position(stack_dst, stack_src, cheapest, *size_dst, *size_src, 'b');

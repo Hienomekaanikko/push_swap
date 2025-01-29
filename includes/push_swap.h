@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:41:40 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/29 14:18:39 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/29 15:26:55 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	long_sort(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b);
 void	rotate_max_on_top(t_list **stack);
 long long	highest(t_list **stack);
 long long	lowest(t_list **stack);
-void	empty_b_to_a(t_list	**stack_a, t_list **stack_b);
 void	reverse_both(t_list **stack_src, t_list **stack_dst, const char *operation);
 void	rotate_both(t_list **stack_src, t_list **stack_dst, const char *operation);
 void	short_sort(t_list **stack_a);

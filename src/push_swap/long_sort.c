@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 13:14:37 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/29 10:33:46 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/29 14:19:12 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,70 +58,70 @@ static void	position(t_list **stack_src, t_list **stack_dst, int cheapest, int s
 			dst_index = 0;
 		if ((src_index > 0 && dst_index > 0) && (src_index <= src_median && dst_index <= dst_median))
 		{
-			rr(stack_src, stack_dst);
+			rotate_both(stack_src, stack_dst, "rr");
 			src_index--;
 			dst_index--;
 		}
 		else if ((src_index > src_median && dst_index > dst_median) && (src_index < size_src && dst_index < size_dst))
 		{
-			rrr(stack_src, stack_dst);
+			reverse_both(stack_src, stack_dst, "rrr");
 			src_index++;
 			dst_index++;
 		}
 		else if (src_index == 0 && dst_index > 0 && dst_index <= dst_median)
 		{
 			if (stack_flag == 'a')
-				rb(stack_dst);
+				rotate(stack_dst, "rb");
 			else
-				ra(stack_dst);
+				rotate(stack_dst, "ra");
 			dst_index--;
 		}
 		else if (src_index == 0 && dst_index > 0 && dst_index > dst_median)
 		{
 			if (stack_flag == 'a')
-				rrb(stack_dst);
+				reverse(stack_dst, "rrb");
 			else
-				rra(stack_dst);
+				reverse(stack_dst, "rra");
 			dst_index++;
 		}
 		else if (dst_index == 0 && src_index > 0 && src_index <= src_median)
 		{
 			if (stack_flag == 'a')
-				ra(stack_src);
+				rotate(stack_src, "ra");
 			else
-				rb(stack_src);
+				rotate(stack_src, "rb");
 			src_index--;
 		}
 		else if (dst_index == 0 && src_index > src_median)
 		{
 			if (stack_flag == 'a')
-				rra(stack_src);
+				reverse(stack_src, "rra");
 			else
-				rrb(stack_src);
+				reverse(stack_src, "rrb");
 			src_index++;
 		}
 		else if (src_index == 0 && dst_index > dst_median)
 		{
 			if (stack_flag == 'a')
-				rrb(stack_dst);
+				reverse(stack_dst, "rrb");
 			else
-				rra(stack_dst);
+				reverse(stack_dst, "rra");
 			dst_index++;
 		}
 		else if (dst_index == 0 && src_index > src_median && src_index < size_src)
 		{
 			if (stack_flag == 'a')
-				rra(stack_src);
+				reverse(stack_src, "rra");
 			else
-				rrb(stack_src);
+				reverse(stack_src, "rrb");
 			src_index++;
 		}
 		else
 		{
 			if (stack_flag == 'a')
-				ra(stack_src);
+				rotate(stack_src, "ra");
 			else
-				rb(stack_src);
+				rotate(stack_src, "rb");
 			src_index--;
 		}
 	}
@@ -153,11 +153,11 @@ static void	fill_b(t_list **stack_src, t_list **stack_dst, int *size_src, int *s
 	int	cheapest;
 	while(*size_src > 2)
 	{
-		add_targets_a(stack_src, stack_dst);
+		add_targets_a(stack_src, stack_dst, 'a');
 		count_cost(stack_src, stack_dst);
 		cheapest = find_cheapest(stack_src);
 		position(stack_src, stack_dst, cheapest, *size_src, *size_dst, 'a');
-		pb(stack_src, stack_dst);
+		push(stack_src, stack_dst, "pb");
 		(*size_src)--;
 		(*size_dst)++;
 	}
@@ -167,11 +167,11 @@ static void	fill_a(t_list **stack_src, t_list **stack_dst, int *size_src, int *s
 	int	cheapest;
 	while (*size_dst > 0)
 	{
-		add_targets_b(stack_src, stack_dst);
+		add_targets_a(stack_dst, stack_src, 'b');
 		count_cost(stack_dst, stack_src);
 		cheapest = find_cheapest(stack_dst);
 		position(stack_dst, stack_src, cheapest, *size_dst, *size_src, 'b');
-		pa(stack_src, stack_dst);
+		push(stack_dst, stack_src, "pa");
 		(*size_src)++;
 		(*size_dst)--;
 	}

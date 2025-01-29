@@ -16,15 +16,15 @@ static void	three_num(t_list **stack_a)
 	temp = *stack_a;
 	while (*(long long *)temp->content != lowest)
 	{
-		ra(stack_a);
+		rotate(stack_a, "ra");
 		temp = *stack_a;
 	}
 	temp = temp->next;
 	if (*(long long *)temp->content > *(long long *)temp->next->content)
 	{
-		ra(stack_a);
-		sa(stack_a);
-		rra(stack_a);
+		rotate(stack_a, "ra");
+		s(stack_a, "sa");
+		reverse(stack_a, "rra");
 	}
 }
 
@@ -38,13 +38,13 @@ void	short_sort(t_list **stack_a)
 	if (size > 3)
 	{
 		if (*(long long *)temp->content > *(long long *)temp->next->content)
-			sa(stack_a);
+			s(stack_a, "sa");
 	}
 	else if (size == 3)
 		three_num(stack_a);
 	else if (size == 2)
 	{
 		if (*(long long *)temp->content > *(long long *)temp->next->content)
-			sa(stack_a);
+			s(stack_a, "sa");
 	}
 }

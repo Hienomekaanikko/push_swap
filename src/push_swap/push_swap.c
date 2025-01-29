@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:32:09 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/29 10:15:27 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/29 14:20:29 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,21 @@ void	push_swap(t_list **stack_a, t_list **stack_b)
 	}
 	if (size_a == 4)
 	{
-		pb(stack_a, stack_b);
+		push(stack_a, stack_b, "pb");
 		size_b++;
+		size_a--;
 	}
 	else
 	{
 		short_sort(stack_a);
 		while (size_b < 2)
 		{
-			pb(stack_a, stack_b);
+			push(stack_a, stack_b, "pb");
 			size_b++;
 			size_a--;
 		}
 	}
 	long_sort(stack_a, stack_b, &size_a, &size_b);
-	//t_list	*temp;
-	// temp = *stack_b;
-	// ft_printf("STACK_B:\n");
-	// while (temp)
-	// {
-	// 	ft_printf("Value: %d ", *(long long*)temp->content);
-	// 	ft_printf("Target: %d ", temp->target);
-	// 	ft_printf("Cost: %d \n", temp->cost);
-	// 	temp = temp->next;
-	// }
 }
 
 static int	init_a(t_list **stack_a, int argc, char **argv)
@@ -115,16 +106,6 @@ int	main(int argc, char *argv[])
 		}
 		push_swap(&stack_a, &stack_b);
 	}
-	/* t_list	*temp;
-	temp = stack_a;
-	ft_printf("STACK_A:\n");
-	while (temp)
-	{
-		ft_printf("Value: %d ", *(long long*)temp->content);
-		ft_printf("Target: %d ", temp->target);
-		ft_printf("Cost: %d \n", temp->cost);
-		temp = temp->next;
-	} */
 	free_stack(&stack_a);
 	free_stack(&stack_b);
 	return (0);

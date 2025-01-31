@@ -75,6 +75,8 @@ PUSH_SWAP_FLS = $(PUSH_SWAP_DIR)/push_swap.c \
 				$(PUSH_SWAP_DIR)/operations3.c \
 				$(PUSH_SWAP_DIR)/short_sort.c \
 				$(PUSH_SWAP_DIR)/operations2.c \
+				$(PUSH_SWAP_DIR)/rotation_orders.c \
+				$(PUSH_SWAP_DIR)/rotation_prep.c \
 
 # ALL SOURCE FILES
 SRC_FILES = $(LIBFT_FLS) $(FT_PRINTF_FLS) $(GNL_FLS) $(PUSH_SWAP_FLS)

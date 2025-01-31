@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:58:08 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/29 16:57:16 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/31 12:41:44 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,12 @@ void	push(t_list **stack_src, t_list **stack_dst, const char *operation)
 		return ;
 	temp = *stack_src;
 	*stack_src = (*stack_src)->next;
-	temp->next = (*stack_dst);c
+	temp->next = (*stack_dst);
 	*stack_dst = temp;
 	if (ft_strncmp(operation, "pb", 2) == 0)
 		ft_putendl_fd("pb", 1);
 	else if (ft_strncmp(operation, "pa", 2) == 0)
 		ft_putendl_fd("pa", 1);
-}
-
-void	s(t_list **stack_src, const char *operation)
-{
-	t_list	*first;
-	t_list	*second;
-	int		len;
-
-	if (!stack_src)
-		return ;
-	len = ft_lstsize(*stack_src);
-	if (len < 2)
-		return ;
-	first = (*stack_src);
-	second = (*stack_src)->next;
-	first->next = second->next;
-	second->next = first;
-	*stack_src = second;
-	if (ft_strncmp(operation, "sa", 2) == 0)
-		ft_putendl_fd("sa", 1);
-	else if (ft_strncmp(operation, "rb", 2) == 0)
-		ft_putendl_fd("sb", 1);
 }
 
 void	rotate(t_list **stack_src, const char *operation)
@@ -68,10 +46,14 @@ void	rotate(t_list **stack_src, const char *operation)
 		ft_putendl_fd("rb", 1);
 }
 
-void	rotate_both(t_list **stack_src, t_list **stack_dst, const char *operation)
+void	rotate_both(t_list **stack_src, t_list **stack_dst, const char *operation, t_data *data)
 {
 	rotate(stack_src, "rr");
 	rotate(stack_dst, "rr");
 	if (ft_strncmp(operation, "rr", 2) == 0)
+	{
 		ft_putendl_fd("rr", 1);
+		data->src_index--;
+		data->dst_index--;
+	}
 }

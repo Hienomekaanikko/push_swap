@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:27:06 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/29 15:16:11 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/31 09:33:45 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 
 typedef struct	s_list
 {
-	void	*content;
+	long long	*content;
 	long long	target;
-	int		cost;
-	int		index;
+	int			cost;
+	int			index;
 	struct s_list 	*next;
 }	t_list;
 

@@ -6,18 +6,22 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:07:24 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/29 16:54:06 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/31 15:51:47 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void reverse_both(t_list **stack_src, t_list **stack_dst, const char *operation)
+void reverse_both(t_list **stack_src, t_list **stack_dst, const char *operation, t_data *data)
 {
 	reverse(stack_src, "rrr");
 	reverse(stack_dst, "rrr");
 	if (ft_strncmp(operation, "rrr", 3) == 0)
+	{
 		ft_putendl_fd("rrr", 1);
+		data->src_index++;
+		data->dst_index++;
+	}
 }
 
 void free_stack(t_list **stack_src)
@@ -59,21 +63,21 @@ void	reverse(t_list **stack_src, const char *operation)
 }
 int	find_cheapest(t_list **stack)
 {
-	t_list	*temp_src;
+	t_list	*temp_stack;
 	int		cheapest;
 
-	temp_src = *stack;
-	cheapest = temp_src->cost;
-	while (temp_src)
+	temp_stack = *stack;
+	cheapest = temp_stack->cost;
+	while (temp_stack)
 	{
-		if (temp_src->cost == 0)
+		if (temp_stack->cost == 0)
 		{
 			cheapest = 0;
 			break ;
 		}
-		if (temp_src->cost < cheapest)
-			cheapest = temp_src->cost;
-		temp_src = temp_src->next;
+		if (temp_stack->cost < cheapest)
+			cheapest = temp_stack->cost;
+		temp_stack = temp_stack->next;
 	}
 	return (cheapest);
 }

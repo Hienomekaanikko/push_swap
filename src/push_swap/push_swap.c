@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:32:09 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/29 16:17:07 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/31 15:44:41 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,35 +34,29 @@ void	add_node(t_list **stack, long long content)
 	}
 }
 
-void	push_swap(t_list **stack_a, t_list **stack_b)
+static void	push_swap(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b)
 {
-	int		size_a;
-	int		size_b;
-
-	size_a = ft_lstsize(*stack_a);
-	size_b = 0;
-	if (size_a <= 3)
+	if (*size_a <= 3)
 	{
 		short_sort(stack_a);
 		return ;
 	}
-	if (size_a == 4)
+	if (*size_a == 4)
 	{
 		push(stack_a, stack_b, "pb");
-		size_b++;
-		size_a--;
+		(*size_b)++;
+		(*size_a)--;
 	}
 	else
 	{
-		short_sort(stack_a);
-		while (size_b < 2)
+		while (*size_b < 2)
 		{
 			push(stack_a, stack_b, "pb");
-			size_b++;
-			size_a--;
+			(*size_b)++;
+			(*size_a)--;
 		}
 	}
-	long_sort(stack_a, stack_b, &size_a, &size_b);
+	long_sort(stack_a, stack_b, size_a, size_b);
 }
 
 static int	init_a(t_list **stack_a, int argc, char **argv)
@@ -93,6 +87,8 @@ int	main(int argc, char *argv[])
 {
 	t_list	*stack_a;
 	t_list	*stack_b;
+	int		size_a;
+	int		size_b;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -104,7 +100,9 @@ int	main(int argc, char *argv[])
 			exit(0);
 			return (1);
 		}
-		push_swap(&stack_a, &stack_b);
+		size_a = ft_lstsize(stack_a);
+		size_b = 0;
+		push_swap(&stack_a, &stack_b, &size_a, &size_b);
 	}
 	free_stack(&stack_a);
 	free_stack(&stack_b);

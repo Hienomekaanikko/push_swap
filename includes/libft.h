@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:27:06 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/31 09:33:45 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/01/23 16:18:52 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@
 
 typedef struct	s_list
 {
-	long long	*content;
-	long long	target;
-	int			cost;
-	int			index;
+	void	*content;
+	int		reverse_roll;
+	int		target;
+	int		cost;
+	int		index;
 	struct s_list 	*next;
 }	t_list;
 
@@ -70,5 +71,4 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void 	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstlast(t_list *lst);
-long long	ft_atoll(const char *s);
 #endif

@@ -1,18 +1,21 @@
 # PROJECT NAME
-NAME = push_swap
+NAME = so_long
 
 # DIRECTORIES
 SRC_DIR = src
 INCLUDES = includes
+MLX42_DIR = $(SRC_DIR)/MLX42
+MLX_INCLUDES = $(MLX42_DIR)/include
+HEADERS = $(INCLUDES) $(MLX_INCLUDES)
+LIBS = $(MLX42_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 OBJ_DIR = objs
 LIBFT_DIR = $(SRC_DIR)/libft
 FT_PRINTF_DIR = $(SRC_DIR)/ft_printf
 GNL_DIR = $(SRC_DIR)/get_next_line
-PUSH_SWAP_DIR = $(SRC_DIR)/push_swap
+SO_LONG_DIR = $(SRC_DIR)/so_long
 
 # SOURCE FILES
 LIBFT_FLS = $(LIBFT_DIR)/ft_calloc.c \
-			$(LIBFT_DIR)/ft_atol.c \
 			$(LIBFT_DIR)/ft_strlen.c \
 			$(LIBFT_DIR)/ft_strdup.c \
 			$(LIBFT_DIR)/ft_memset.c \
@@ -38,19 +41,10 @@ LIBFT_FLS = $(LIBFT_DIR)/ft_calloc.c \
 			$(LIBFT_DIR)/ft_substr.c \
 			$(LIBFT_DIR)/ft_strjoin.c \
 			$(LIBFT_DIR)/ft_strtrim.c \
-			$(LIBFT_DIR)/ft_split.c \
-			$(LIBFT_DIR)/ft_putchar_fd.c \
-			$(LIBFT_DIR)/ft_putstr_fd.c \
-			$(LIBFT_DIR)/ft_putendl_fd.c \
-			$(LIBFT_DIR)/ft_putnbr_fd.c \
-			$(LIBFT_DIR)/ft_itoa.c \
-			$(LIBFT_DIR)/ft_strlcat.c \
-			$(LIBFT_DIR)/ft_lstnew.c \
-			$(LIBFT_DIR)/ft_lstdelone.c \
-			$(LIBFT_DIR)/ft_lstiter.c \
-			$(LIBFT_DIR)/ft_lstmap.c \
 			$(LIBFT_DIR)/ft_lstadd_back.c \
+			$(LIBFT_DIR)/ft_putendl_fd.c \
 			$(LIBFT_DIR)/ft_lstadd_front.c \
+			$(LIBFT_DIR)/ft_lstdelone.c \
 			$(LIBFT_DIR)/ft_lstclear.c \
 			$(LIBFT_DIR)/ft_lstlast.c \
 			$(LIBFT_DIR)/ft_lstsize.c \
@@ -67,19 +61,10 @@ FT_PRINTF_FLS = $(FT_PRINTF_DIR)/ft_itoalen.c \
 
 GNL_FLS = $(GNL_DIR)/get_next_line.c \
 
-PUSH_SWAP_FLS = $(PUSH_SWAP_DIR)/push_swap.c \
-				$(PUSH_SWAP_DIR)/operations.c \
-				$(PUSH_SWAP_DIR)/count_cost.c \
-				$(PUSH_SWAP_DIR)/error_checks.c \
-				$(PUSH_SWAP_DIR)/long_sort.c \
-				$(PUSH_SWAP_DIR)/operations3.c \
-				$(PUSH_SWAP_DIR)/short_sort.c \
-				$(PUSH_SWAP_DIR)/operations2.c \
-				$(PUSH_SWAP_DIR)/rotation_orders.c \
-				$(PUSH_SWAP_DIR)/rotation_prep.c \
+SO_LONG_FLS = $(SO_LONG_DIR)/so_long.c \
 
 # ALL SOURCE FILES
-SRC_FILES = $(LIBFT_FLS) $(FT_PRINTF_FLS) $(GNL_FLS) $(PUSH_SWAP_FLS)
+SRC_FILES = $(LIBFT_FLS) $(FT_PRINTF_FLS) $(GNL_FLS) $(SO_LONG_FLS)
 
 # OBJS FILES
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
@@ -91,13 +76,16 @@ DEPS = $(OBJS:.o=.d)
 CC = cc
 RM = rm -rf
 CFLGS = -Wall -Werror -Wextra
-IFLGS = -I$(INCLUDES)
+IFLGS = -I$(INCLUDES) -I$(MLX_INCLUDES)
 
 # RULES
 .PHONY: all clean fclean re
 
 # Default target
-all: $(NAME)
+all: libmlx $(NAME)
+
+libmlx:
+	@cmake $(MLX42_DIR) -B $(MLX42_DIR)/build && make -C $(MLX42_DIR)/build -j4
 
 # Object file rule
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -106,11 +94,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 # Create the executable
 $(NAME): $(OBJS)
-	$(CC) $(CFLGS) -o $(NAME) $(OBJS) $(IFLGS)
+	$(CC) $(CFLGS) -o $(NAME) $(OBJS) $(IFLGS) $(LIBS)
 
 # Clean object files
 clean:
 	$(RM) $(OBJ_DIR)
+	$(RM) $(MLX42_DIR)/build
 
 # Clean everything (object files and executable)
 fclean: clean

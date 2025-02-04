@@ -12,32 +12,32 @@
 
 #include "push_swap.h"
 
-void	push(t_list **stack_src, t_list **stack_dst, const char *operation)
+void	push(t_list **src, t_list **dst, const char *operation)
 {
 	t_list	*temp;
 
-	if (*stack_src == NULL)
+	if (*src == NULL)
 		return ;
-	temp = *stack_src;
-	*stack_src = (*stack_src)->next;
-	temp->next = (*stack_dst);
-	*stack_dst = temp;
+	temp = *src;
+	*src = (*src)->next;
+	temp->next = (*dst);
+	*dst = temp;
 	if (ft_strncmp(operation, "pb", 2) == 0)
 		ft_putendl_fd("pb", 1);
 	else if (ft_strncmp(operation, "pa", 2) == 0)
 		ft_putendl_fd("pa", 1);
 }
 
-void	rotate(t_list **stack_src, const char *operation)
+void	rotate(t_list **src, const char *operation)
 {
 	t_list	*first;
 	t_list	*last;
 
-	if (*stack_src == NULL || (*stack_src)->next == NULL)
+	if (*src == NULL || (*src)->next == NULL)
 		return ;
-	first = (*stack_src);
-	last = ft_lstlast(*stack_src);
-	*stack_src = first->next;
+	first = (*src);
+	last = ft_lstlast(*src);
+	*src = first->next;
 	last->next = first;
 	first->next = NULL;
 	if (ft_strncmp(operation, "ra", 2) == 0)
@@ -46,10 +46,10 @@ void	rotate(t_list **stack_src, const char *operation)
 		ft_putendl_fd("rb", 1);
 }
 
-void	rotate_both(t_list **stack_src, t_list **stack_dst, const char *operation, t_data *data)
+void	rotate_both(t_list **src, t_list **dst, const char *operation, t_data *data)
 {
-	rotate(stack_src, "rr");
-	rotate(stack_dst, "rr");
+	rotate(src, "rr");
+	rotate(dst, "rr");
 	if (ft_strncmp(operation, "rr", 2) == 0)
 	{
 		ft_putendl_fd("rr", 1);

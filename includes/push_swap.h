@@ -16,8 +16,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "libft.h"
-#include "ft_printf.h"
-#include "get_next_line.h"
 
 typedef struct	s_data
 {
@@ -35,27 +33,27 @@ typedef struct	s_data
 	int	limit;
 }	t_data;
 
-void	s(t_list **stack_src, const char *operation);
-void	push(t_list **stack_src, t_list **stack_dst, const char *operations);
-void	rotate(t_list **stack_a, const char *operation);
+void	s(t_list **src, const char *operation);
+void	push(t_list **src, t_list **dst, const char *operations);
+void	rotate(t_list **a, const char *operation);
 void	reverse(t_list **stack, const char *operation);
-void	add_targets(t_list **stack_src, t_list **stack_dst, t_data *data);
-void	long_sort(t_list **stack_a, t_list **stack_b);
+void	add_targets(t_list **src, t_list **dst, t_data *data);
+void	long_sort(t_list **a, t_list **b);
 void	rotate_max_on_top(t_list **stack);
 long long	highest(t_list **stack);
 long long	lowest(t_list **stack);
-void	reverse_both(t_list **stack_src, t_list **stack_dst, const char *operation, t_data *data);
-void	rotate_both(t_list **stack_src, t_list **stack_dst, const char *operation, t_data *data);
-void	short_sort(t_list **stack_a);
+void	reverse_both(t_list **src, t_list **dst, const char *operation, t_data *data);
+void	rotate_both(t_list **src, t_list **dst, const char *operation, t_data *data);
+void	short_sort(t_list **a);
 void	free_stack(t_list **stack);
 void	rotate_min_on_top(t_list **stack);
 void	error_checks(int argc, char **argv);
 int		find_cheapest(t_list **stack);
-void	rotate_dst(t_list **stack_dst, t_data *data);
-void	rotate_src(t_list **stack_src, t_data *data);
-void	reverse_dst(t_list **stack_dst, t_data *data);
-void	reverse_src(t_list **stack_src, t_data *data);
-void	other_case(t_list **stack_src, t_data *data);
+void	rotate_dst(t_list **dst, t_data *data);
+void	rotate_src(t_list **src, t_data *data);
+void	reverse_dst(t_list **dst, t_data *data);
+void	reverse_src(t_list **src, t_data *data);
+void	other_case(t_list **src, t_data *data);
 int		src_to_top_dist(int cheapest, t_list **src);
 int		dst_to_top_dist(int cheapest, t_list **src, t_list **dest);
 long long	lowest(t_list **stack);

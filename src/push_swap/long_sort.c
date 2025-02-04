@@ -11,10 +11,11 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
-static void	position(t_list **stack_src, t_list **stack_dst, t_data *data)
+static void	position(t_list **src, t_list **dst, t_data *data)
 {
-	while (*(*stack_dst)->content != (*stack_src)->target)
+	while (*(*dst)->content != (*src)->target)
 	{
 		if (data->src_index == data->src_size)
 			data->src_index = 0;
@@ -22,69 +23,69 @@ static void	position(t_list **stack_src, t_list **stack_dst, t_data *data)
 			data->dst_index = 0;
 		if ((data->src_index > 0 && data->dst_index > 0)
 			&& (data->src_index <= data->src_median && data->dst_index <= data->dst_median))
-			rotate_both(stack_src, stack_dst, "rr", data);
+			rotate_both(src, dst, "rr", data);
 		else if ((data->src_index > data->src_median && data->dst_index > data->dst_median)
 			&& (data->src_index < data->src_size && data->dst_index < data->dst_size))
-			reverse_both(stack_src, stack_dst, "rrr", data);
+			reverse_both(src, dst, "rrr", data);
 		else if (data->src_index == 0 && data->dst_index > 0)
-			rotate_dst(stack_dst, data);
+			rotate_dst(dst, data);
 		else if (data->dst_index == 0 && data->src_index > 0)
-			rotate_src(stack_src, data);
+			rotate_src(src, data);
 		else if (data->src_index == 0 && data->dst_index > data->dst_median)
-			reverse_dst(stack_dst, data);
+			reverse_dst(dst, data);
 		else if (data->dst_index == 0 && data->src_index > data->src_median)
-			reverse_src(stack_src, data);
+			reverse_src(src, data);
 		else
-			other_case(stack_src, data);
+			other_case(src, data);
 	}
 }
 
-static void	fill(t_list **stack_src, t_list **stack_dst, t_data *data)
+static void	fill(t_list **src, t_list **dst, t_data *data)
 {
 	while(data->src_size > data->limit)
 	{
-		data->highest = highest(stack_dst);
-		data->lowest = lowest(stack_dst);
-		add_targets(stack_src, stack_dst, data);
-		data->cheapest = find_cheapest(stack_src);
-		data->src_median = data->src_size / 2;
-		data->dst_median = data->dst_size / 2;
-		data->src_index = src_to_top_dist(data->cheapest, stack_src);
-		data->dst_index = dst_to_top_dist(data->cheapest, stack_src, stack_dst);
+		data->highest = highest(dst);
+		data->lowest = lowest(dst);
+		add_targets(src, dst, data);
+		data->cheapest = find_cheapest(src);
+		data->src_median = (data->src_size + 1) / 2;
+		data->dst_median = (data->dst_size + 1) / 2;
+		data->src_index = src_to_top_dist(data->cheapest, src);
+		data->dst_index = dst_to_top_dist(data->cheapest, src, dst);
 		if (data->src_index == 0 && data->dst_index == 0 && data->stack_flag == 'a')
-			push(stack_src, stack_dst, "pb");
+			push(src, dst, "pb");
 		else if (data->src_index == 0 && data->dst_index == 0 && data->stack_flag == 'b')
-			push(stack_src, stack_dst, "pa");
+			push(src, dst, "pa");
 		else
 		{
-			position(stack_src, stack_dst, data);
+			position(src, dst, data);
 			if (data->stack_flag == 'a')
-				push(stack_src, stack_dst, "pb");
+				push(src, dst, "pb");
 			else
-				push(stack_src, stack_dst, "pa");
+				push(src, dst, "pa");
 		}
 		data->src_size--;
 		data->dst_size++;
 	}
 }
 
-void	long_sort(t_list **stack_a, t_list **stack_b)
+void	long_sort(t_list **a, t_list **b)
 {
 	t_data	data;
 	t_list	*temp_a;
 
-	temp_a = *stack_b;
+	temp_a = *b;
 	if (!temp_a)
 		return ;
 	data.stack_flag = 'a';
 	data.limit = 2;
-	data.src_size = ft_lstsize(*stack_a);
-	data.dst_size = ft_lstsize(*stack_b);
-	fill(stack_a, stack_b, &data);
+	data.src_size = ft_lstsize(*a);
+	data.dst_size = ft_lstsize(*b);
+	fill(a, b, &data);
 	data.limit = 0;
 	data.stack_flag = 'b';
-	data.src_size = ft_lstsize(*stack_b);
-	data.dst_size = ft_lstsize(*stack_a);
-	fill(stack_b, stack_a, &data);
-	rotate_min_on_top(stack_a);
+	data.src_size = ft_lstsize(*b);
+	data.dst_size = ft_lstsize(*a);
+	fill(b, a, &data);
+	rotate_min_on_top(a);
 }

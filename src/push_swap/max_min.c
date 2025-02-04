@@ -9,11 +9,11 @@ long long lowest(t_list **stack)
 		return (0);
 
 	temp_stack = *stack;
-	temp = *(long long *)temp_stack->content;
+	temp = *temp_stack->content;
 	while (temp_stack)
 	{
-		if (*(long long *)temp_stack->content < temp)
-			temp = *(long long *)temp_stack->content;
+		if (*temp_stack->content < temp)
+			temp = *temp_stack->content;
 		temp_stack = temp_stack->next;
 	}
 	return (temp);
@@ -26,11 +26,11 @@ long long	highest(t_list **stack)
 	long long	temp;
 
 	temp_stack = *stack;
-	temp = *(long long *)temp_stack->content;
+	temp = *temp_stack->content;
 	while (temp_stack)
 	{
-		if (*(long long *)temp_stack->content > temp)
-			temp = *(long long *)temp_stack->content;
+		if (*temp_stack->content > temp)
+			temp = *temp_stack->content;
 		temp_stack = temp_stack->next;
 	}
 	return (temp);

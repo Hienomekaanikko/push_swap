@@ -47,20 +47,20 @@ long long	highest(t_list **stack)
 	return (temp);
 }
 
-void	rotate_max_on_top(t_list **stack_src)
+void	rotate_max_on_top(t_list **src)
 {
 	long long	target;
 
-	target = highest(stack_src);
-	while (*(*stack_src)->content != target)
-		rotate(stack_src, "rb");
+	target = highest(src);
+	while (*(*src)->content != target)
+		rotate(src, "rb");
 }
 
-void	rotate_min_on_top(t_list **stack_src)
+void	rotate_min_on_top(t_list **src)
 {
 	long long	target;
 
-	target = lowest(stack_src);
-	while (*(*stack_src)->content != target)
-		rotate(stack_src, "ra");
+	target = lowest(src);
+	while (*(*src)->content != target)
+		rotate(src, "ra");
 }

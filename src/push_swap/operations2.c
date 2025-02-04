@@ -12,10 +12,10 @@
 
 #include "push_swap.h"
 
-void reverse_both(t_list **stack_src, t_list **stack_dst, const char *operation, t_data *data)
+void reverse_both(t_list **src, t_list **dst, const char *operation, t_data *data)
 {
-	reverse(stack_src, "rrr");
-	reverse(stack_dst, "rrr");
+	reverse(src, "rrr");
+	reverse(dst, "rrr");
 	if (ft_strncmp(operation, "rrr", 3) == 0)
 	{
 		ft_putendl_fd("rrr", 1);
@@ -24,37 +24,37 @@ void reverse_both(t_list **stack_src, t_list **stack_dst, const char *operation,
 	}
 }
 
-void free_stack(t_list **stack_src)
+void free_stack(t_list **src)
 {
 	t_list *tmp;
 
-	if (!stack_src || !(*stack_src))
+	if (!src || !(*src))
 		return ;
-	while (*stack_src)
+	while (*src)
 	{
-		tmp = (*stack_src)->next;
-		free((*stack_src)->content);
-		free(*stack_src);
-		*stack_src = tmp;
+		tmp = (*src)->next;
+		free((*src)->content);
+		free(*src);
+		*src = tmp;
 	}
-	*stack_src = NULL;
+	*src = NULL;
 }
 
-void	reverse(t_list **stack_src, const char *operation)
+void	reverse(t_list **src, const char *operation)
 {
 	t_list	*first;
 	t_list	*last;
 	t_list	*second_last;
 
-	if (*stack_src == NULL || (*stack_src)->next == NULL)
+	if (*src == NULL || (*src)->next == NULL)
 		return ;
-	first = *stack_src;
-	second_last = *stack_src;
-	last = ft_lstlast(*stack_src);
+	first = *src;
+	second_last = *src;
+	last = ft_lstlast(*src);
 	while (second_last->next != last)
 		second_last = second_last->next;
-	*stack_src = last;
-	(*stack_src)->next = first;
+	*src = last;
+	(*src)->next = first;
 	second_last->next = NULL;
 	if (ft_strncmp(operation, "rra", 3) == 0)
 		ft_putendl_fd("rra", 1);

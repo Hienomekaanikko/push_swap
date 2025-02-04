@@ -12,19 +12,24 @@
 
 #include "push_swap.h"
 
-static int	values(long long num, char **argv, int i)
+static void	error(char *msg)
+{
+	ft_putendl_fd(msg, 2);
+	exit(1);
+}
+
+static void	values(long long num, char **argv, int i)
 {
 	i++;
 	while (argv[i])
 	{
 		if (ft_atoll(argv[i]) == num)
-			return (1);
+			error("Error");
 		i++;
 	}
-	return (0);
 }
 
-static int	order(char **argv)
+static void	order(char **argv)
 {
 	int i;
 
@@ -32,14 +37,14 @@ static int	order(char **argv)
 	while (argv[i + 1])
 	{
 		if (ft_atoll(argv[i]) >= ft_atoll(argv[i + 1]))
-			return (0);
+			return ;
 		i++;
 	}
-	return (1);
+	exit(0);
 }
 
 
-static int	isnum(char *num)
+static void	isnum(char *num)
 {
 	int	i;
 
@@ -49,16 +54,9 @@ static int	isnum(char *num)
 	while (num[i])
 	{
 		if (!ft_isdigit(num[i]))
-			return (0);
+			error("Error");
 		i++;
 	}
-	return (1);
-}
-
-static void	error(char *msg)
-{
-	ft_putendl_fd(msg, 2);
-	exit(0);
 }
 
 static void	free_split(char **args)
@@ -90,16 +88,13 @@ void	error_checks(int argc, char **argv)
 	while (args[i])
 	{
 		nbr = ft_atoll(args[i]);
-		if (!isnum(args[i]))
-			error("Error");
-		if (values(nbr, args, i))
-			error("Error");
+		isnum(args[i]);
+		values(nbr, args, i);
 		if (nbr < INT_MIN || nbr > INT_MAX)
 			error("Error");
 		i++;
 	}
-	if (order(args) == 1)
-		exit(0);
+	order(args);
 	if (argc == 2)
 		free_split(args);
 }

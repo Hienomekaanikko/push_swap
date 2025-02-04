@@ -18,6 +18,8 @@ void	add_node(t_list **stack, long long content)
 	t_list	*temp;
 	long long		*content_copy;
 
+	if (!content)
+		return ;
 	content_copy = malloc(sizeof(long long));
 	if (!content_copy)
 		return ;
@@ -36,33 +38,22 @@ void	add_node(t_list **stack, long long content)
 	}
 }
 
-static void	push_swap(t_list **stack_a, t_list **stack_b)
+static void	push_swap(t_list **a, t_list **b)
 {
 	int	size_a;
-	int	size_b;
 
-	size_a = ft_lstsize(*stack_a);
-	size_b = ft_lstsize(*stack_b);
-	if (size_a <= 3)
+	size_a = ft_lstsize(*a);
+	if (size_a > 3)
 	{
-		short_sort(stack_a);
-		return ;
+		push(a, b, "pb");
+		push(a, b, "pb");
+		long_sort(a, b);
 	}
-	if (size_a == 4)
-		push(stack_a, stack_b, "pb");
-	else
-	{
-		while (size_b < 2)
-		{
-			push(stack_a, stack_b, "pb");
-			(size_b)++;
-			(size_a)--;
-		}
-	}
-	long_sort(stack_a, stack_b);
+	else if (size_a <= 3)
+		short_sort(a);
 }
 
-static int	init_a(t_list **stack_a, int argc, char **argv)
+static void	init_a(t_list **a, int argc, char **argv)
 {
 	long long	num;
 
@@ -72,7 +63,7 @@ static int	init_a(t_list **stack_a, int argc, char **argv)
 		while (*argv)
 		{
 			num = ft_atoll(*argv++);
-			add_node(stack_a, num);
+			add_node(a, num);
 		}
 	}
 	else
@@ -80,30 +71,25 @@ static int	init_a(t_list **stack_a, int argc, char **argv)
 		while (*++argv)
 		{
 			num = ft_atoll(*argv);
-			add_node(stack_a, num);
+			add_node(a, num);
 		}
 	}
-	return (1);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
+	t_list	*a;
+	t_list	*b;
 
-	stack_a = NULL;
-	stack_b = NULL;
+	a = NULL;
+	b = NULL;
 	if (argc > 1)
 	{
 		error_checks(argc, argv);
-		if (!init_a(&stack_a, argc, argv))
-		{
-			exit(0);
-			return (1);
-		}
-		push_swap(&stack_a, &stack_b);
+		init_a(&a, argc, argv);
+		push_swap(&a, &b);
+		free_stack(&a);
+		free_stack(&b);
 	}
-	free_stack(&stack_a);
-	free_stack(&stack_b);
 	return (0);
 }

@@ -22,13 +22,13 @@ int	src_to_top_dist(int cheapest, t_list **src)
 	return (temp_src->index);
 }
 
-int	dst_to_top_dist(int cheapest, t_list **src, t_list **dest)
+int	dst_to_top_dist(int cheapest, t_list **src, t_list **dst)
 {
 	t_list	*temp_src;
 	t_list	*temp_dst;
 
 	temp_src = *src;
-	temp_dst = *dest;
+	temp_dst = *dst;
 	while (temp_src && temp_src->cost != cheapest)
 		temp_src = temp_src->next;
 	while (temp_dst && *temp_dst->content != temp_src->target)
@@ -36,11 +36,11 @@ int	dst_to_top_dist(int cheapest, t_list **src, t_list **dest)
 	return(temp_dst->index);
 }
 
-void	other_case(t_list **stack_src, t_data *data)
+void	other_case(t_list **src, t_data *data)
 {
 	if (data->stack_flag == 'a')
-		rotate(stack_src, "ra");
+		rotate(src, "ra");
 	else
-		rotate(stack_src, "rb");
+		rotate(src, "rb");
 	data->src_index--;
 }

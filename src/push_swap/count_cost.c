@@ -12,14 +12,14 @@
 
 #include "push_swap.h"
 
-static void	add_index(t_list **stack_src, t_list **stack_dst)
+static void	add_index(t_list **src, t_list **dst)
 {
 	t_list	*temp_src;
 	t_list	*temp_dst;
 	int		pos;
 
-	temp_src = *stack_src;
-	temp_dst = *stack_dst;
+	temp_src = *src;
+	temp_dst = *dst;
 	pos = 0;
 	while (temp_src)
 	{
@@ -36,7 +36,7 @@ static void	add_index(t_list **stack_src, t_list **stack_dst)
 	}
 }
 
-static void	count_cost(t_list **stack_src, t_list **stack_dst, t_data *data)
+static void	count_cost(t_list **src, t_list **dst, t_data *data)
 {
 	t_list	*temp_src;
 	t_list	*temp_dst;
@@ -44,17 +44,15 @@ static void	count_cost(t_list **stack_src, t_list **stack_dst, t_data *data)
 	int		dst_median;
 
 	dst_median = data->dst_median;
-	temp_src = *stack_src;
-	add_index(stack_src, stack_dst);
+	temp_src = *src;
+	add_index(src, dst);
 	while(temp_src)
 	{
-		temp_dst = *stack_dst;
+		temp_dst = *dst;
 		cost = temp_src->index;
-		while (temp_dst)
+		while (*temp_dst->content != temp_src->target)
 		{
-			if (*temp_dst->content == temp_src->target)
-				break ;
-			else if (temp_dst->index <= dst_median)
+			if (temp_dst->index <= dst_median)
 				cost++;
 			else if (temp_dst->index > dst_median)
 				cost--;
@@ -65,33 +63,33 @@ static void	count_cost(t_list **stack_src, t_list **stack_dst, t_data *data)
 	}
 }
 
-static void	update_best_target(t_list *temp_src, t_list *temp_dst, t_data *data, long long *temp)
+static void	update_target(t_list *src, t_list *dst, t_data *data, long long *temp)
 {
-	if (*temp_dst->content < *temp_src->content
-		&& data->stack_flag == 'a' && *temp_dst->content > *temp)
-		*temp = *temp_dst->content;
-	else if (*temp_dst->content > *temp_src->content
-		&& data->stack_flag == 'b' && *temp_dst->content < *temp)
-		*temp = *temp_dst->content;
+	if (*dst->content < *src->content
+		&& data->stack_flag == 'a' && *dst->content > *temp)
+		*temp = *dst->content;
+	else if (*dst->content > *src->content
+		&& data->stack_flag == 'b' && *dst->content < *temp)
+		*temp = *dst->content;
 }
 
-void	add_targets(t_list **stack_src, t_list **stack_dst, t_data *data)
+void	add_targets(t_list **src, t_list **dst, t_data *data)
 {
 	t_list		*temp_src;
 	t_list		*temp_dst;
 	long long	temp;
 
-	temp_src = *stack_src;
+	temp_src = *src;
 	while (temp_src)
 	{
 		if (data->stack_flag == 'a')
 			temp = data->lowest;
 		else if (data->stack_flag == 'b')
 			temp = data->highest;
-		temp_dst = *stack_dst;
+		temp_dst = *dst;
 		while (temp_dst)
 		{
-			update_best_target(temp_src, temp_dst, data, &temp);
+			update_target(temp_src, temp_dst, data, &temp);
 			temp_dst = temp_dst->next;
 		}
 		if (temp > *temp_src->content && data->stack_flag =='a')
@@ -101,6 +99,6 @@ void	add_targets(t_list **stack_src, t_list **stack_dst, t_data *data)
 		temp_src->target = temp;
 		temp_src = temp_src->next;
 	}
-	count_cost(stack_src, stack_dst, data);
+	count_cost(src, dst, data);
 }
 

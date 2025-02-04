@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:41:40 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/31 15:17:07 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/03 10:26:59 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_data
 	int	highest;
 	int	lowest;
 	int	both;
+	int	limit;
 }	t_data;
 
 void	s(t_list **stack_src, const char *operation);
@@ -39,7 +40,7 @@ void	push(t_list **stack_src, t_list **stack_dst, const char *operations);
 void	rotate(t_list **stack_a, const char *operation);
 void	reverse(t_list **stack, const char *operation);
 void	add_targets(t_list **stack_src, t_list **stack_dst, t_data *data);
-void	long_sort(t_list **stack_a, t_list **stack_b, int *size_a, int *size_b);
+void	long_sort(t_list **stack_a, t_list **stack_b);
 void	rotate_max_on_top(t_list **stack);
 long long	highest(t_list **stack);
 long long	lowest(t_list **stack);

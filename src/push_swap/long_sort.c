@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 13:14:37 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/31 15:57:56 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/03 10:46:59 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,71 +39,52 @@ static void	position(t_list **stack_src, t_list **stack_dst, t_data *data)
 	}
 }
 
-static void	fill_b(t_list **stack_src, t_list **stack_dst, int *size_src, int *size_dst)
+static void	fill(t_list **stack_src, t_list **stack_dst, t_data *data)
 {
-	t_data data;
-
-	while(*size_src > 2)
+	while(data->src_size > data->limit)
 	{
-		data.stack_flag = 'a';
-		data.highest = highest(stack_dst);
-		data.lowest = lowest(stack_dst);
-		add_targets(stack_src, stack_dst, &data);
-		data.cheapest = find_cheapest(stack_src);
-		data.src_size = *size_src;
-		data.dst_size = *size_dst;
-		data.src_median = *size_src / 2;
-		data.dst_median = *size_dst / 2;
-		data.src_index = src_to_top_dist(data.cheapest, stack_src);
-		data.dst_index = dst_to_top_dist(data.cheapest, stack_src, stack_dst);
-		if (data.src_index == 0 && data.dst_index == 0)
+		data->highest = highest(stack_dst);
+		data->lowest = lowest(stack_dst);
+		add_targets(stack_src, stack_dst, data);
+		data->cheapest = find_cheapest(stack_src);
+		data->src_median = data->src_size / 2;
+		data->dst_median = data->dst_size / 2;
+		data->src_index = src_to_top_dist(data->cheapest, stack_src);
+		data->dst_index = dst_to_top_dist(data->cheapest, stack_src, stack_dst);
+		if (data->src_index == 0 && data->dst_index == 0 && data->stack_flag == 'a')
 			push(stack_src, stack_dst, "pb");
+		else if (data->src_index == 0 && data->dst_index == 0 && data->stack_flag == 'b')
+			push(stack_src, stack_dst, "pa");
 		else
 		{
-			position(stack_src, stack_dst, &data);
-			push(stack_src, stack_dst, "pb");
+			position(stack_src, stack_dst, data);
+			if (data->stack_flag == 'a')
+				push(stack_src, stack_dst, "pb");
+			else
+				push(stack_src, stack_dst, "pa");
 		}
-		(*size_src)--;
-		(*size_dst)++;
-	}
-}
-static void	fill_a(t_list **stack_src, t_list **stack_dst, int *size_src, int *size_dst)
-{
-	t_data data;
-
-	while (*size_dst > 0)
-	{
-		data.stack_flag = 'b';
-		data.highest = highest(stack_src);
-		data.lowest = lowest(stack_src);
-		add_targets(stack_dst, stack_src, &data);
-		data.cheapest = find_cheapest(stack_dst);
-		data.src_size = *size_dst;
-		data.dst_size = *size_src;
-		data.src_median = *size_src / 2;
-		data.dst_median = *size_dst / 2;
-		data.src_index = src_to_top_dist(data.cheapest, stack_dst);
-		data.dst_index = dst_to_top_dist(data.cheapest, stack_dst, stack_src);
-		if (data.src_index == 0 && data.dst_index == 0)
-			push(stack_dst, stack_src, "pa");
-		else
-		{
-			position(stack_dst, stack_src, &data);
-			push(stack_dst, stack_src, "pa");
-		}
-		(*size_src)++;
-		(*size_dst)--;
+		data->src_size--;
+		data->dst_size++;
 	}
 }
 
-void	long_sort(t_list **stack_src, t_list **stack_dst, int *size_src, int *size_dst)
+void	long_sort(t_list **stack_a, t_list **stack_b)
 {
-	t_list	*temp_src;
+	t_data	data;
+	t_list	*temp_a;
 
-	temp_src = *stack_src;
-	if (!temp_src)
+	temp_a = *stack_b;
+	if (!temp_a)
 		return ;
-	fill_b(stack_src, stack_dst, size_src, size_dst);
-	fill_a(stack_src, stack_dst, size_src, size_dst);
-	rotate_min_on_top(stack_src);
+	data.stack_flag = 'a';
+	data.limit = 2;
+	data.src_size = ft_lstsize(*stack_a);
+	data.dst_size = ft_lstsize(*stack_b);
+	fill(stack_a, stack_b, &data);
+	data.limit = 0;
+	data.stack_flag = 'b';
+	data.src_size = ft_lstsize(*stack_b);
+	data.dst_size = ft_lstsize(*stack_a);
+	fill(stack_b, stack_a, &data);
+	rotate_min_on_top(stack_a);
 }

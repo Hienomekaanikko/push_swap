@@ -12,6 +12,14 @@
 
 #include "push_swap.h"
 
+void	index_overflow(t_data *data)
+{
+	if (data->src_index == data->src_size)
+		data->src_index = 0;
+	if (data->dst_index == data->dst_size)
+		data->dst_index = 0;
+}
+
 void	push(t_list **src, t_list **dst, const char *operation)
 {
 	t_list	*temp;
@@ -56,4 +64,5 @@ void	rotate_both(t_list **src, t_list **dst, const char *operation, t_data *data
 		data->src_index--;
 		data->dst_index--;
 	}
+	index_overflow(data);
 }

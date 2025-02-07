@@ -35,12 +35,3 @@ int	dst_to_top_dist(int cheapest, t_list **src, t_list **dst)
 		temp_dst = temp_dst->next;
 	return(temp_dst->index);
 }
-
-void	other_case(t_list **src, t_data *data)
-{
-	if (data->stack_flag == 'a')
-		rotate(src, "ra");
-	else
-		rotate(src, "rb");
-	data->src_index--;
-}

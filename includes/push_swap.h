@@ -24,13 +24,13 @@ typedef struct	s_data
 	int	dst_median;
 	int	src_index;
 	int	dst_index;
-	int	stack_flag;
+	int	stack;
 	int	src_size;
 	int	dst_size;
 	int	highest;
 	int	lowest;
 	int	both;
-	int	limit;
+	int	leftover;
 }	t_data;
 
 void	s(t_list **src, const char *operation);
@@ -53,9 +53,9 @@ void	rotate_dst(t_list **dst, t_data *data);
 void	rotate_src(t_list **src, t_data *data);
 void	reverse_dst(t_list **dst, t_data *data);
 void	reverse_src(t_list **src, t_data *data);
-void	other_case(t_list **src, t_data *data);
 int		src_to_top_dist(int cheapest, t_list **src);
 int		dst_to_top_dist(int cheapest, t_list **src, t_list **dest);
 long long	lowest(t_list **stack);
+void	index_overflow(t_data *data);
 
 #endif

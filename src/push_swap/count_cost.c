@@ -12,14 +12,12 @@
 
 #include "push_swap.h"
 
-static void	add_index(t_list **src, t_list **dst)
+static void	add_index(t_list **src)
 {
 	t_list	*temp_src;
-	t_list	*temp_dst;
 	int		pos;
 
 	temp_src = *src;
-	temp_dst = *dst;
 	pos = 0;
 	while (temp_src)
 	{
@@ -27,38 +25,33 @@ static void	add_index(t_list **src, t_list **dst)
 		pos++;
 		temp_src = temp_src->next;
 	}
-	pos = 0;
-	while (temp_dst)
-	{
-		temp_dst->index = pos;
-		pos++;
-		temp_dst = temp_dst->next;
-	}
 }
 
 static void	count_cost(t_list **src, t_list **dst, t_data *data)
 {
 	t_list	*temp_src;
 	t_list	*temp_dst;
-	int		cost;
-	int		dst_median;
+	int		cost_src;
+	int		cost_dst;
 
-	dst_median = data->dst_median;
 	temp_src = *src;
-	add_index(src, dst);
+	add_index(src);
+	add_index(dst);
 	while(temp_src)
 	{
+		cost_dst = 0;
 		temp_dst = *dst;
-		cost = temp_src->index;
+		cost_src = temp_src->index;
+		if (cost_src > data->src_median)
+			cost_src = data->src_size - cost_src;
 		while (*temp_dst->content != temp_src->target)
 		{
-			if (temp_dst->index <= dst_median)
-				cost++;
-			else if (temp_dst->index > dst_median)
-				cost--;
+			cost_dst++;
 			temp_dst = temp_dst->next;
 		}
-		temp_src->cost = cost;
+		if (cost_dst > data->dst_median)
+			cost_dst = data->dst_size - cost_dst;
+		temp_src->cost = cost_src + cost_dst;
 		temp_src = temp_src->next;
 	}
 }
@@ -66,10 +59,10 @@ static void	count_cost(t_list **src, t_list **dst, t_data *data)
 static void	update_target(t_list *src, t_list *dst, t_data *data, long long *temp)
 {
 	if (*dst->content < *src->content
-		&& data->stack_flag == 'a' && *dst->content > *temp)
+		&& data->stack == 'a' && *dst->content > *temp)
 		*temp = *dst->content;
 	else if (*dst->content > *src->content
-		&& data->stack_flag == 'b' && *dst->content < *temp)
+		&& data->stack == 'b' && *dst->content < *temp)
 		*temp = *dst->content;
 }
 
@@ -82,9 +75,9 @@ void	add_targets(t_list **src, t_list **dst, t_data *data)
 	temp_src = *src;
 	while (temp_src)
 	{
-		if (data->stack_flag == 'a')
+		if (data->stack == 'a')
 			temp = data->lowest;
-		else if (data->stack_flag == 'b')
+		else if (data->stack == 'b')
 			temp = data->highest;
 		temp_dst = *dst;
 		while (temp_dst)
@@ -92,9 +85,9 @@ void	add_targets(t_list **src, t_list **dst, t_data *data)
 			update_target(temp_src, temp_dst, data, &temp);
 			temp_dst = temp_dst->next;
 		}
-		if (temp > *temp_src->content && data->stack_flag =='a')
+		if (temp > *temp_src->content && data->stack =='a')
 			temp = data->highest;
-		if (temp < *temp_src->content && data->stack_flag =='b')
+		if (temp < *temp_src->content && data->stack =='b')
 			temp = data->lowest;
 		temp_src->target = temp;
 		temp_src = temp_src->next;

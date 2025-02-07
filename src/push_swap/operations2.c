@@ -22,6 +22,7 @@ void reverse_both(t_list **src, t_list **dst, const char *operation, t_data *dat
 		data->src_index++;
 		data->dst_index++;
 	}
+	index_overflow(data);
 }
 
 void free_stack(t_list **src)

@@ -6,13 +6,13 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 10:47:03 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/23 09:43:19 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/10 08:58:09 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-long long ft_atoll(const char *s)
+long long	ft_atoll(const char *s)
 {
 	long	result;
 	int		sign;

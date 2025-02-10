@@ -6,13 +6,13 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:48:55 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/31 15:05:27 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/10 10:06:42 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	add_index(t_list **src)
+void	add_index(t_list **src)
 {
 	t_list	*temp_src;
 	int		pos;
@@ -31,38 +31,38 @@ static void	count_cost(t_list **src, t_list **dst, t_data *data)
 {
 	t_list	*temp_src;
 	t_list	*temp_dst;
-	int		cost_src;
-	int		cost_dst;
+	int		cost;
+	int		cost_b;
 
 	temp_src = *src;
-	add_index(src);
-	add_index(dst);
-	while(temp_src)
+	while (temp_src)
 	{
-		cost_dst = 0;
+		cost_b = 0;
 		temp_dst = *dst;
-		cost_src = temp_src->index;
-		if (cost_src > data->src_median)
-			cost_src = data->src_size - cost_src;
-		while (*temp_dst->content != temp_src->target)
+		cost = temp_src->index;
+		if (cost >= data->src_median)
+			cost = data->src_size - cost;
+		while (temp_dst)
 		{
-			cost_dst++;
+			if (*temp_dst->content == temp_src->target)
+				break ;
+			cost_b++;
 			temp_dst = temp_dst->next;
 		}
-		if (cost_dst > data->dst_median)
-			cost_dst = data->dst_size - cost_dst;
-		temp_src->cost = cost_src + cost_dst;
+		if (cost_b >= data->dst_median)
+			cost_b = data->dst_size - cost_b;
+		temp_src->cost = cost + cost_b;
 		temp_src = temp_src->next;
 	}
 }
 
-static void	update_target(t_list *src, t_list *dst, t_data *data, long long *temp)
+static void	target(t_list *src, t_list *dst, t_data *data, long long *temp)
 {
 	if (*dst->content < *src->content
-		&& data->stack == 'a' && *dst->content > *temp)
+		&& data->stack_flag == 'a' && *dst->content > *temp)
 		*temp = *dst->content;
 	else if (*dst->content > *src->content
-		&& data->stack == 'b' && *dst->content < *temp)
+		&& data->stack_flag == 'b' && *dst->content < *temp)
 		*temp = *dst->content;
 }
 
@@ -75,23 +75,22 @@ void	add_targets(t_list **src, t_list **dst, t_data *data)
 	temp_src = *src;
 	while (temp_src)
 	{
-		if (data->stack == 'a')
+		if (data->stack_flag == 'a')
 			temp = data->lowest;
-		else if (data->stack == 'b')
+		else if (data->stack_flag == 'b')
 			temp = data->highest;
 		temp_dst = *dst;
 		while (temp_dst)
 		{
-			update_target(temp_src, temp_dst, data, &temp);
+			target(temp_src, temp_dst, data, &temp);
 			temp_dst = temp_dst->next;
 		}
-		if (temp > *temp_src->content && data->stack =='a')
+		if (temp > *temp_src->content && data->stack_flag == 'a')
 			temp = data->highest;
-		if (temp < *temp_src->content && data->stack =='b')
+		if (temp < *temp_src->content && data->stack_flag == 'b')
 			temp = data->lowest;
 		temp_src->target = temp;
 		temp_src = temp_src->next;
 	}
 	count_cost(src, dst, data);
 }
-

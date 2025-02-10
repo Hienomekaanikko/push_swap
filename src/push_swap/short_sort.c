@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:55:11 by msuokas           #+#    #+#             */
-/*   Updated: 2025/02/03 10:48:05 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/10 10:35:09 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	s(t_list **src, const char *operation)
 		ft_putendl_fd("sb", 1);
 }
 
-static void	three_num(t_list **a)
+void	three_num(t_list **a)
 {
 	t_list		*temp;
 	long long	min;
@@ -62,7 +62,6 @@ static void	three_num(t_list **a)
 	else if (*temp->content != min && *temp->next->content != max)
 		s(a, "sa");
 }
-
 
 void	short_sort(t_list **a)
 {

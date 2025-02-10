@@ -6,20 +6,19 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:09:45 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/31 11:04:16 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/10 09:10:43 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long long lowest(t_list **stack)
+long long	lowest(t_list **stack)
 {
-	t_list *temp_stack;
-	long long temp;
+	t_list		*temp_stack;
+	long long	temp;
 
 	if (!stack || !*stack)
 		return (0);
-
 	temp_stack = *stack;
 	temp = *temp_stack->content;
 	while (temp_stack)
@@ -33,7 +32,7 @@ long long lowest(t_list **stack)
 
 long long	highest(t_list **stack)
 {
-	t_list	*temp_stack;
+	t_list		*temp_stack;
 	long long	temp;
 
 	temp_stack = *stack;
@@ -47,25 +46,29 @@ long long	highest(t_list **stack)
 	return (temp);
 }
 
-void	rotate_min_on_top(t_list **src)
+void	rotate_min_on_top(t_list **stack)
 {
 	t_list		*temp;
-	long long	min;
+	int			size;
 	int			median;
+	int			i;
+	long long	target;
 
-	min = lowest(src);
-	median = ft_lstsize(*src) / 2;
-	temp = *src;
-	while (*temp->content != min)
+	size = ft_lstsize(*stack);
+	median = (size + 1) / 2;
+	target = lowest(stack);
+	temp = *stack;
+	while (*temp->content != target)
 		temp = temp->next;
-	if (temp->index > median)
+	i = temp->index;
+	if (i < median)
 	{
-		while (*(*src)->content != min)
-			reverse(src, "rra");
+		while (*(*stack)->content != target)
+			rotate(stack, "ra");
 	}
 	else
 	{
-		while (*(*src)->content != min)
-			rotate(src, "ra");
+		while (*(*stack)->content != target)
+			reverse(stack, "rra");
 	}
 }

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_free_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 09:01:22 by msuokas           #+#    #+#             */
-/*   Updated: 2025/02/10 09:01:27 by msuokas          ###   ########.fr       */
+/*   Created: 2025/02/05 12:54:35 by msuokas           #+#    #+#             */
+/*   Updated: 2025/02/05 12:57:32 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr(char *str)
+void	ft_free_split(char **args)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
+	while (args[i])
 	{
-		write(1, &str[i], 1);
+		free(args[i]);
 		i++;
 	}
 }

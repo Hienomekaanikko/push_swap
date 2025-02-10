@@ -6,28 +6,27 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:07:24 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/31 15:51:47 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/10 09:57:58 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void reverse_both(t_list **src, t_list **dst, const char *operation, t_data *data)
+void	rev_both(t_list **src, t_list **dst, const char *op, t_data *data)
 {
 	reverse(src, "rrr");
 	reverse(dst, "rrr");
-	if (ft_strncmp(operation, "rrr", 3) == 0)
+	if (ft_strncmp(op, "rrr", 3) == 0)
 	{
 		ft_putendl_fd("rrr", 1);
 		data->src_index++;
 		data->dst_index++;
 	}
-	index_overflow(data);
 }
 
-void free_stack(t_list **src)
+void	free_stack(t_list **src)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	if (!src || !(*src))
 		return ;
@@ -62,6 +61,7 @@ void	reverse(t_list **src, const char *operation)
 	else if (ft_strncmp(operation, "rrb", 3) == 0)
 		ft_putendl_fd("rrb", 1);
 }
+
 int	find_cheapest(t_list **stack)
 {
 	t_list	*temp_stack;

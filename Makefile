@@ -43,27 +43,22 @@ LIBFT_FLS = $(LIBFT_DIR)/ft_calloc.c \
 			$(LIBFT_DIR)/ft_putnbr_fd.c \
 			$(LIBFT_DIR)/ft_itoa.c \
 			$(LIBFT_DIR)/ft_strlcat.c \
-			$(LIBFT_DIR)/ft_lstnew.c \
-			$(LIBFT_DIR)/ft_lstdelone.c \
-			$(LIBFT_DIR)/ft_lstiter.c \
-			$(LIBFT_DIR)/ft_lstmap.c \
-			$(LIBFT_DIR)/ft_lstadd_back.c \
-			$(LIBFT_DIR)/ft_lstadd_front.c \
-			$(LIBFT_DIR)/ft_lstclear.c \
-			$(LIBFT_DIR)/ft_lstlast.c \
-			$(LIBFT_DIR)/ft_lstsize.c \
-			$(LIBFT_DIR)/ft_putstr.c
+			$(LIBFT_DIR)/ft_putstr.c \
+			$(LIBFT_DIR)/ft_free_split.c \
+			$(LIBFT_DIR)/ft_isspace.c
 
 PUSH_SWAP_FLS = $(PUSH_SWAP_DIR)/push_swap.c \
 				$(PUSH_SWAP_DIR)/operations.c \
 				$(PUSH_SWAP_DIR)/count_cost.c \
 				$(PUSH_SWAP_DIR)/error_checks.c \
+				$(PUSH_SWAP_DIR)/error_checks2.c \
 				$(PUSH_SWAP_DIR)/long_sort.c \
 				$(PUSH_SWAP_DIR)/operations3.c \
 				$(PUSH_SWAP_DIR)/short_sort.c \
 				$(PUSH_SWAP_DIR)/operations2.c \
 				$(PUSH_SWAP_DIR)/rotation_orders.c \
 				$(PUSH_SWAP_DIR)/rotation_prep.c \
+				$(PUSH_SWAP_DIR)/utils.c \
 
 # ALL SOURCE FILES
 SRC_FILES = $(LIBFT_FLS) $(PUSH_SWAP_FLS)

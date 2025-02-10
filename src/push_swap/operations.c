@@ -6,19 +6,11 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:58:08 by msuokas           #+#    #+#             */
-/*   Updated: 2025/01/31 12:41:44 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/10 08:57:14 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	index_overflow(t_data *data)
-{
-	if (data->src_index == data->src_size)
-		data->src_index = 0;
-	if (data->dst_index == data->dst_size)
-		data->dst_index = 0;
-}
 
 void	push(t_list **src, t_list **dst, const char *operation)
 {
@@ -54,15 +46,14 @@ void	rotate(t_list **src, const char *operation)
 		ft_putendl_fd("rb", 1);
 }
 
-void	rotate_both(t_list **src, t_list **dst, const char *operation, t_data *data)
+void	rot_both(t_list **src, t_list **dst, const char *op, t_data *data)
 {
 	rotate(src, "rr");
 	rotate(dst, "rr");
-	if (ft_strncmp(operation, "rr", 2) == 0)
+	if (ft_strncmp(op, "rr", 2) == 0)
 	{
 		ft_putendl_fd("rr", 1);
 		data->src_index--;
 		data->dst_index--;
 	}
-	index_overflow(data);
 }

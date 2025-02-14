@@ -6,82 +6,84 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:32:09 by msuokas           #+#    #+#             */
-/*   Updated: 2025/02/10 11:00:59 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/14 17:54:29 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push_swap(t_list **a, t_list **b)
+static void	long_sort(t_stack **a, t_stack **b)
 {
-	int	size_a;
+	t_data	data;
 
-	size_a = ft_lstsize(*a);
+	init_data_a(a, b, &data);
+	fill(a, b, &data);
+	init_data_b(a, b, &data);
+	fill(b, a, &data);
+	add_index(a);
+	rotate_min_on_top(a);
+}
+
+static void	push_swap(t_stack **a, t_stack **b, size_t size_a)
+{
 	if (size_a > 4)
 	{
 		push(a, b, "pb");
 		push(a, b, "pb");
+		size_a--;
+		size_a--;
 		long_sort(a, b);
 	}
 	else if (size_a <= 3)
-		short_sort(a);
+		short_sort(a, size_a);
 	else if (size_a == 4)
 	{
 		push(a, b, "pb");
-		short_sort(a);
+		size_a--;
+		short_sort(a, size_a);
 		long_sort(a, b);
 	}
 }
 
-void	make_list(t_list **a, char **content)
+static int	init_a(t_stack **a, int argc, char **argv)
 {
-	long long	num;
-
-	while (*content)
-	{
-		num = ft_atoll(*content);
-		add_node(a, num);
-		content++;
-	}
-}
-
-static int	init_a(t_list **a, int argc, char **argv)
-{
-	char		**split_argv;
-	char		**original_split_argv;
+	char	**split_argv;
 
 	if (argc == 2)
 	{
 		split_argv = ft_split(argv[1], ' ');
 		if (!split_argv)
 			return (0);
-		original_split_argv = split_argv;
-		make_list(a, split_argv);
-		ft_free_split(original_split_argv);
-		free(original_split_argv);
+		if (!ft_make_list(a, split_argv))
+		{
+			ft_free_split(split_argv);
+			return (0);
+		}
+		ft_free_split(split_argv);
 	}
 	else
-		make_list(a, ++argv);
+	{
+		if (!ft_make_list(a, ++argv))
+			return (0);
+	}
 	return (1);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_list	*a;
-	t_list	*b;
+	t_stack	*a;
+	t_stack	*b;
+	size_t	size_a;
 
 	a = NULL;
 	b = NULL;
 	if (argc > 1)
 	{
-		if (argc == 2 && ft_strlen(argv[1]) == 0)
-		{
-			ft_putendl_fd("Error", 2);
-			return (0);
-		}
-		error_checks(argc, argv);
-		init_a(&a, argc, argv);
-		push_swap(&a, &b);
+		parse_input(argc, argv);
+		if (init_a(&a, argc, argv) == 0)
+			ft_exit(&a, &b);
+		size_a = ft_lstsize(a);
+		push_swap(&a, &b, size_a);
 	}
 	free_stack(&a);
 	free_stack(&b);

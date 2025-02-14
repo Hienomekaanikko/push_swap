@@ -6,13 +6,13 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:47:46 by msuokas           #+#    #+#             */
-/*   Updated: 2025/02/10 11:10:15 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/14 18:06:41 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	values(long long num, char **argv, int i)
+static int	values(long long num, char **argv, int i)
 {
 	i++;
 	while (argv[i])
@@ -24,45 +24,68 @@ int	values(long long num, char **argv, int i)
 	return (0);
 }
 
-int	order(char **argv)
+static int	order(char **args, int i, int should_free)
 {
-	int	i;
-
-	i = 0;
-	while (argv[i + 1])
+	while (args[i] && args[i + 1])
 	{
-		if (ft_atoll(argv[i]) >= ft_atoll(argv[i + 1]))
+		if (ft_atoll(args[i]) >= ft_atoll(args[i + 1]))
 			return (0);
 		i++;
 	}
-	return (1);
+	if (should_free)
+		ft_free_split(args);
+	exit(0);
 }
 
-int	isnum(char *num)
+static void	loop_input(char **args, int should_free, int i)
 {
-	int	i;
+	long long	nbr;
+	int			j;
+	int			space_flag;
 
-	i = 0;
-	while (num[i] && ft_isspace(num[i]))
-		i++;
-	if (num[i] == '-' || num[i] == '+')
-		i++;
-	if (!ft_isdigit(num[i]))
-		return (0);
-	while (num[i] && ft_isdigit(num[i]))
-		i++;
-	while (num[i])
+	j = i;
+	space_flag = 0;
+	while (args[i])
 	{
-		if (!ft_isspace(num[i]))
-			return (0);
+		nbr = ft_atoll(args[i]);
+		if (!ft_isspace(*args[i]))
+			space_flag = 1;
+		if (!ft_isnum(args[i]))
+			error("Error", args, should_free);
+		if (values(nbr, args, i))
+			error("Error", args, should_free);
+		if (nbr < INT_MIN || nbr > INT_MAX)
+			error("Error", args, should_free);
 		i++;
 	}
-	return (1);
+	if (space_flag == 0)
+		error("Error", args, should_free);
+	order(args, j, should_free);
 }
 
-void	error(char *msg, char **args, int should_free)
+void	parse_input(int argc, char **argv)
 {
-	cleanup(args, should_free);
-	ft_putendl_fd(msg, 2);
-	exit(1);
+	int			i;
+	char		**args;
+	int			should_free;
+
+	i = 0;
+	should_free = 0;
+	if (argc == 2)
+	{
+		if (!argv[1][0])
+			return ;
+		args = ft_split(argv[1], ' ');
+		if (!args)
+			return ;
+		should_free = 1;
+	}
+	else
+	{
+		i = 1;
+		args = argv;
+	}
+	loop_input(args, should_free, i);
+	if (should_free)
+		ft_free_split(args);
 }

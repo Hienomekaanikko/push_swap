@@ -6,13 +6,13 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:07:24 by msuokas           #+#    #+#             */
-/*   Updated: 2025/02/10 09:57:58 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/13 13:44:12 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rev_both(t_list **src, t_list **dst, const char *op, t_data *data)
+void	rev_both(t_stack **src, t_stack **dst, const char *op, t_data *data)
 {
 	reverse(src, "rrr");
 	reverse(dst, "rrr");
@@ -24,12 +24,10 @@ void	rev_both(t_list **src, t_list **dst, const char *op, t_data *data)
 	}
 }
 
-void	free_stack(t_list **src)
+void	free_stack(t_stack **src)
 {
-	t_list	*tmp;
+	t_stack	*tmp;
 
-	if (!src || !(*src))
-		return ;
 	while (*src)
 	{
 		tmp = (*src)->next;
@@ -40,14 +38,12 @@ void	free_stack(t_list **src)
 	*src = NULL;
 }
 
-void	reverse(t_list **src, const char *operation)
+void	reverse(t_stack **src, const char *operation)
 {
-	t_list	*first;
-	t_list	*last;
-	t_list	*second_last;
+	t_stack	*first;
+	t_stack	*last;
+	t_stack	*second_last;
 
-	if (*src == NULL || (*src)->next == NULL)
-		return ;
 	first = *src;
 	second_last = *src;
 	last = ft_lstlast(*src);
@@ -62,9 +58,9 @@ void	reverse(t_list **src, const char *operation)
 		ft_putendl_fd("rrb", 1);
 }
 
-int	find_cheapest(t_list **stack)
+int	find_cheapest(t_stack **stack)
 {
-	t_list	*temp_stack;
+	t_stack	*temp_stack;
 	int		cheapest;
 
 	temp_stack = *stack;

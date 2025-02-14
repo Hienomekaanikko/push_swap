@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 16:15:16 by msuokas           #+#    #+#             */
-/*   Updated: 2025/02/10 11:09:34 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/14 15:43:46 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ static int	ft_count_splits(char const *s, char c)
 
 static char	**free_malloc(char **array_of_strings, int y)
 {
-	while (array_of_strings[y])
+	while (y >= 0)
 	{
-		y--;
 		free(array_of_strings[y]);
+		y--;
 	}
 	free(array_of_strings);
 	return (NULL);
@@ -63,7 +63,10 @@ static char	**split_the_strings(char const *s, char c, char **array_of_strings)
 			i++;
 		array_of_strings[y] = ft_substr(s, j, i - j);
 		if (!array_of_strings[y])
-			return (free_malloc(array_of_strings, y));
+		{
+			free_malloc(array_of_strings, y);
+			return (NULL);
+		}
 		y++;
 	}
 	array_of_strings[y] = NULL;
@@ -84,9 +87,6 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	result = split_the_strings(s, c, array_of_strings);
 	if (!result)
-	{
-		free(array_of_strings);
 		return (NULL);
-	}
 	return (result);
 }

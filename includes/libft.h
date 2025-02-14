@@ -6,7 +6,7 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 11:27:06 by msuokas           #+#    #+#             */
-/*   Updated: 2025/02/10 09:38:30 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/14 15:08:36 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int			ft_isalnum(int c);
 int			ft_isascii(int c);
 int			ft_toupper(int c);
 int			ft_tolower(int c);
+int			ft_isnum(char *num);
 int			ft_isprint(int c);
 int			ft_atoi(const char *str);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
@@ -54,4 +55,5 @@ size_t		ft_strlcat(char *dst, const char *src, size_t size);
 size_t		ft_strlen(const char *str);
 long long	ft_atoll(const char *s);
 int			ft_isspace(int c);
+
 #endif

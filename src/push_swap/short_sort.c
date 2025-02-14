@@ -6,16 +6,16 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:55:11 by msuokas           #+#    #+#             */
-/*   Updated: 2025/02/10 10:35:09 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/14 16:19:45 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	s(t_list **src, const char *operation)
+void	s(t_stack **src, const char *operation)
 {
-	t_list	*first;
-	t_list	*second;
+	t_stack	*first;
+	t_stack	*second;
 	int		len;
 
 	if (!src)
@@ -34,15 +34,13 @@ void	s(t_list **src, const char *operation)
 		ft_putendl_fd("sb", 1);
 }
 
-void	three_num(t_list **a)
+static void	three_num(t_stack **a, long long min, long long max)
 {
-	t_list		*temp;
-	long long	min;
-	long long	max;
+	t_stack		*temp;
 
+	if (!a || !(*a))
+		return ;
 	temp = *a;
-	min = lowest(a);
-	max = highest(a);
 	if (*temp->content == min && *temp->next->content != max)
 		return ;
 	else if (*temp->content == min && *temp->next->content == max)
@@ -63,15 +61,19 @@ void	three_num(t_list **a)
 		s(a, "sa");
 }
 
-void	short_sort(t_list **a)
+void	short_sort(t_stack **a, size_t size)
 {
-	int		size;
-	t_list	*temp;
+	long long	min;
+	long long	max;
+	t_stack		*temp;
 
 	temp = *a;
-	size = ft_lstsize(*a);
 	if (size == 3)
-		three_num(a);
+	{
+		min = lowest(a);
+		max = highest(a);
+		three_num(a, min, max);
+	}
 	else if (size == 2)
 	{
 		if (*temp->content > *temp->next->content)

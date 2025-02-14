@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_split.c                                    :+:      :+:    :+:   */
+/*   ft_isnum.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 12:54:35 by msuokas           #+#    #+#             */
-/*   Updated: 2025/02/13 10:12:48 by msuokas          ###   ########.fr       */
+/*   Created: 2025/02/13 10:10:20 by msuokas           #+#    #+#             */
+/*   Updated: 2025/02/14 14:25:21 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_split(char **args)
+int	ft_isnum(char *num)
 {
 	int	i;
 
 	i = 0;
-	while (args[i])
+	while (num[i] && ft_isspace(num[i]))
+		i++;
+	if (num[i] == '-' || num[i] == '+')
+		i++;
+	if (!ft_isdigit(num[i]))
+		return (0);
+	while (num[i] && ft_isdigit(num[i]))
+		i++;
+	while (num[i])
 	{
-		free(args[i]);
+		if (!ft_isspace(num[i]))
+			return (0);
 		i++;
 	}
-	free(args);
+	return (1);
 }

@@ -6,74 +6,50 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 09:19:31 by msuokas           #+#    #+#             */
-/*   Updated: 2025/02/10 10:44:51 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/14 16:19:29 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	add_node(t_list **stack, long long content)
+void	error(char *msg, char **args, int should_free)
 {
-	t_list			*new_node;
-	t_list			*temp;
-	long long		*content_copy;
-
-	content_copy = malloc(sizeof(long long));
-	if (!content_copy)
-		return ;
-	*content_copy = content;
-	new_node = ft_lstnew(content_copy);
-	if (!new_node)
-	{
-		free(content_copy);
-		return ;
-	}
-	if (*stack == NULL)
-		*stack = new_node;
-	else
-	{
-		temp = *stack;
-		while (temp->next)
-			temp = temp->next;
-		temp->next = new_node;
-	}
+	if (should_free)
+		ft_free_split(args);
+	ft_putendl_fd(msg, 2);
+	exit(1);
 }
 
-int	ft_lstsize(t_list *lst)
+void	init_data_a(t_stack **a, t_stack **b, t_data *data)
 {
-	t_list	*curr;
-	int		i;
-
-	curr = lst;
-	i = 0;
-	while (curr)
-	{
-		curr = curr->next;
-		i++;
-	}
-	return (i);
+	data->limit = 2;
+	data->stack_flag = 'a';
+	data->src_size = ft_lstsize(*a);
+	data->dst_size = ft_lstsize(*b);
+	data->highest = highest(b);
+	data->lowest = lowest(b);
 }
 
-t_list	*ft_lstnew(void *content)
+void	init_data_b(t_stack **a, t_stack **b, t_data *data)
 {
-	t_list	*elem;
-
-	elem = malloc(sizeof(t_list));
-	if (!elem)
-		return (NULL);
-	elem->content = content;
-	elem->next = NULL;
-	return (elem);
+	data->limit = 0;
+	data->stack_flag = 'b';
+	data->src_size = ft_lstsize(*b);
+	data->dst_size = ft_lstsize(*a);
+	data->highest = highest(a);
+	data->lowest = lowest(a);
 }
 
-t_list	*ft_lstlast(t_list *lst)
+void	update_values(t_stack **src, t_stack **dst, t_data *data)
 {
-	t_list	*curr;
-
-	if (!lst)
-		return (NULL);
-	curr = lst;
-	while (curr->next)
-		curr = curr->next;
-	return (curr);
+	data->highest = highest(dst);
+	data->lowest = lowest(dst);
+	add_index(src);
+	add_index(dst);
+	data->src_median = data->src_size / 2;
+	data->dst_median = data->dst_size / 2;
+	add_targets(src, dst, data);
+	data->cheapest = find_cheapest(src);
+	data->src_index = src_dist(data->cheapest, src);
+	data->dst_index = dst_dist(data->cheapest, src, dst);
 }

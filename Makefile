@@ -1,14 +1,21 @@
-# PROJECT NAME
-NAME = push_swap
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/02/14 18:17:00 by msuokas           #+#    #+#              #
+#    Updated: 2025/02/14 18:17:20 by msuokas          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-# DIRECTORIES
+NAME = push_swap
 SRC_DIR = src
 INCLUDES = includes
 OBJ_DIR = objs
 LIBFT_DIR = $(SRC_DIR)/libft
 PUSH_SWAP_DIR = $(SRC_DIR)/push_swap
-
-# SOURCE FILES
 LIBFT_FLS = $(LIBFT_DIR)/ft_calloc.c \
 			$(LIBFT_DIR)/ft_atol.c \
 			$(LIBFT_DIR)/ft_strlen.c \
@@ -45,61 +52,45 @@ LIBFT_FLS = $(LIBFT_DIR)/ft_calloc.c \
 			$(LIBFT_DIR)/ft_strlcat.c \
 			$(LIBFT_DIR)/ft_putstr.c \
 			$(LIBFT_DIR)/ft_free_split.c \
-			$(LIBFT_DIR)/ft_isspace.c
+			$(LIBFT_DIR)/ft_isnum.c \
+			$(LIBFT_DIR)/ft_isspace.c \
 
 PUSH_SWAP_FLS = $(PUSH_SWAP_DIR)/push_swap.c \
 				$(PUSH_SWAP_DIR)/operations.c \
 				$(PUSH_SWAP_DIR)/count_cost.c \
 				$(PUSH_SWAP_DIR)/error_checks.c \
-				$(PUSH_SWAP_DIR)/error_checks2.c \
 				$(PUSH_SWAP_DIR)/long_sort.c \
 				$(PUSH_SWAP_DIR)/operations3.c \
 				$(PUSH_SWAP_DIR)/short_sort.c \
 				$(PUSH_SWAP_DIR)/operations2.c \
-				$(PUSH_SWAP_DIR)/rotation_orders.c \
 				$(PUSH_SWAP_DIR)/rotation_prep.c \
 				$(PUSH_SWAP_DIR)/utils.c \
+				$(PUSH_SWAP_DIR)/list_utils.c \
 
-# ALL SOURCE FILES
 SRC_FILES = $(LIBFT_FLS) $(PUSH_SWAP_FLS)
 
-# OBJS FILES
 OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
-# DEPENDENCIES
-DEPS = $(OBJS:.o=.d)
-
-# FLAGS
 CC = cc
 RM = rm -rf
-CFLGS = -Wall -Werror -Wextra
-IFLGS = -I$(INCLUDES)
+CFLAGS = -Wall -Werror -Wextra
+IFLAGS = -I$(INCLUDES)
 
-# RULES
-.PHONY: all clean fclean re
-
-# Default target
 all: $(NAME)
 
-# Object file rule
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
-	$(CC) $(CFLGS) $(DFLGS) -c -o $@ $< $(IFLGS)
+	$(CC) $(CFLAGS) -c -o $@ $< $(IFLAGS)
 
-# Create the executable
 $(NAME): $(OBJS)
-	$(CC) $(CFLGS) -o $(NAME) $(OBJS) $(IFLGS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(IFLAGS)
 
-# Clean object files
 clean:
 	$(RM) $(OBJ_DIR)
 
-# Clean everything (object files and executable)
 fclean: clean
 	$(RM) $(NAME)
 
-# Rebuild the project
 re: fclean all
 
-# Include dependencies
--include $(DEPS)
+.PHONY: all clean fclean re

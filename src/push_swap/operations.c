@@ -6,18 +6,16 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 16:58:08 by msuokas           #+#    #+#             */
-/*   Updated: 2025/02/10 08:57:14 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/14 16:18:10 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_list **src, t_list **dst, const char *operation)
+void	push(t_stack **src, t_stack **dst, const char *operation)
 {
-	t_list	*temp;
+	t_stack	*temp;
 
-	if (*src == NULL)
-		return ;
 	temp = *src;
 	*src = (*src)->next;
 	temp->next = (*dst);
@@ -28,13 +26,11 @@ void	push(t_list **src, t_list **dst, const char *operation)
 		ft_putendl_fd("pa", 1);
 }
 
-void	rotate(t_list **src, const char *operation)
+void	rotate(t_stack **src, const char *operation)
 {
-	t_list	*first;
-	t_list	*last;
+	t_stack	*first;
+	t_stack	*last;
 
-	if (*src == NULL || (*src)->next == NULL)
-		return ;
 	first = (*src);
 	last = ft_lstlast(*src);
 	*src = first->next;
@@ -46,7 +42,7 @@ void	rotate(t_list **src, const char *operation)
 		ft_putendl_fd("rb", 1);
 }
 
-void	rot_both(t_list **src, t_list **dst, const char *op, t_data *data)
+void	rot_both(t_stack **src, t_stack **dst, const char *op, t_data *data)
 {
 	rotate(src, "rr");
 	rotate(dst, "rr");
@@ -55,5 +51,20 @@ void	rot_both(t_list **src, t_list **dst, const char *op, t_data *data)
 		ft_putendl_fd("rr", 1);
 		data->src_index--;
 		data->dst_index--;
+	}
+}
+
+void	add_index(t_stack **src)
+{
+	t_stack	*temp_src;
+	int		pos;
+
+	temp_src = *src;
+	pos = 0;
+	while (temp_src)
+	{
+		temp_src->index = pos;
+		pos++;
+		temp_src = temp_src->next;
 	}
 }

@@ -6,14 +6,22 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 12:41:40 by msuokas           #+#    #+#             */
-/*   Updated: 2025/02/10 10:50:51 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/14 15:13:13 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "libft.h"
-# include <stdio.h>
+
+typedef struct s_stack
+{
+	long long		*content;
+	long long		target;
+	int				cost;
+	int				index;
+	struct s_stack	*next;
+}	t_stack;
 
 typedef struct s_data
 {
@@ -31,48 +39,32 @@ typedef struct s_data
 	int	limit;
 }	t_data;
 
-typedef struct s_list
-{
-	long long		*content;
-	long long		target;
-	int				cost;
-	int				index;
-	struct s_list	*next;
-}	t_list;
-
-void		s(t_list **src, const char *operation);
-void		push(t_list **src, t_list **dst, const char *operations);
-void		rotate(t_list **a, const char *operation);
-void		reverse(t_list **stack, const char *operation);
-void		add_targets(t_list **src, t_list **dst, t_data *data);
-void		long_sort(t_list **a, t_list **b);
-long long	highest(t_list **stack);
-long long	lowest(t_list **stack);
-void		rev_both(t_list **src, t_list **dst, const char *op, t_data *data);
-void		rot_both(t_list **src, t_list **dst, const char *op, t_data *data);
-void		short_sort(t_list **a);
-void		free_stack(t_list **stack);
-void		rotate_min_on_top(t_list **stack);
-void		error_checks(int argc, char **argv);
-int			find_cheapest(t_list **stack);
-void		rotate_dst(t_list **dst, t_data *data);
-void		rotate_src(t_list **src, t_data *data);
-void		reverse_dst(t_list **dst, t_data *data);
-void		reverse_src(t_list **src, t_data *data);
-int			src_to_top_dist(int cheapest, t_list **src);
-int			dst_to_top_dist(int cheapest, t_list **src, t_list **dest);
-long long	lowest(t_list **stack);
-void		three_num(t_list **a);
-void		add_index(t_list **src);
-int			ft_lstsize(t_list *lst);
-t_list		*ft_lstnew(void *content);
-t_list		*ft_lstlast(t_list *lst);
-void		cleanup(char **args, int should_free);
-void		error_checks(int argc, char **argv);
+void		push(t_stack **src, t_stack **dst, const char *operations);
+void		rotate(t_stack **stck, const char *operation);
+void		reverse(t_stack **stck, const char *operation);
+void		rev_both(t_stack **src, t_stack **dst, const char *op, t_data *d);
+void		rot_both(t_stack **src, t_stack **dst, const char *op, t_data *d);
+void		add_targets(t_stack **src, t_stack **dst, t_data *data);
+long long	highest(t_stack **stck);
+long long	lowest(t_stack **stck);
+void		short_sort(t_stack **a, size_t size);
+void		free_stack(t_stack **stck);
+void		rotate_min_on_top(t_stack **a);
+int			find_cheapest(t_stack **stck);
+int			src_dist(int chpst, t_stack **src);
+int			dst_dist(int chpst, t_stack **src, t_stack **dest);
+void		parse_input(int argc, char **argv);
 void		error(char *msg, char **args, int should_free);
-int			values(long long num, char **argv, int i);
-int			order(char **argv);
-int			isnum(char *num);
-void		add_node(t_list **stack, long long content);
+void		init_data_a(t_stack **a, t_stack **b, t_data *data);
+void		init_data_b(t_stack **a, t_stack **b, t_data *data);
+void		update_values(t_stack **src, t_stack **dst, t_data *data);
+void		add_index(t_stack **src);
+void		fill(t_stack **src, t_stack **dst, t_data *data);
+void		ft_exit(t_stack **src, t_stack **dst);
+int			ft_lstsize(t_stack *lst);
+t_stack		*ft_lstnew(void *content);
+t_stack		*ft_lstlast(t_stack *lst);
+void		ft_add_node(t_stack **stack, long long content);
+int			ft_make_list(t_stack **a, char **content);
 
 #endif

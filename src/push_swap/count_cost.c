@@ -6,31 +6,16 @@
 /*   By: msuokas <msuokas@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:48:55 by msuokas           #+#    #+#             */
-/*   Updated: 2025/02/10 10:06:42 by msuokas          ###   ########.fr       */
+/*   Updated: 2025/02/13 13:04:29 by msuokas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	add_index(t_list **src)
+static void	count_cost(t_stack **src, t_stack **dst, t_data *data)
 {
-	t_list	*temp_src;
-	int		pos;
-
-	temp_src = *src;
-	pos = 0;
-	while (temp_src)
-	{
-		temp_src->index = pos;
-		pos++;
-		temp_src = temp_src->next;
-	}
-}
-
-static void	count_cost(t_list **src, t_list **dst, t_data *data)
-{
-	t_list	*temp_src;
-	t_list	*temp_dst;
+	t_stack	*temp_src;
+	t_stack	*temp_dst;
 	int		cost;
 	int		cost_b;
 
@@ -56,7 +41,7 @@ static void	count_cost(t_list **src, t_list **dst, t_data *data)
 	}
 }
 
-static void	target(t_list *src, t_list *dst, t_data *data, long long *temp)
+static void	target(t_stack *src, t_stack *dst, t_data *data, long long *temp)
 {
 	if (*dst->content < *src->content
 		&& data->stack_flag == 'a' && *dst->content > *temp)
@@ -66,10 +51,10 @@ static void	target(t_list *src, t_list *dst, t_data *data, long long *temp)
 		*temp = *dst->content;
 }
 
-void	add_targets(t_list **src, t_list **dst, t_data *data)
+void	add_targets(t_stack **src, t_stack **dst, t_data *data)
 {
-	t_list		*temp_src;
-	t_list		*temp_dst;
+	t_stack		*temp_src;
+	t_stack		*temp_dst;
 	long long	temp;
 
 	temp_src = *src;
